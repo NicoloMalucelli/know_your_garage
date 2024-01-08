@@ -3,11 +3,13 @@
     <div class="my-card" style="">
       <img class="w-100 mb-5 d-flex flex-column" src="../assets/logo.png">
       <input type="email" class="form-control mb-3 mt-3 my-input" v-model="email" placeholder="name@example.com">
+      <input type="text" class="form-control mb-3 mt-3 my-input" v-model="username" placeholder="username">
       <input type="password" class="form-control mb-3 my-input" v-model="password" placeholder="password">
-      <button class="btn btn-lg btn-primary my-input" @click="login()">Sign in</button>
+      <input type="password" class="form-control mb-3 my-input" v-model="passwordConfirm" placeholder="password">
+      <button class="btn btn-lg btn-primary my-input">Register</button>
 
       <div class="mt-2" style="font-size:12px">
-        Don't you have an account? <router-link to="/register"> Register </router-link>
+        Don you already have an account? <router-link to="/login"> Login </router-link>
       </div>
     </div>
   </div>
