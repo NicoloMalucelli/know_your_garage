@@ -1,10 +1,25 @@
 <template>
+  <Header></Header>
   <div class="home">
-    <h1>Home</h1>
+    <div class="d-flex justify-content-center mt-5" >
+      <div>You don't have any active parking or membership at the moment <br>  </div>
+    </div>
   </div>
+  <Footer></Footer>
 </template>
 
-<script lang="ts">
-import { Vue } from 'vue-class-component';
-export default class HomeView extends Vue {}
+<script>
+
+import { defineComponent } from "vue";
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
+
+export default defineComponent({
+  name: "HomeView",
+  components: {
+    Header,
+    Footer,
+  },
+});
+
 </script>
