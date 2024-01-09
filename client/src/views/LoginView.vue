@@ -11,7 +11,7 @@
         Don't you have an account? <router-link to="/register"> Register </router-link>
       </div>
       <transition name="fade">
-        <div class="mt-5" style="color: #b81421" v-if="login_error">Wrong email or password!</div>
+        <div class="mt-5" style="color: #b81421" v-if="login_error">{{error_text}}</div>
       </transition>
     </div>
   </div>
@@ -27,7 +27,8 @@ export default defineComponent({
     return{
       email: "",
       password: "",
-      login_error: false
+      login_error: false,
+      error_text: ""
     }
   },
   methods:{
@@ -39,12 +40,16 @@ export default defineComponent({
           sessionStorage.setItem('email', data.email)
           this.$router.push('/')
         }else{
-          this.login_error = true
-          setTimeout(() => {
-            this.login_error = false
-          }, 2000)
+          this.displayError("Wrong email or password")
         }
       });
+    },
+    displayError(text){
+      this.error_text = text
+      this.login_error = true
+      setTimeout(() => {
+        this.login_error = false
+      }, 2000)
     },
     isDisable(){
       return this.email.length <= 0 || this.password.length <= 0

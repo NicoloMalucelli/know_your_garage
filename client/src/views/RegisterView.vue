@@ -42,14 +42,16 @@ export default defineComponent({
         this.displayError("The given passwords are different")
         return
       }
-      axios.put('http://localhost:3000/users', {'email': this.email, 'username': this.username, 'password': sha256(this.password).toString()}).then(response => {
-        if (response.status === 200){//TODO may cause problems
+      const body = {'email': this.email, 'username': this.username, 'password': sha256(this.password).toString()}
+      axios.put('http://localhost:3000/users', body)
+        .then(() => {
           sessionStorage.setItem('username', this.username)
           sessionStorage.setItem('email', this.email)
           this.$router.push('/')
-        }else {
-          this.displayError("An error occurred during the registration")
-        }
+        }).catch(error => {
+          if(error.response){
+            this.displayError(error.response.data.error)
+          }
       })
     },
     displayError(text){

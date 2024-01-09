@@ -6,7 +6,7 @@ exports.getUser = async(req, res) => {
        if(result){
             res.json({'email' : result.email, 'username' : result.username, 'password' : result.password})
         } else {
-            res.json({})
+           res.status(500).json({ error: 'Internal Server Error occurred'})
         }
     })
 }
@@ -22,31 +22,21 @@ exports.createUser = async(req, res) => {
         res.header('Access-Control-Allow-Origin', '*');
     }
 
+    if(req.body.email == null || req.body.username == null || req.body.password == null){
+        res.status(400).json({error: 'inclomplete request'})
+        return
+    }
+
     const userExists = await usersModel.exists({email: req.body.email})
     if(userExists){
         res.status(409).json({ error: 'email already in use' })
+        return
     }
-
-    console.log("create user request received")
-    const newUser = {'mail': req.body.email, 'username': req.body.username, 'password': req.body.password}
 
     const offer = new usersModel(req.body);
     try{
         res.json(await offer.save());
     }catch (e) {
-        res.json(e);
+        res.status(500).json({ error: 'Internal Server Error occurred'})
     }
-
-    //res.status(200).send()
 }
- /*
-    ;
-    const userExists = await usersModel.exists({email: req.params.email})
-    if(userExists){
-        return res.status(409).json({ error: 'email already in use' })
-    }
-
-    usersModel.push({req.params.email, req.params.username, req.params.password})
-    usersModel.save()
-}
-*/
