@@ -1,22 +1,54 @@
 <template>
   <div class="d-flex justify-content-center align-items-center vh-100" style="background-color: #9de3f5">
     <div class="my-card" style="">
-      <img class="w-100 mb-5 d-flex flex-column" src="../assets/logo.png">
-      <input type="email" class="form-control mb-3 mt-3 my-input" v-model="email" placeholder="name@example.com">
-      <input type="password" class="form-control mb-3 my-input" v-model="password" placeholder="password">
-      <button class="btn btn-lg btn-primary my-input" @click="login()">Sign in</button>
-
+      <form @submit="login()">
+        <img class="w-100 mb-5 d-flex flex-column" src="../assets/logo.png">
+        <input type="email" class="form-control mb-3 mt-3 my-input" v-model="email" placeholder="name@example.com">
+        <input type="password" class="form-control mb-3 my-input" v-model="password" placeholder="password" autocomplete="on">
+        <button class="btn btn-lg btn-primary my-input" type="submit">Sign in</button>
+      </form>
       <div class="mt-2" style="font-size:12px">
         Don't you have an account? <router-link to="/register"> Register </router-link>
       </div>
+      <transition name="fade">
+        <div class="mt-5" style="color: #b81421" v-if="login_error">Wrong email or password!</div>
+      </transition>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: "LoginView"
-}
+import axios from "axios";
+import sha256 from 'crypto-js/sha256';
+import {defineComponent} from "vue";
+export default defineComponent({
+  name: "LoginView",
+  data(){
+    return{
+      email: "",
+      password: "",
+      login_error: false
+    }
+  },
+  methods:{
+    login(){
+      axios.get('http://localhost:3000/users/' + this.email).then(response => {
+        const data = response.data;
+        if(sha256(this.password).toString() === data.password){
+          sessionStorage.setItem('username', data.username)
+          sessionStorage.setItem('email', data.email)
+          this.$router.push('/')
+        }else{
+          this.login_error = true
+          setTimeout(() => {
+            this.login_error = false
+          }, 2000)
+        }
+      });
+    }
+  }
+})
+
 </script>
 
 <style scoped>
@@ -33,6 +65,16 @@ export default {
 .my-input{
   border-radius: 10px;
   box-shadow: 2px 5px 10px 0px #b0b0b0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
 </style>
