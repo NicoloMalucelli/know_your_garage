@@ -5,8 +5,10 @@ const usersRouter = require('./route/usersRoutes');
 const app = express();
 
 const cors = require('cors');
-app.options('*', cors());
+//app.options('*', cors());
 
+app.use(cors());
+app.use(express.json());
 app.use(usersRouter);
 
 mongoose.connect('mongodb://127.0.0.1:27017/knowYourGarage').then(() => {

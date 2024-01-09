@@ -1,24 +1,70 @@
 <template>
   <div class="d-flex justify-content-center align-items-center vh-100" style="background-color: #9de3f5">
     <div class="my-card" style="">
-      <img class="w-100 mb-5 d-flex flex-column" src="../assets/logo.png">
-      <input type="email" class="form-control mb-3 mt-3 my-input" v-model="email" placeholder="name@example.com">
-      <input type="text" class="form-control mb-3 mt-3 my-input" v-model="username" placeholder="username">
-      <input type="password" class="form-control mb-3 my-input" v-model="password" placeholder="password">
-      <input type="password" class="form-control mb-3 my-input" v-model="passwordConfirm" placeholder="password">
-      <button class="btn btn-lg btn-primary my-input">Register</button>
-
+      <form @submit="register()">
+        <img class="w-100 mb-5 d-flex flex-column" src="../assets/logo.png">
+        <input type="email" class="form-control mb-3 mt-3 my-input" v-model="email" placeholder="name@example.com">
+        <input type="text" class="form-control mb-3 mt-3 my-input" v-model="username" placeholder="username">
+        <input type="password" class="form-control mb-3 my-input" autocomplete="on" v-model="password" placeholder="password">
+        <input type="password" class="form-control mb-3 my-input" autocomplete="on" v-model="password_confirm" placeholder="password">
+        <button class="btn btn-lg btn-primary my-input" type="submit" :disabled="isDisable(email, password, username, password_confirm)">Register</button>
+      </form>
       <div class="mt-2" style="font-size:12px">
         Don you already have an account? <router-link to="/login"> Login </router-link>
       </div>
+      <transition name="fade">
+        <div class="mt-3" style="color: #b81421" v-if="registration_error">{{error_text}}</div>
+      </transition>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: "LoginView"
-}
+
+import axios from "axios";
+import sha256 from 'crypto-js/sha256';
+import {defineComponent} from "vue";
+export default defineComponent({
+  name: "LoginView",
+  data(){
+    return{
+      email: "",
+      password: "",
+      username: "",
+      password_confirm: "",
+      registration_error: false,
+      error_text: ""
+    }
+  },
+  methods:{
+    register(){
+      if(this.password !== this.password_confirm){
+        this.displayError("The given passwords are different")
+        return
+      }
+      axios.put('http://localhost:3000/users', {'email': this.email, 'username': this.username, 'password': sha256(this.password).toString()}).then(response => {
+        if (response.status === 200){//TODO may cause problems
+          sessionStorage.setItem('username', this.username)
+          sessionStorage.setItem('email', this.email)
+          this.$router.push('/')
+        }else {
+          this.displayError("An error occurred during the registration")
+        }
+      })
+    },
+    displayError(text){
+      this.error_text = text
+      this.registration_error = true
+      setTimeout(() => {
+        this.registration_error = false
+      }, 2000)
+    },
+    isDisable(){
+      return this.email.length <= 0 || this.password.length <= 0 || this.email.username <= 0 || this.password_confirm.length <= 0
+    }
+  }
+})
+
 </script>
 
 <style scoped>
