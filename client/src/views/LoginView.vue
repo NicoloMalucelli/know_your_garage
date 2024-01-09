@@ -5,7 +5,7 @@
         <img class="w-100 mb-5 d-flex flex-column" src="../assets/logo.png">
         <input type="email" class="form-control mb-3 mt-3 my-input" v-model="email" placeholder="name@example.com">
         <input type="password" class="form-control mb-3 my-input" v-model="password" placeholder="password" autocomplete="on">
-        <button class="btn btn-lg btn-primary my-input" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary my-input" :disabled="isDisable(email, password)" type="submit">Sign in</button>
       </form>
       <div class="mt-2" style="font-size:12px">
         Don't you have an account? <router-link to="/register"> Register </router-link>
@@ -45,6 +45,9 @@ export default defineComponent({
           }, 2000)
         }
       });
+    },
+    isDisable(){
+      return this.email.length <= 0 || this.password.length <= 0
     }
   }
 })
