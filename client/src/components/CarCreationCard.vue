@@ -1,0 +1,76 @@
+<template>
+  <form class="car-card row d-flex" style="position: relative">
+    <div class="col-4 justify-content-center align-items-center d-flex">
+      <img @click="dec_index" src="../assets/arrows/left-arrow.png" style="width: 20px; cursor: pointer">
+      <img :src="getPath(shown_image)" style="width: 70%; margin: 0px 10px">
+      <img @click="inc_index" src="../assets/arrows/right-arrow.png" style="width: 20px; cursor: pointer">
+    </div>
+    <div class="col-4 d-flex flex-column align-items-start justify-content-center">
+      <input type="text" class="form-control my-input" style="width: 60%; margin-bottom: 16px" v-model="model" placeholder="model">
+      <input type="text" class="form-control my-input" style="width: 60%; margin-bottom: 16px" v-model="license_plate" placeholder="license plate">
+      <input type="text" class="form-control my-input" style="width: 60%; margin-bottom: 16px" v-model="color" placeholder="color">
+      <input type="number" class="form-control my-input" style="width: 60%; margin-bottom: 16px" v-model="year" placeholder="year">
+    </div>
+    <div class="col-4 d-flex flex-column align-items-center justify-content-center">
+        <Bin class="mb-4" style="height:35px; width: 35px;" @click="cancel"></Bin>
+        <img src="../assets/save.png" style="height:27px; width: 27px; padding: 0; cursor: pointer">
+    </div>
+  </form>
+</template>
+
+<script>
+import Bin from "@/components/Bin.vue";
+import axios from "axios";
+
+export default {
+  name: "CarCreationCard",
+  data(){
+    return{
+      shown_image: 1,
+      model: "",
+      license_plate: "",
+      color: "",
+      year: ""
+    }
+  },
+  components: {Bin},
+  methods: {
+    getPath() {
+      return require("@/assets/cars/car" + this.shown_image + ".png")
+    },
+    dec_index() {
+      if(this.shown_image > 1) {
+        this.shown_image -= 1
+      }else{
+        this.shown_image = 4
+      }
+    },
+    inc_index() {
+      if(this.shown_image < 4) {
+        this.shown_image += 1
+      }else{
+        this.shown_image = 1
+      }
+    },
+    cancel(){
+      this.$emit("cancel")
+    }
+  }
+}
+
+</script>
+
+<style scoped>
+
+.car-card{
+  display: block;
+  background-color: #9de3f5;
+  height: 30vh;
+  min-height: 200px;
+  min-width: 650px;
+  width: 50vw;
+  border-radius: 30vh;
+  box-shadow: 5px 10px 20px 0px #b0b0b0;
+}
+
+</style>

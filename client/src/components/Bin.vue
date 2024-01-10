@@ -1,5 +1,5 @@
 <template>
-  <img :src="img_active" @mouseover="img_active = img_open" @mouseleave="img_active = img_close" style="padding: 0">
+  <img :src="img_active" @mouseover="img_active = img_open" @mouseleave="img_active = img_close" style="padding: 0; cursor: pointer">
 </template>
 
 <script>
