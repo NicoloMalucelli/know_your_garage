@@ -2,7 +2,8 @@
   <Header></Header>
   <div class="home">
     <div class="d-flex justify-content-center mt-5" >
-      <div>You don't have any active parking or membership at the moment <br>  </div>
+
+      <div>Welcome Nicolò! <br> You don't have any active parking or membership at the moment </div>
     </div>
   </div>
   <Footer></Footer>
