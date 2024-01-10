@@ -1,9 +1,7 @@
 <template>
   <Header selected_item="my_cars" ></Header>
-  <div class="home">
-    <div class="d-flex justify-content-center mt-5" >
-
-    </div>
+  <div class="d-flex justify-content-center mt-5" >
+    ciao
   </div>
   <Footer></Footer>
 </template>
