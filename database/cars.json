@@ -1,0 +1,32 @@
+[
+  {"owner": "mario.rossi@example.com", "license_plate": "AB123CD", "color": "Blue", "matriculation_year": 2010, "pic": "car1.png"},
+  {"owner": "mario.rossi@example.com", "license_plate": "XY456ZZ", "color": "Red", "matriculation_year": 2015, "pic": "car2.png"},
+  {"owner": "mario.rossi@example.com", "license_plate": "OP567QR", "color": "Red", "matriculation_year": 2019, "pic": "car3.png"},
+
+  {"owner": "elena.bianchi@example.com", "license_plate": "DE789FG", "color": "Green", "matriculation_year": 2012, "pic": "car1.png"},
+  {"owner": "elena.bianchi@example.com", "license_plate": "HI012IJ", "color": "Silver", "matriculation_year": 2018, "pic": "car2.png"},
+  {"owner": "elena.bianchi@example.com", "license_plate": "KL345MN", "color": "Black", "matriculation_year": 2020, "pic": "car3.png"},
+
+  {"owner": "luca.ferrari@example.com", "license_plate": "OP678QR", "color": "White", "matriculation_year": 2014, "pic": "car1.png"},
+  {"owner": "luca.ferrari@example.com", "license_plate": "ST901UV", "color": "Yellow", "matriculation_year": 2019, "pic": "car2.png"},
+
+  {"owner": "giulia.russo@example.com", "license_plate": "WX234YZ", "color": "Orange", "matriculation_year": 2017, "pic": "car1.png"},
+  {"owner": "giulia.russo@example.com", "license_plate": "AB567CD", "color": "Purple", "matriculation_year": 2022, "pic": "car2.png"},
+
+  {"owner": "andrea.moretti@example.com", "license_plate": "EF890GH", "color": "Brown", "matriculation_year": 2016, "pic": "car1.png"},
+  {"owner": "andrea.moretti@example.com", "license_plate": "IJ123KL", "color": "Gray", "matriculation_year": 2021, "pic": "car2.png"},
+
+  {"owner": "francesca.galli@example.com", "license_plate": "MN456OP", "color": "Pink", "matriculation_year": 2013, "pic": "car1.png"},
+
+  {"owner": "marco.fiori@example.com", "license_plate": "QR789ST", "color": "Cyan", "matriculation_year": 2011, "pic": "car1.png"},
+  {"owner": "marco.fiori@example.com", "license_plate": "UV012WX", "color": "Magenta", "matriculation_year": 2019, "pic": "car2.png"},
+
+  {"owner": "chiara.romano@example.com", "license_plate": "YZ345AB", "color": "Gold", "matriculation_year": 2015, "pic": "car1.png"},
+  {"owner": "chiara.romano@example.com", "license_plate": "CD678EF", "color": "Silver", "matriculation_year": 2020, "pic": "car2.png"},
+
+  {"owner": "riccardo.bruno@example.com", "license_plate": "GH901IJ", "color": "Green", "matriculation_year": 2018, "pic": "car1.png"},
+  {"owner": "riccardo.bruno@example.com", "license_plate": "KL234MN", "color": "Blue", "matriculation_year": 2023, "pic": "car2.png"},
+
+  {"owner": "valentina.gentile@example.com", "license_plate": "ST890UV", "color": "Black", "matriculation_year": 2021, "pic": "car1.png"},
+  {"owner": "valentina.gentile@example.com", "license_plate": "WX123YZ", "color": "White", "matriculation_year": 2024, "pic": "car2.png"}
+]

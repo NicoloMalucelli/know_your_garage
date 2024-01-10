@@ -1,7 +1,15 @@
 <template>
-  <Header selected_item="my_cars" ></Header>
-  <div class="d-flex justify-content-center mt-5" >
-    ciao
+  <Header selected_item="my_cars"></Header>
+  <div class="d-flex flex-column justify-content-center align-items-center mt-5 vw-100" >
+    <h1>My cars</h1>
+    <div v-for="car in cars">
+      <CarCard :car="car" class="mt-5"></CarCard>
+    </div>
+    <!--
+    <div v-for="i in 3" :key="i">
+    <CarCard class="mt-5"></CarCard>
+    </div>
+    -->
   </div>
   <Footer></Footer>
 </template>
@@ -11,13 +19,26 @@
 import { defineComponent } from "vue";
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
+import CarCard from "@/components/CarCard.vue";
+import axios from "axios";
 
 export default defineComponent({
   name: "MyCars",
   components: {
     Header,
     Footer,
+    CarCard
   },
+  data(){
+    return{
+      cars: []
+    }
+  },
+  mounted() {
+    axios.get('http://localhost:3000/cars/' + sessionStorage.getItem('email')).then((response) => {
+      this.cars = response.data;
+    })
+  }
 });
 
 </script>

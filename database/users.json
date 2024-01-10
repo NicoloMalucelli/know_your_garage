@@ -1,1 +1,12 @@
-{"email": "marco@gmail.com", "username": "Marco", "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"}
+[
+  {"email": "mario.rossi@example.com", "name": "Mario", "surname": "Rossi", "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"},
+  {"email": "elena.bianchi@example.com", "name": "Elena", "surname": "Bianchi", "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"},
+  {"email": "luca.ferrari@example.com", "name": "Luca", "surname": "Ferrari", "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"},
+  {"email": "giulia.russo@example.com", "name": "Giulia", "surname": "Russo", "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"},
+  {"email": "andrea.moretti@example.com", "name": "Andrea", "surname": "Moretti", "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"},
+  {"email": "francesca.galli@example.com", "name": "Francesca", "surname": "Galli", "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"},
+  {"email": "marco.fiori@example.com", "name": "Marco", "surname": "Fiori", "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"},
+  {"email": "chiara.romano@example.com", "name": "Chiara", "surname": "Romano", "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"},
+  {"email": "riccardo.bruno@example.com", "name": "Riccardo", "surname": "Bruno", "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"},
+  {"email": "valentina.gentile@example.com", "name": "Valentina", "surname": "Gentile", "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"}
+]
