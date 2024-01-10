@@ -2,14 +2,9 @@
   <Header selected_item="my_cars"></Header>
   <div class="d-flex flex-column justify-content-center align-items-center mt-5 vw-100" >
     <h1>My cars</h1>
-    <div v-for="car in cars">
-      <CarCard :car="car" class="mt-5"></CarCard>
+    <div v-for="(car, i) in cars">
+      <CarCard v-if="visible[i]" :car="car" class="mt-5" @delete="visible[i] = false"></CarCard>
     </div>
-    <!--
-    <div v-for="i in 3" :key="i">
-    <CarCard class="mt-5"></CarCard>
-    </div>
-    -->
   </div>
   <Footer></Footer>
 </template>
@@ -31,11 +26,13 @@ export default defineComponent({
   },
   data(){
     return{
-      cars: []
+      cars: [],
+      visible: []
     }
   },
   mounted() {
     axios.get('http://localhost:3000/cars/' + sessionStorage.getItem('email')).then((response) => {
+      this.visible = Array.from({ length: response.data.length}, () => true);
       this.cars = response.data;
     })
   }

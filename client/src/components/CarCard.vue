@@ -1,5 +1,5 @@
 <template>
-  <div class="car-card row d-flex" style="">
+  <div class="car-card row d-flex" style="position: relative">
     <div class="col-4 justify-content-center align-items-center d-flex">
       <img :src="getPath()" style="width: 70%">
     </div>
@@ -10,19 +10,33 @@
       <p><strong>Matriculation year:</strong> {{car.matriculation_year}} </p>
     </div>
     <div class="col-4 d-flex flex-column align-items-start justify-content-center">
-      <p><strong>Status:</strong> not parked</p>
-      <p><strong>Active pass:</strong> none</p>
+      <div class="d-flex flex-column align-items-center">
+        <p><strong>Status:</strong> not parked</p>
+        <p><strong>Active pass:</strong> none</p>
+        <Bin @click="askForDeletion" style="height:35px; width: 35px;"></Bin>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Bin from "@/components/Bin.vue";
+import axios from "axios";
+
 export default {
   name: "CarCard",
+  components: {Bin},
   props: ['car'],
   methods:{
     getPath(){
       return require("@/assets/cars/" + this.car.pic)
+    },
+    askForDeletion(){
+      if(window.confirm("Do you really want to remove:\n   - " + this.car.model + ", license plate " + this.car.license_plate + "\nfrom your cars?")){
+        axios.delete('http://localhost:3000/cars/' + this.car.license_plate).then(() => {
+          this.$emit("delete")
+        })
+      }
     }
   }
 }
