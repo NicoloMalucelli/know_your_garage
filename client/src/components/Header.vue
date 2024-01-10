@@ -4,13 +4,13 @@
   </div>
   <div class="d-flex justify-content-center align-items-center my-navbar-container" style="width: 100vw">
     <div class="my-navbar row" style="">
-      <div class="d-flex align-items-center justify-content-center" style="width: 15%; border-radius: max(4vh, 27px) 0px 0px max(4vh, 27px)"> History </div>
-      <div class="d-flex align-items-center justify-content-center" style="width: 15%"> Find a parking lot </div>
-      <div class="d-flex align-items-center justify-content-center" style="width: 15%"> ??? </div>
-      <div class="d-flex align-items-center justify-content-center" style="width: 10%" @click="goToHome()"> Home </div>
-      <div class="d-flex align-items-center justify-content-center" style="width: 15%"> My memberships </div>
-      <div class="d-flex align-items-center justify-content-center" style="width: 15%" @click="goToMyCars()"> My cars </div>
-      <div class="d-flex align-items-center justify-content-center" style="width: 15%; border-radius: 0px max(4vh, 27px) max(4vh, 27px) 0px"> My profile </div>
+      <div :style="{color: updateColor('history')}" class="d-flex align-items-center justify-content-center" style="width: 15%; border-radius: max(4vh, 27px) 0px 0px max(4vh, 27px)"> History </div>
+      <div :style="{color: updateColor('find_a_parking_lot')}" class="d-flex align-items-center justify-content-center" style="width: 15%"> Find a parking lot </div>
+      <div :style="{color: updateColor('idk')}" class="d-flex align-items-center justify-content-center" style="width: 15%"> ??? </div>
+      <div :style="{color: updateColor('home')}" class="d-flex align-items-center justify-content-center" style="width: 10%" @click="goToHome()"> Home </div>
+      <div :style="{color: updateColor('my_memberships')}" class="d-flex align-items-center justify-content-center" style="width: 15%"> My memberships </div>
+      <div :style="{color: updateColor('my_cars')}" class="d-flex align-items-center justify-content-center" style="width: 15%" @click="goToMyCars()"> My cars </div>
+      <div :style="{color: updateColor('my_profile')}" class="d-flex align-items-center justify-content-center" style="width: 15%; border-radius: 0px max(4vh, 27px) max(4vh, 27px) 0px"> My profile </div>
       <!--
       <div class="col-2 d-flex align-items-center justify-content-center" style="border-radius: max(4vh, 27px) 0px 0px max(4vh, 27px)"> My profile</div>
       <div class="col-3 d-flex align-items-center justify-content-center" style=""> My cars </div>
@@ -28,7 +28,14 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Header",
+  props: ['selected_item'],
   methods: {
+    updateColor(id){
+      if(id === this.selected_item){
+        return "#f0f0f0";
+      }
+      return "#000000";
+    },
     goToMyCars(){
       this.$router.push({name: 'my_cars'})
     },

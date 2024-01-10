@@ -1,5 +1,5 @@
 <template>
-  <Header></Header>
+  <Header selected_item="home" ></Header>
   <div class="home">
     <div class="d-flex justify-content-center mt-5" >
 
