@@ -7,9 +7,9 @@
       <div class="d-flex align-items-center justify-content-center" style="width: 15%; border-radius: max(4vh, 27px) 0px 0px max(4vh, 27px)"> History </div>
       <div class="d-flex align-items-center justify-content-center" style="width: 15%"> Find a parking lot </div>
       <div class="d-flex align-items-center justify-content-center" style="width: 15%"> ??? </div>
-      <div class="d-flex align-items-center justify-content-center" style="width: 10%"> Home </div>
+      <div class="d-flex align-items-center justify-content-center" style="width: 10%" @click="goToHome()"> Home </div>
       <div class="d-flex align-items-center justify-content-center" style="width: 15%"> My memberships </div>
-      <div class="d-flex align-items-center justify-content-center" style="width: 15%"> My cars </div>
+      <div class="d-flex align-items-center justify-content-center" style="width: 15%" @click="goToMyCars()"> My cars </div>
       <div class="d-flex align-items-center justify-content-center" style="width: 15%; border-radius: 0px max(4vh, 27px) max(4vh, 27px) 0px"> My profile </div>
       <!--
       <div class="col-2 d-flex align-items-center justify-content-center" style="border-radius: max(4vh, 27px) 0px 0px max(4vh, 27px)"> My profile</div>
@@ -28,6 +28,19 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Header",
+  methods: {
+    goToMyCars(){
+      this.$router.push({name: 'my_cars'})
+    },
+    goToHome(){
+      this.$router.push({name: 'home'})
+    }
+  },
+  mounted() {
+    if (sessionStorage.getItem('email') === null) {
+      this.$router.push('/login')
+    }
+  }
 });
 
 </script>

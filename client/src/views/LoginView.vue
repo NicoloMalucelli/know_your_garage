@@ -42,7 +42,11 @@ export default defineComponent({
         }else{
           this.displayError("Wrong email or password")
         }
-      });
+      }).catch(error => {
+        if(error.response){
+          this.displayError(error.response.data.error)
+        }
+      })
     },
     displayError(text){
       this.error_text = text

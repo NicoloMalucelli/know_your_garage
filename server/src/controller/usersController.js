@@ -6,7 +6,7 @@ exports.getUser = async(req, res) => {
        if(result){
             res.json({'email' : result.email, 'username' : result.username, 'password' : result.password})
         } else {
-           res.status(500).json({ error: 'Internal Server Error occurred'})
+           res.status(500).json({ error: 'Wrong email or password'})
         }
     })
 }
