@@ -22,7 +22,7 @@ exports.createUser = async(req, res) => {
         res.header('Access-Control-Allow-Origin', '*');
     }
 
-    if(req.body.email == null || req.body.username == null || req.body.password == null){
+    if(req.body.email == null || req.body.name == null || req.body.surname == null || req.body.password == null){
         res.status(400).json({error: 'inclomplete request'})
         return
     }
