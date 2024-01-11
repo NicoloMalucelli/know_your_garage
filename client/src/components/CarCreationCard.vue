@@ -14,6 +14,7 @@
     <div class="col-4 d-flex flex-column align-items-center justify-content-center">
         <Bin class="mb-4" style="height:35px; width: 35px;" @click="cancel"></Bin>
         <img @click="registerCar" v-if="isFormSubmittable(model, license_plate, color, year)" src="../assets/save.png" style="height:27px; width: 27px; padding: 0; cursor: pointer">
+        <p v-if="registration_error" style="color: #b81421">License plate already in use</p>
     </div>
   </form>
 </template>
@@ -31,7 +32,8 @@ export default {
       model: "",
       license_plate: "",
       color: "",
-      year: ""
+      year: "",
+      registration_error: false,
     }
   },
   components: {Bin},
@@ -68,9 +70,17 @@ export default {
         'year': this.year,
         'pic': "car" + this.shown_image + ".png"}
       axios.put('http://localhost:3000/cars', body).then((response) => {
-          this.$emit("newCarRegistered", response.data)
-        })
-    }
+        this.$emit("newCarRegistered", response.data)
+      }).catch(error => {
+        this.displayError()
+      })
+    },
+    displayError(){
+      this.registration_error = true
+      setTimeout(() => {
+        this.registration_error = false
+      }, 2000)
+    },
   }
 }
 

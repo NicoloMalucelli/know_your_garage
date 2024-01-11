@@ -36,6 +36,12 @@ exports.createCar = async(req, res) => {
         res.header('Access-Control-Allow-Origin', '*');
     }
 
+    const carExists = await carsModel.exists({license_plate: req.body.license_plate})
+    if(carExists){
+        res.status(409).json({ error: 'license plate already in use' })
+        return
+    }
+
     const cars = new carsModel(req.body);
     try{
         res.json(await cars.save());
