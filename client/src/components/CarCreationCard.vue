@@ -92,7 +92,7 @@ export default {
   display: block;
   background-color: #9de3f5;
   height: 30vh;
-  min-height: 200px;
+  min-height: 250px;
   min-width: 650px;
   width: 50vw;
   border-radius: 30vh;
