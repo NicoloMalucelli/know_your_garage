@@ -33,9 +33,9 @@ exports.createUser = async(req, res) => {
         return
     }
 
-    const offer = new usersModel(req.body);
+    const user = new usersModel(req.body);
     try{
-        res.json(await offer.save());
+        res.json(await user.save());
     }catch (e) {
         res.status(500).json({ error: 'Internal Server Error occurred'})
     }

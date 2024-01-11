@@ -1,12 +1,12 @@
 <template>
   <div class="d-flex justify-content-center align-items-center vh-100" style="background-color: #9de3f5">
     <div class="my-card" style="">
-      <form @submit="login()">
+      <div>
         <img class="w-100 mb-5 d-flex flex-column" src="../assets/logo.png">
         <input type="email" class="form-control mb-3 mt-3 my-input" v-model="email" placeholder="name@example.com">
         <input type="password" class="form-control mb-3 my-input" v-model="password" placeholder="password" autocomplete="on">
-        <button class="btn btn-lg btn-primary my-input" :disabled="isDisable(email, password)" type="submit">Sign in</button>
-      </form>
+        <button class="btn btn-lg btn-primary my-input" :disabled="isDisable(email, password)" @click="login">Sign in</button>
+      </div>
       <div class="mt-2" style="font-size:12px">
         Don't you have an account? <router-link to="/register"> Register </router-link>
       </div>
@@ -38,7 +38,7 @@ export default defineComponent({
         if(sha256(this.password).toString() === data.password){
           sessionStorage.setItem('username', data.username)
           sessionStorage.setItem('email', data.email)
-          this.$router.push('/')
+          this.$router.push({name: 'home'})
         }else{
           this.displayError("Wrong email or password")
         }

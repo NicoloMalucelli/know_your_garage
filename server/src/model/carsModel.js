@@ -5,7 +5,7 @@ const carSchema = new mongoose.Schema({
     model: String,
     license_plate: String,
     color: String,
-    matriculation_year: String,
+    matriculation_year: Number,
     pic: String
 })
 

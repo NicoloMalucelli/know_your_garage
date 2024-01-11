@@ -10,10 +10,7 @@
       + add a new car
     </button>
 
-    <CarCreationCard class="mt-5" v-if="add_car_form_visible" @cancel="add_car_form_visible=false">
-
-    </CarCreationCard>
-
+    <CarCreationCard class="mt-5" v-if="add_car_form_visible" @cancel="add_car_form_visible=false" @newCarRegistered="refreshCars"></CarCreationCard>
 
   </div>
 
@@ -48,12 +45,17 @@ export default defineComponent({
   methods: {
     showForm(){
       this.add_car_form_visible = true
+    },
+    refreshCars(newCar){
+      this.add_car_form_visible = false;
+      //this.cars[this.cars.length+1] = newCar;
+      this.cars.push(newCar); //TODO doesn't refresh the v-for right now
     }
   },
   mounted() {
     axios.get('http://localhost:3000/cars/' + sessionStorage.getItem('email')).then((response) => {
       this.visible = Array.from({ length: response.data.length}, () => true);
-      this.cars = response.data;
+      this.cars = response.data
     })
   }
 });
