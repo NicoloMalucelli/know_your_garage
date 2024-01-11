@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-content-center align-items-center vh-100" style="background-color: #9de3f5">
     <div class="my-card" style="">
-      <div>
+      <form @submit.prevent="submitForm">
         <img class="w-100 mb-5 d-flex flex-column" src="../assets/logo.png">
         <input type="email" class="form-control mb-3 mt-3 my-input" v-model="email" placeholder="name@example.com">
         <div class="d-flex mb-3 mt-3">
@@ -11,7 +11,7 @@
         <input type="password" class="form-control mb-3 my-input" autocomplete="on" v-model="password" placeholder="password">
         <input type="password" class="form-control mb-3 my-input" autocomplete="on" v-model="password_confirm" placeholder="password">
         <button class="btn btn-lg btn-primary my-input" @click="register" :disabled="isDisable(email, password, username, password_confirm)">Register</button>
-      </div>
+      </form>
       <div class="mt-2" style="font-size:12px">
         Don you already have an account? <router-link to="/login"> Login </router-link>
       </div>
