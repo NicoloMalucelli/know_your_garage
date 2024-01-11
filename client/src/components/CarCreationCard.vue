@@ -57,11 +57,9 @@ export default {
       this.$emit("cancel")
     },
     isFormSubmittable(){
-      console.log(this.year.length)
       return this.model.length > 0 && this.license_plate.length > 0 && this.color.length > 0 && this.year > 1980 && this.year <= 2024
     },
     registerCar(){
-      console.log("registering")
       const body = {
         'owner': sessionStorage.getItem("email"),
         'model': this.model,

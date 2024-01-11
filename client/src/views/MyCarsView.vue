@@ -2,8 +2,8 @@
   <Header selected_item="my_cars"></Header>
   <div class="d-flex flex-column justify-content-center align-items-center mt-5 vw-100" >
     <h1>My cars</h1>
-    <div v-for="(car, i) in cars">
-      <CarCard v-if="visible[i]" :car="car" class="mt-5" @delete="visible[i] = false"></CarCard>
+    <div v-for="car in cars">
+      <CarCard :car="car" class="mt-5" @delete="cars.pop(car)"></CarCard>
     </div>
 
     <button @click="showForm()" class="mt-5 d-flex add-car-card justify-content-center align-items-center" v-if="!add_car_form_visible">
@@ -38,7 +38,6 @@ export default defineComponent({
   data(){
     return{
       cars: [],
-      visible: [],
       add_car_form_visible: false,
     }
   },
@@ -48,13 +47,11 @@ export default defineComponent({
     },
     refreshCars(newCar){
       this.add_car_form_visible = false;
-      //this.cars[this.cars.length+1] = newCar;
-      this.cars.push(newCar); //TODO doesn't refresh the v-for right now
+      this.cars.push(newCar);
     }
   },
   mounted() {
     axios.get('http://localhost:3000/cars/' + sessionStorage.getItem('email')).then((response) => {
-      this.visible = Array.from({ length: response.data.length}, () => true);
       this.cars = response.data
     })
   }
