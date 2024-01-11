@@ -5,7 +5,7 @@
   <div class="d-flex justify-content-center align-items-center my-navbar-container" style="width: 100%">
     <div class="my-navbar row" style="">
       <div :style="{color: updateColor('history')}" class="d-flex align-items-center justify-content-center" style="width: 15%; border-radius: max(4vh, 40px) 0px 0px max(4vh, 40px)"> History </div>
-      <div :style="{color: updateColor('find_a_parking_lot')}" class="d-flex align-items-center justify-content-center" style="width: 15%"> Find a parking lot </div>
+      <div :style="{color: updateColor('find_a_parking_lot')}" class="d-flex align-items-center justify-content-center" style="width: 15%" @click="$router.push({name: 'parking_lots'})"> Parking lots </div>
       <div :style="{color: updateColor('idk')}" class="d-flex align-items-center justify-content-center" style="width: 15%"> ??? </div>
       <div :style="{color: updateColor('home')}" class="d-flex align-items-center justify-content-center" style="height: 100%; width: 10%" @click="$router.push({name: 'home'})">
         <img src="../assets/home_black.png" v-if="selected_item !== 'home'" style="height: 35%">
