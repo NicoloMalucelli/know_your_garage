@@ -4,12 +4,14 @@ import LoginView from "@/views/LoginView.vue";
 import RegisterView from "@/views/RegisterView.vue";
 import MyCarsView from "@/views/MyCarsView.vue";
 import PageNotFound from "@/views/PageNotFound.vue";
+import ProfileView from "@/views/ProfileView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   { path: '/', name: 'home', component: HomeView },
   { path: '/login', name: 'login', component: LoginView },
   { path: '/register', name: 'register', component: RegisterView },
   { path: '/mycars', name: 'my_cars', component: MyCarsView },
+  { path: '/profile', name: 'profile', component: ProfileView },
   { path: '/:catchAll(.*)', name:'404', component: PageNotFound}
 ]
 

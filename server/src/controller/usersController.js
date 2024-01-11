@@ -4,7 +4,7 @@ exports.getUser = async(req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     usersModel.findOne({email: req.params.email}).then(result => {
        if(result){
-            res.json({'email' : result.email, 'username' : result.username, 'password' : result.password})
+            res.json(result)
         } else {
            res.status(500).json({ error: 'Wrong email or password'})
         }
@@ -38,5 +38,24 @@ exports.createUser = async(req, res) => {
         res.json(await user.save());
     }catch (e) {
         res.status(500).json({ error: 'Internal Server Error occurred'})
+    }
+}
+
+exports.updatePassword = async(req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    if(req.body.password == null){
+        res.status(400).json({error: 'inclomplete request'})
+        return
+    }
+
+    try{
+        await usersModel.updateOne(
+            {"email": req.params.email},
+            {"password": req.body.password}
+        )
+        res.status(200).json("{}");
+    }catch (e) {
+        res.json(e);
     }
 }

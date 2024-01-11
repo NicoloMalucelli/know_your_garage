@@ -1,6 +1,6 @@
 <template>
   <Header selected_item="my_cars"></Header>
-  <div class="d-flex flex-column justify-content-center align-items-center mt-5 vw-100" >
+  <div class="d-flex flex-column justify-content-center align-items-center mt-5" style="width: 100%">
     <h1>My cars</h1>
     <div v-for="car in cars">
       <CarCard :car="car" class="mt-5" @delete="cars.pop(car)"></CarCard>
@@ -14,7 +14,6 @@
 
   </div>
 
-  <!-- TODO possibility to add a car -->
   <Footer></Footer>
 </template>
 

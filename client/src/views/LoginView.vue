@@ -36,7 +36,6 @@ export default defineComponent({
       axios.get('http://localhost:3000/users/' + this.email).then(response => {
         const data = response.data;
         if(sha256(this.password).toString() === data.password){
-          sessionStorage.setItem('username', data.username)
           sessionStorage.setItem('email', data.email)
           this.$router.push({name: 'home'})
         }else{
