@@ -39,7 +39,7 @@ export default {
   components: {Bin},
   methods: {
     getPath() {
-      return require("@/assets/cars/car" + this.shown_image + ".png")
+      return new URL('../assets/cars/car' + this.shown_image + ".png", import.meta.url).href//require("@/assets/cars/car" + this.shown_image + ".png")
     },
     dec_index() {
       if(this.shown_image > 1) {

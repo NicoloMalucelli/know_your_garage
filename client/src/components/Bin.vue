@@ -7,9 +7,9 @@ export default {
   name: "Bin",
   data() {
     return {
-      img_open: require("@/assets/bin/bin_open.png"),
-      img_close: require("@/assets/bin/bin_closed.png"),
-      img_active: require("@/assets/bin/bin_closed.png")
+      img_open: new URL('../assets/bin/bin_open.png', import.meta.url).href,//require("@/assets/bin/bin_open.png"),
+      img_close: new URL('../assets/bin/bin_closed.png', import.meta.url).href,
+      img_active: new URL('../assets/bin/bin_closed.png', import.meta.url).href
     }
   }
 }

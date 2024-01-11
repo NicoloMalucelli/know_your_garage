@@ -29,7 +29,7 @@ export default {
   props: ['car'],
   methods:{
     getPath(){
-      return require("@/assets/cars/" + this.car.pic)
+      return new URL('../assets/cars/' + this.car.pic, import.meta.url).href//require("@/assets/cars/" + this.car.pic)
     },
     askForDeletion(){
       if(window.confirm("Do you really want to remove:\n   - " + this.car.model + ", license plate " + this.car.license_plate + "\nfrom your cars?")){
