@@ -1,0 +1,10 @@
+[
+  {"owner":  "comune.cesena@example.com", "name":  "Parcheggio Automatico Barriera", "latitude":  44.14012953028867, "longitude":  12.245941231295165, "slots": 300},
+  {"owner":  "comune.cesena@example.com", "name":  "Parcheggio Automatico Piazza Fabbri", "latitude": 44.138606004331116, "longitude": 12.243729832075461, "slots": 55},
+  {"owner":  "comune.cesena@example.com", "name":  "Parcheggio Coperto Foro Annonario", "latitude":  44.136039499693396, "longitude":  12.242200807472122, "slots": 300},
+  {"owner":  "comune.cesena@example.com", "name":  "Parcheggio IV Novembre", "latitude":  44.13829273205613, "longitude":  12.235385056607122, "slots": 250},
+  {"owner":  "comune.cesena@example.com", "name":  "Parcheggio Orogel Stadium - Dino Manuzzi", "latitude":  44.142621898220206, "longitude":  12.260632093275257, "slots": 100},
+
+  {"owner":  "comune.forli@example.com", "name":  "Parcheggio Lungasosta Via Lombardini", "latitude":  44.21818137396107, "longitude":  12.041555812818073, "slots": 150},
+  {"owner":  "comune.forli@example.com", "name":  "Parcheggio Via Oriani", "latitude":  44.22190655990892, "longitude":  12.049503171737268, "slots": 100},
+]
