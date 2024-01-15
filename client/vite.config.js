@@ -18,11 +18,5 @@ export default defineConfig({
     server: {
         port: 8080,
     },
-    optimizeDeps: {
-        include: [
-            "@fawmi/vue-google-maps",
-            "fast-deep-equal",
-        ],
-    },
 });
 

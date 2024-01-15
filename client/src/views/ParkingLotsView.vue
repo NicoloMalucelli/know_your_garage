@@ -1,15 +1,22 @@
 <template>
   <Header selected_item="find_a_parking_lot"></Header>
-  <h1 class="mt-3">Parking lots</h1>
-  <div class="w-100 d-flex justify-content-center" style="height: 50vh">
 
+  <GoogleAddressAutocomplete
+      apiKey="AIzaSyB633unraFl_EQhKi6DAUvz-71uYQEr6VU"
+      v-model="address"
+      @callback="updatePlace"
+      class="mb-3 mt-3 searchBar"
+      placeholder="Seach a place"
+  />
+
+  <div class="w-100 d-flex justify-content-center" style="height: 50vh">
     <GoogleMap
         id="map"
         ref="map"
-        api-key=""
+        api-key="AIzaSyB633unraFl_EQhKi6DAUvz-71uYQEr6VU"
         :center="{ lat: 44.148464093357504, lng: 12.235835024328905 }"
         :zoom="15"
-        @bounds_changed="updateMarkersWithCheck"
+        @bounds_changed="boundsChanged"
         @mouseup="updateMarkers">
       <MarkerCluster>
       <div v-for="marker in map_markers">
@@ -33,6 +40,8 @@
           <p class="d-flex" style="margin-bottom: 0">{{marker.slots - 200}} free slots</p>
         </div>
       </div>
+
+      <p v-if="list_markers.length === 0" class="mt-5"><strong>No parking in this area</strong></p>
     </div>
   </div>
 
@@ -42,6 +51,7 @@
 import { defineComponent } from "vue";
 import Header from "@/components/Header.vue";
 import { GoogleMap, Marker, InfoWindow, CustomMarker, MarkerCluster } from "vue3-google-map";
+import GoogleAddressAutocomplete from 'vue3-google-address-autocomplete'
 
 import CarCard from "@/components/CarCard.vue";
 import CarCreationCard from "@/components/CarCreationCard.vue";
@@ -55,7 +65,8 @@ export default defineComponent({
     Marker,
     CustomMarker,
     InfoWindow,
-    MarkerCluster
+    MarkerCluster,
+    GoogleAddressAutocomplete
   },
   data(){
     return{
@@ -64,10 +75,11 @@ export default defineComponent({
       map_markers: [],
       list_markers: [],
       lastUpdateTime: 0,
+      address: ""
     }
   },
   methods: {
-    updateMarkersWithCheck(){
+    boundsChanged(){
       if((new Date() - this.lastUpdateTime) < 500){
         return
       }
@@ -115,6 +127,9 @@ export default defineComponent({
     },
     deg2rad(deg) {
       return deg * (Math.PI/180)
+    },
+    updatePlace(place){
+      this.$refs.map.map.setCenter({lat: place.geometry.location.lat(), lng: place.geometry.location.lng()})
     }
   },
   mounted() {
@@ -146,5 +161,26 @@ export default defineComponent({
   overflow-y: auto;
   margin-left: 2%;
 }
+
+.searchBar{
+  height: 40px; border-radius: 20px; padding: 10px; text-align: center
+}
+
+.pac-item-query{
+  font-size: 17px;
+}
+
+.pac-item{
+  font-size: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.pac-container{
+  margin-top: 3px;
+  padding: 0px 10px;
+  border-radius: 20px;
+}
+
 
 </style>
