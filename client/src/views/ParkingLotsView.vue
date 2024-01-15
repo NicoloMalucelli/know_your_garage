@@ -17,6 +17,7 @@
         :center="{ lat: 44.148464093357504, lng: 12.235835024328905 }"
         :zoom="15"
         @bounds_changed="boundsChanged"
+        @zoom_changed="zoomChanged"
         @mouseup="updateMarkers">
       <MarkerCluster>
       <div v-for="marker in map_markers">
@@ -86,6 +87,9 @@ export default defineComponent({
       this.updateMarkers()
     },
     updateMarkers(){
+      if(this.$refs.map.map.zoom < 12){
+        return;
+      }
       this.lastUpdateTime = new Date()
 
       this.lat = this.$refs.map.map.center.lat()
@@ -130,6 +134,12 @@ export default defineComponent({
     },
     updatePlace(place){
       this.$refs.map.map.setCenter({lat: place.geometry.location.lat(), lng: place.geometry.location.lng()})
+    },
+    zoomChanged(){
+      if(this.$refs.map.map.zoom < 12){
+        this.map_markers = []
+        this.list_markers = []
+      }
     }
   },
   mounted() {
