@@ -6,12 +6,12 @@
     <GoogleMap
         id="map"
         ref="map"
-        api-key="AIzaSyDkrA8bBMCdp3rJ8B3QXHb2hq70H-4FMtg"
+        api-key=""
         :center="{ lat: 44.148464093357504, lng: 12.235835024328905 }"
         :zoom="15"
         @bounds_changed="updateMarkersWithCheck"
         @mouseup="updateMarkers">
-
+      <MarkerCluster>
       <div v-for="marker in map_markers">
         <CustomMarker :options="{ position: { lat: marker.latitude, lng: marker.longitude }}">
           <div class="d-flex justify-content-center flex-column align-items-center">
@@ -22,18 +22,16 @@
           </div>
         </CustomMarker>
       </div>
-
+      </MarkerCluster>
     </GoogleMap>
 
     <div id="list">
-      <div v-for="marker in list_markers" class="w-100" style="padding: 15px 0px 5px 0px; box-shadow: 2px 5px 10px 0px #b0b0b0; margin-bottom: 10px; border-radius: 40px; background-color: #9de3f5">
+      <div v-for="marker in list_markers" class="w-100" style="padding: 10px 0px; box-shadow: 2px 5px 10px 0px #b0b0b0; margin-bottom: 10px; border-radius: 40px; background-color: #9de3f5">
         <strong><p>{{marker.name}}</p></strong>
         <div class="d-flex align-items-center justify-content-center">
           <p class="d-flex" style="margin-bottom: 0; margin-right: 10%">{{getDist(lat, long, marker.latitude, marker.longitude) }} Km</p>
           <p class="d-flex" style="margin-bottom: 0">{{marker.slots - 200}} free slots</p>
         </div>
-
-        <p></p>
       </div>
     </div>
   </div>
@@ -65,7 +63,7 @@ export default defineComponent({
       long: 0,
       map_markers: [],
       list_markers: [],
-      lastUpdateTime: 0
+      lastUpdateTime: 0,
     }
   },
   methods: {
@@ -82,16 +80,16 @@ export default defineComponent({
       this.long = this.$refs.map.map.center.lng()
 
       const params = {
-        latitude_min: this.lat - 0.05,
-        latitude_max: this.lat + 0.05,
-        longitude_min: this.long - 0.05,
-        longitude_max: this.long + 0.05,
+        latitude_min: this.$refs.map.map.getBounds().ci.lo,
+        latitude_max: this.$refs.map.map.getBounds().ci.hi,
+        longitude_min: this.$refs.map.map.getBounds().Nh.lo,
+        longitude_max:this.$refs.map.map.getBounds().Nh.hi,
       }
       axios.get('http://localhost:3000/parkings/', {"params": params}).then((response) => {
         this.list_markers = response.data
         this.list_markers.sort((a, b) => this.getDist(this.lat, this.long, a.latitude, a.longitude) - this.getDist(this.lat, this.long, b.latitude, b.longitude))
 
-        if(this.getNewMarkers(this.map_markers, response.data).length === 0){
+        if(this.map_markers.length === response.data.length && this.getNewMarkers(this.map_markers, response.data).length === 0){
           return
         }
 
@@ -141,10 +139,11 @@ export default defineComponent({
 }
 
 #list{
-  max-width: 330px;
+  max-width: 350px;
   width: 40%;
   height: 100%;
-  overflow-y: scroll;
+  padding: 0px 10px;
+  overflow-y: auto;
   margin-left: 2%;
 }
 
