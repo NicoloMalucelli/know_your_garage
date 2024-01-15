@@ -13,15 +13,17 @@
     <GoogleMap
         id="map"
         ref="map"
+        mapTypeId="satellite"
         api-key="AIzaSyB633unraFl_EQhKi6DAUvz-71uYQEr6VU"
         :center="{ lat: 44.148464093357504, lng: 12.235835024328905 }"
         :zoom="15"
         @bounds_changed="boundsChanged"
         @zoom_changed="zoomChanged"
         @mouseup="updateMarkers">
+
       <MarkerCluster>
-      <div v-for="marker in map_markers">
-        <CustomMarker :options="{ position: { lat: marker.latitude, lng: marker.longitude }}">
+      <div v-for="(marker, index) in map_markers">
+        <CustomMarker :options="{ position: { lat: marker.latitude, lng: marker.longitude }}" @click="parking_clicked(marker)" style="cursor: pointer">
           <div class="d-flex justify-content-center flex-column align-items-center">
             <img src="../assets/parking.png" style="height: 40px; width: 40px">
             <div style="background-color: #42b983; padding: 3px; font-size: 13px; border-radius: 10px">
@@ -29,12 +31,20 @@
             </div>
           </div>
         </CustomMarker>
+
+        <InfoWindow v-if="marker.infoWindow" :options="{ position: { lat: marker.latitude, lng: marker.longitude }, pixelOffset: {width: 0, height: -25}}">
+          <div style="width: 200px">
+            <p style="font-size: 15px; color: black"><strong>{{marker.name}}</strong></p>
+            <p style="font-size: 13px; color: black"> <strong>{{marker.slots-200}} free slots</strong> </p>
+            <button class="btn btn-primary"> view more </button>
+          </div>
+        </InfoWindow>
       </div>
       </MarkerCluster>
     </GoogleMap>
 
     <div id="list">
-      <div v-for="marker in list_markers" class="w-100" style="padding: 10px 0px; box-shadow: 2px 5px 10px 0px #b0b0b0; margin-bottom: 10px; border-radius: 40px; background-color: #9de3f5">
+      <div v-for="marker in list_markers" class="w-100" style="cursor: pointer; padding: 10px 0px; box-shadow: 2px 5px 10px 0px #b0b0b0; margin-bottom: 10px; border-radius: 40px; background-color: #9de3f5">
         <strong><p>{{marker.name}}</p></strong>
         <div class="d-flex align-items-center justify-content-center">
           <p class="d-flex" style="margin-bottom: 0; margin-right: 10%">{{getDist(lat, long, marker.latitude, marker.longitude) }} Km</p>
@@ -54,8 +64,6 @@ import Header from "@/components/Header.vue";
 import { GoogleMap, Marker, InfoWindow, CustomMarker, MarkerCluster } from "vue3-google-map";
 import GoogleAddressAutocomplete from 'vue3-google-address-autocomplete'
 
-import CarCard from "@/components/CarCard.vue";
-import CarCreationCard from "@/components/CarCreationCard.vue";
 import axios from "axios";
 
 export default defineComponent({
@@ -110,6 +118,7 @@ export default defineComponent({
         }
 
         this.map_markers = response.data
+        this.map_markers.forEach(e => e.infoWindow = false)
       })
     },
     getNewMarkers(oldMarkers, newMarkers){
@@ -140,6 +149,12 @@ export default defineComponent({
         this.map_markers = []
         this.list_markers = []
       }
+    },
+    parking_clicked(marker){
+      this.$refs.map.map.zoom = 17
+      this.$refs.map.map.setCenter({lat: marker.latitude, lng: marker.longitude})
+      this.map_markers.forEach(e => e.infoWindow = false)
+      marker.infoWindow = true
     }
   },
   mounted() {
