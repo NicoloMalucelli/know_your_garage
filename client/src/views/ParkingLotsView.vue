@@ -35,8 +35,8 @@
         <InfoWindow v-if="marker.infoWindow" :options="{ position: { lat: marker.latitude, lng: marker.longitude }, pixelOffset: {width: 0, height: -25}}">
           <div style="width: 200px">
             <p style="font-size: 15px; color: black"><strong>{{marker.name}}</strong></p>
-            <p style="font-size: 13px; color: black"> <strong>{{marker.slots-200}} free slots</strong> </p>
-            <button class="btn btn-primary"> view more </button>
+            <p style="font-size: 15px; color: darkgreen"> <strong>{{marker.slots-200}} slots available</strong> </p>
+            <button class="btn btn-primary"> book a slot </button>
           </div>
         </InfoWindow>
       </div>
@@ -44,7 +44,7 @@
     </GoogleMap>
 
     <div id="list">
-      <div v-for="marker in list_markers" class="w-100" style="cursor: pointer; padding: 10px 0px; box-shadow: 2px 5px 10px 0px #b0b0b0; margin-bottom: 10px; border-radius: 40px; background-color: #9de3f5">
+      <div v-for="marker in list_markers" @click="parking_clicked(marker)" class="w-100" style="cursor: pointer; padding: 10px 0px; box-shadow: 2px 5px 10px 0px #b0b0b0; margin-bottom: 10px; border-radius: 40px; background-color: #9de3f5">
         <strong><p>{{marker.name}}</p></strong>
         <div class="d-flex align-items-center justify-content-center">
           <p class="d-flex" style="margin-bottom: 0; margin-right: 10%">{{getDist(lat, long, marker.latitude, marker.longitude) }} Km</p>
@@ -117,8 +117,9 @@ export default defineComponent({
           return
         }
 
+        const openInfoWindow = this.map_markers.find(e => e.infoWindow === true)
         this.map_markers = response.data
-        this.map_markers.forEach(e => e.infoWindow = false)
+        this.map_markers.forEach(e => e.infoWindow = !(openInfoWindow === undefined || e.name !== openInfoWindow.name))
       })
     },
     getNewMarkers(oldMarkers, newMarkers){
@@ -151,10 +152,9 @@ export default defineComponent({
       }
     },
     parking_clicked(marker){
+      this.map_markers.forEach(e => e.infoWindow = (e.name === marker.name) )
       this.$refs.map.map.zoom = 17
       this.$refs.map.map.setCenter({lat: marker.latitude, lng: marker.longitude})
-      this.map_markers.forEach(e => e.infoWindow = false)
-      marker.infoWindow = true
     }
   },
   mounted() {
