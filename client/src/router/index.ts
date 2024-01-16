@@ -7,6 +7,8 @@ import PageNotFound from "@/views/PageNotFound.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import ParkingLotsView from "@/views/ParkingLotsView.vue";
 
+import AdminLoginView from "@/views/admin/AdminLoginView.vue";
+
 const routes: Array<RouteRecordRaw> = [
   { path: '/', name: 'home', component: HomeView },
   { path: '/login', name: 'login', component: LoginView },
@@ -14,6 +16,9 @@ const routes: Array<RouteRecordRaw> = [
   { path: '/mycars', name: 'my_cars', component: MyCarsView },
   { path: '/parking_lots', name: 'parking_lots', component: ParkingLotsView },
   { path: '/profile', name: 'profile', component: ProfileView },
+
+  { path: '/admin/login', name: 'admin_login', component: AdminLoginView },
+
   { path: '/:catchAll(.*)', name:'404', component: PageNotFound}
 ]
 

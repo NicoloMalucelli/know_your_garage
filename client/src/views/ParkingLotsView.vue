@@ -1,6 +1,20 @@
 <template>
   <Header selected_item="find_a_parking_lot"></Header>
 
+  <div v-if="overlayMarker != null" class="overlay-container d-flex justify-content-center align-items-center" @click.self="overlayMarker = null">
+    <div class="overlay-div flex-column py-4" style="position: relative">
+      <img src="../assets/cancel.png" @click="overlayMarker = null" style="height: 20px; width: 20px; cursor: pointer; position: absolute; right: 10px; top: 10px">
+      <h1 style="font-size: larger">{{overlayMarker.name}}</h1>
+      <p style="color: darkgreen">{{overlayMarker.slots-200}} slots available</p>
+      <button :disabled="overlayMarker.slots-200 <= 0" class="btn btn-primary">Reserve a slot for today</button>
+
+      <p class="mt-3" style="font-size: small">― or buy a pass ―</p>
+
+      <!-- TODO iterate over the passes and show them -->
+
+    </div>
+  </div>
+
   <GoogleAddressAutocomplete
       apiKey="AIzaSyB633unraFl_EQhKi6DAUvz-71uYQEr6VU"
       v-model="address"
@@ -32,18 +46,18 @@
           </div>
         </CustomMarker>
 
-        <InfoWindow v-if="marker.infoWindow" :options="{ position: { lat: marker.latitude, lng: marker.longitude }, pixelOffset: {width: 0, height: -25}}">
+        <InfoWindow class="mb-1" v-if="marker.infoWindow" :options="{ position: { lat: marker.latitude, lng: marker.longitude }, pixelOffset: {width: 0, height: -25}}">
           <div style="width: 200px">
             <p style="font-size: 15px; color: black"><strong>{{marker.name}}</strong></p>
             <p style="font-size: 15px; color: darkgreen"> <strong>{{marker.slots-200}} slots available</strong> </p>
-            <button class="btn btn-primary"> book a slot </button>
+            <button class="btn btn-primary" @click="overlayMarker=marker"> book a slot </button>
           </div>
         </InfoWindow>
       </div>
       </MarkerCluster>
     </GoogleMap>
 
-    <div id="list">
+    <div v-if="selectedMarker == null" class="right_panel" id="list">
       <div v-for="marker in list_markers" @click="parking_clicked(marker)" class="w-100" style="cursor: pointer; padding: 10px 0px; box-shadow: 2px 5px 10px 0px #b0b0b0; margin-bottom: 10px; border-radius: 40px; background-color: #9de3f5">
         <strong><p>{{marker.name}}</p></strong>
         <div class="d-flex align-items-center justify-content-center">
@@ -54,6 +68,10 @@
 
       <p v-if="list_markers.length === 0" class="mt-5"><strong>No parking in this area</strong></p>
     </div>
+
+    <div v-if="selectedMarker != null" class="right_panel" style="background-color: red">
+
+    </div>
   </div>
 
 </template>
@@ -63,8 +81,8 @@ import { defineComponent } from "vue";
 import Header from "@/components/Header.vue";
 import { GoogleMap, Marker, InfoWindow, CustomMarker, MarkerCluster } from "vue3-google-map";
 import GoogleAddressAutocomplete from 'vue3-google-address-autocomplete'
-
 import axios from "axios";
+import button from "bootstrap/js/src/button";
 
 export default defineComponent({
   name: "ParkingLots",
@@ -75,7 +93,7 @@ export default defineComponent({
     CustomMarker,
     InfoWindow,
     MarkerCluster,
-    GoogleAddressAutocomplete
+    GoogleAddressAutocomplete,
   },
   data(){
     return{
@@ -84,7 +102,8 @@ export default defineComponent({
       map_markers: [],
       list_markers: [],
       lastUpdateTime: 0,
-      address: ""
+      address: "",
+      overlayMarker: null
     }
   },
   methods: {
@@ -143,6 +162,7 @@ export default defineComponent({
       return deg * (Math.PI/180)
     },
     updatePlace(place){
+      this.$refs.map.map.zoom = 15
       this.$refs.map.map.setCenter({lat: place.geometry.location.lat(), lng: place.geometry.location.lng()})
     },
     zoomChanged(){
@@ -155,7 +175,7 @@ export default defineComponent({
       this.map_markers.forEach(e => e.infoWindow = (e.name === marker.name) )
       this.$refs.map.map.zoom = 17
       this.$refs.map.map.setCenter({lat: marker.latitude, lng: marker.longitude})
-    }
+    },
   },
   mounted() {
     /*navigator.geolocation.getCurrentPosition((success) => {
@@ -178,7 +198,7 @@ export default defineComponent({
   border: 1px solid black;
 }
 
-#list{
+.right_panel{
   max-width: 350px;
   width: 40%;
   height: 100%;
@@ -207,5 +227,20 @@ export default defineComponent({
   border-radius: 20px;
 }
 
+.overlay-container{
+  position:absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background-color: rgb(255, 255, 255, 0.5);
+}
+
+.overlay-div{
+  height: 500px;
+  width: 400px;
+  background-color: white;
+  box-shadow: 5px 10px 20px 0px #b0b0b0;
+}
 
 </style>

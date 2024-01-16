@@ -67,7 +67,7 @@ export default {
         'model': this.model,
         'license_plate': this.license_plate,
         'color': this.color,
-        'year': this.year,
+        'matriculation_year': this.year,
         'pic': "car" + this.shown_image + ".png"}
       axios.put('http://localhost:3000/cars', body).then((response) => {
         this.$emit("newCarRegistered", response.data)
