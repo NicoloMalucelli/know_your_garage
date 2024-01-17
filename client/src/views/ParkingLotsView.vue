@@ -1,5 +1,5 @@
 <template>
-  <Header selected_item="find_a_parking_lot"></Header>
+  <Header selected_item="home"></Header>
 
   <div v-if="overlayMarker != null" class="overlay-container d-flex justify-content-center align-items-center" @click.self="overlayMarker = null">
     <div class="overlay-div flex-column py-4" style="position: relative">
