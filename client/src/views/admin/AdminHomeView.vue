@@ -5,7 +5,8 @@
 
     <div class="d-flex flex-column justify-content-center align-items-center mb-5" style="width: 100%">
       <div v-for="garage in garages">
-        <GarageCard :read-only="false" :garage="garage" class="mt-5" @delete="garages.pop(garage)"></GarageCard>
+        <GarageCard v-if="!garage.edit" :read-only="false" :garage="garage" class="mt-5" @delete="garages.pop(garage)" @edit="garage.edit = true"></GarageCard>
+        <GarageModifyCard :garage="garage" class="mt-5" v-if="garage.edit" @cancel="garage.edit=false" @save="refreshAll"></GarageModifyCard>
       </div>
 
       <button @click="showForm()" class="mt-5 d-flex add-car-card justify-content-center align-items-center" v-if="!add_garage_form_visible">
@@ -28,10 +29,12 @@ import AdminHeader from "@/components/AdminHeader.vue";
 import axios from "axios";
 import GarageCard from "@/components/GarageCard.vue";
 import GarageCreationCard from "@/components/GarageCreationCard.vue";
+import GarageModifyCard from "@/components/GarageModifyCard.vue";
 
 export default defineComponent({
   name: "AdminHomeView",
   components: {
+    GarageModifyCard,
     GarageCreationCard,
     GarageCard,
     AdminHeader,
@@ -40,7 +43,7 @@ export default defineComponent({
   data(){
     return{
       garages: [],
-      add_garage_form_visible: true,
+      add_garage_form_visible: false,
     }
   },
   methods: {
@@ -49,13 +52,18 @@ export default defineComponent({
     },
     refreshGarages(newGarage){
       this.add_garage_form_visible = false;
+      newGarage.edit = false
       this.garages.push(newGarage);
+    },
+    refreshAll(){
+      axios.get('http://localhost:3000/parkings/' + sessionStorage.getItem('email')).then((response) => {
+        this.garages = response.data
+        this.garages.forEach(e => e.edit = false)
+      })
     }
   },
   mounted() {
-    axios.get('http://localhost:3000/parkings/' + sessionStorage.getItem('email')).then((response) => {
-      this.garages = response.data
-    })
+    this.refreshAll()
   }
 });
 

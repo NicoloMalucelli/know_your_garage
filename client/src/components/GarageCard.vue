@@ -14,19 +14,21 @@
 
     <div v-if="!readOnly" class="d-flex justify-content-center align-items-center">
       <Bin @click="askForDeletion" style="height:35px; width: 35px; margin-right: 30px"></Bin>
-      <img @click="edit(garage)" src="../assets/edit.png" style="height:23px; width: 23px; padding: 0; cursor: pointer">
+      <img @click="edit" src="../assets/edit.png" style="height:23px; width: 23px; padding: 0; cursor: pointer">
     </div>
 
   </div>
+
 </template>
 
 <script>
 import Bin from "@/components/Bin.vue";
 import axios from "axios";
+import GarageModifyCard from "@/components/GarageCreationCard.vue";
 
 export default {
   name: "GarageCard",
-  components: {Bin},
+  components: {GarageModifyCard, Bin},
   props: ['garage', 'readOnly'],
   methods:{
     askForDeletion(){
@@ -35,6 +37,9 @@ export default {
           this.$emit("delete")
         })
       }
+    },
+    edit(){
+      this.$emit("edit")
     }
   }
 }

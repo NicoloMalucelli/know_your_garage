@@ -67,8 +67,27 @@ exports.deleteParking = async(req, res)  => {
     } else {
         res.header('Access-Control-Allow-Origin', '*');
     }
+    try{
+        const out = await parkingsModel.deleteOne({name: req.params.name, owner: req.params.email})
+        res.json({})
+    }catch (err){
+        console.log(err)
+        res.status(500).json({})
+    }
 
-    console.log(req.params)
-    await parkingsModel.deleteOne({name: req.params.name, owner: req.params.email})
-    res.json({})
+}
+
+exports.updateParking = async(req, res)  => {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    try{
+        await parkingsModel.updateOne(
+            {"owner": req.params.email, "name": req.params.name},
+            req.body
+        )
+        res.status(200).json(req.body);
+    }catch (e) {
+        res.json(e);
+    }
+
 }

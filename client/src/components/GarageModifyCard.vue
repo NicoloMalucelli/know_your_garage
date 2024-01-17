@@ -1,15 +1,21 @@
 <template>
   <form class="garage-card d-flex flex-column align-items-center" style="position: relative">
-    <input type="text" class="form-control my-input mb-2" v-model="garageName" placeholder="name" style="width: 200px; text-align: center">
+    <p class="mb-2"><strong>{{garage.name}}</strong></p>
+
+    <div class="d-flex">
+      <p style="margin-bottom: 0; width: 200px; text-align: center">latitude</p>
+      <p style="margin-bottom: 0; width: 200px; text-align: center">longitude</p>
+    </div>
     <div class="d-flex mb-2">
       <input type="number" class="form-control my-input" v-model="latitude" placeholder="latitude" style="width: 200px; text-align: center">
       <input type="number" class="form-control my-input" v-model="longitude" placeholder="longitude" style="width: 200px; text-align: center">
     </div>
+    <p style="margin-bottom: 0; text-align: center">slots</p>
     <input type="number" class="form-control my-input mb-2" v-model="slots" placeholder="number of slots" style="width: 200px; text-align: center">
 
     <div class="d-flex justify-content-center align-items-center">
       <Bin @click="cancel" style="height:35px; width: 35px; margin-right: 30px"></Bin>
-      <img @click="registerGarage" src="../assets/save.png" style="height:27px; width: 27px; padding: 0; cursor: pointer">
+      <img @click="save" src="../assets/save.png" style="height:27px; width: 27px; padding: 0; cursor: pointer">
     </div>
   </form>
 </template>
@@ -19,36 +25,34 @@ import Bin from "@/components/Bin.vue";
 import axios from "axios";
 
 export default {
-  name: "GarageCreationCard",
+  name: "GarageModifyCard",
   data() {
     return {
-      garageName: "",
-      latitude: "",
-      longitude: "",
-      slots: ""
+      latitude: this.garage.latitude,
+      longitude: this.garage.longitude,
+      slots: this.garage.slots
     }
   },
   components: {Bin},
+  props: ['garage'],
   methods: {
     cancel() {
       this.$emit("cancel")
     },
     isFormSubmittable() {
-      return this.garageName.length > 0 && Math.abs(this.latitude) <= 90 && Math.abs(this.longitude) <= 180 && this.slots > 0
+      return Math.abs(this.latitude) <= 90 && Math.abs(this.longitude) <= 180 && this.slots >= 0
     },
-    registerGarage() {
-      if(!this.isFormSubmittable(this.garageName, this.latitude, this.longitude, this.slots)){
+    save() {
+      if(!this.isFormSubmittable(this.latitude, this.longitude, this.slots)){
         return
       }
       const body = {
-        'owner': sessionStorage.getItem("email"),
-        'name': this.garageName,
         'latitude': this.latitude,
         'longitude': this.longitude,
         'slots': this.slots
       }
-      axios.put('http://localhost:3000/parkings', body).then((response) => {
-        this.$emit("newGarageRegistered", response.data)
+      axios.patch('http://localhost:3000/parkings/' + sessionStorage.getItem("email") + "/" + this.garage.name, body).then((response) => {
+        this.$emit("save", response.data)
       })
     }
   }
