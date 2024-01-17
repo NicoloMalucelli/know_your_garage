@@ -6,10 +6,11 @@
       <p>position: ({{garage.latitude}}, {{garage.longitude}})</p>
     </div>
 
-    <div class="row px-5 mx-3">
+    <div class="row mx-3">
       <p class="col-4">total slots: {{garage.slots}}</p>
       <p class="col-4">slots occupied: xxx</p>
-      <p class="col-4">active passes: xxx</p>
+      <p class="col-4" v-if="garage.passes === undefined"></p>
+      <p class="col-4" v-if="garage.passes !== undefined">active passes: {{garage.passes.length}}</p>
     </div>
 
     <div v-if="!readOnly" class="d-flex justify-content-center align-items-center">
@@ -51,12 +52,11 @@ export default {
 .garage-card{
   display: block;
   background-color: #9de3f5;
-  min-width: 650px;
-  max-width: 800px;
-  width: 50vw;
+  min-width: 500px;
+  width: 35vw;
   border-radius: 30vh;
   box-shadow: 5px 10px 20px 0px #b0b0b0;
-  padding: 20px 0;
+  padding: 20px 50px;
 }
 
 </style>

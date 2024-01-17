@@ -5,6 +5,8 @@ const usersRouter = require('./route/usersRoutes');
 const carsRouter = require('./route/carsRoutes');
 const parkingsRouter = require('./route/parkingsRoutes');
 const adminsRouter = require('./route/adminsRoutes');
+const passesRouter  = require('./route/passesRoutes')
+
 const app = express();
 
 const cors = require('cors');
@@ -16,6 +18,7 @@ app.use(usersRouter);
 app.use(carsRouter);
 app.use(parkingsRouter);
 app.use(adminsRouter);
+app.use(passesRouter);
 
 mongoose.connect('mongodb://127.0.0.1:27017/knowYourGarage').then(() => {
     console.log('Successfully connected to the database');

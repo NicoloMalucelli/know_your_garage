@@ -1,7 +1,8 @@
 <template>
   <div class="d-flex justify-content-center align-items-center mt-5 w-100">
     <div class="my-card d-flex justify-content-center align-items-center flex-column" style="background-color: #9de3f5">
-      <img style="height: 100px" src="../assets/user.png">
+      <img v-if="admin()" style="height: 100px" src="../assets/admin.png">
+      <img v-if="!admin()" style="height: 100px" src="../assets/user.png">
       <h1>{{user.name}} {{user.surname}}</h1>
       <p>{{user.email}}</p>
 
