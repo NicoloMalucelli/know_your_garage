@@ -12,3 +12,21 @@ exports.getAdmin = async(req, res) => {
     })
 }
 
+exports.updatePassword = async(req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    if(req.body.password == null){
+        res.status(400).json({error: 'inclomplete request'})
+        return
+    }
+
+    try{
+        await adminsModelupdateOne(
+            {"email": req.params.email},
+            {"password": req.body.password}
+        )
+        res.status(200).json("{}");
+    }catch (e) {
+        res.json(e);
+    }
+}
