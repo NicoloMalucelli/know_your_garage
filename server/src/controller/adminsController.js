@@ -11,3 +11,4 @@ exports.getAdmin = async(req, res) => {
         }
     })
 }
+
