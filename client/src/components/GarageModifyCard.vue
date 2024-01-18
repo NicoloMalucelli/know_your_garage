@@ -51,7 +51,8 @@ export default {
         'longitude': this.longitude,
         'slots': this.slots
       }
-      axios.patch('http://localhost:3000/parkings/' + sessionStorage.getItem("email") + "/" + this.garage.name, body).then((response) => {
+      axios
+          .patch('http://localhost:3000/parkings/' + sessionStorage.getItem("email") + "/" + this.garage.name, body).then((response) => {
         this.$emit("save", response.data)
       })
     }

@@ -3,7 +3,7 @@
   <div class="d-flex flex-column justify-content-center align-items-center mt-5 mb-5" style="width: 100%">
     <h1>My cars</h1>
     <div v-for="car in cars">
-      <CarCard :car="car" class="mt-5" @delete="cars.pop(car)"></CarCard>
+      <CarCard :car="car" class="mt-5" @delete="car.visible = false" v-if="car.visible"></CarCard>
     </div>
 
     <button @click="showForm()" class="mt-5 d-flex add-car-card justify-content-center align-items-center" v-if="!add_car_form_visible">
@@ -46,12 +46,14 @@ export default defineComponent({
     },
     refreshCars(newCar){
       this.add_car_form_visible = false;
+      newCar.visible= true
       this.cars.push(newCar);
     }
   },
   mounted() {
     axios.get('http://localhost:3000/cars/' + sessionStorage.getItem('email')).then((response) => {
       this.cars = response.data
+      this.cars.forEach(c => c.visible = true)
     })
   }
 });

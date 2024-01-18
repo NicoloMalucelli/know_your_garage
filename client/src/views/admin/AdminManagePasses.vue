@@ -13,7 +13,8 @@
   </div>
 
   <div v-if="garages.length > 0" class="row mt-5 px-xl-5 mx-xl-5 d-flex justify-content-center">
-    <PassCard :readOnly="false" class="col-12 col-md-6 col-xl-3 mb-5 d-flex justify-content-center" v-for="pass in garages[selected_garage].passes"  :pass="pass"></PassCard>
+    <PassCard :initialMode="'read'" :editable="true" class="col-12 col-md-6 col-xl-3 mb-5 d-flex justify-content-center" v-for="pass in garages[selected_garage].passes"  :initialpass="pass"></PassCard>
+    <PassCard @create="passCreated" :garage="garages[selected_garage].name" :initialMode="'create'" class="col-12 col-md-6 col-xl-3 mb-5 d-flex justify-content-center"></PassCard>
   </div>
 
   <Footer></Footer>
@@ -43,20 +44,23 @@ export default defineComponent({
     }
   },
   methods: {
-      dec_index() {
-        if(this.selected_garage > 1) {
-          this.selected_garage -= 1
-        }else{
-          this.selected_garage = 4
-        }
-      },
-      inc_index() {
-        if(this.selected_garage < 4) {
-          this.selected_garage += 1
-        }else{
-          this.selected_garage = 1
-        }
-      },
+    dec_index() {
+      if(this.selected_garage > 1) {
+        this.selected_garage -= 1
+      }else{
+        this.selected_garage = 4
+      }
+    },
+    inc_index() {
+      if(this.selected_garage < 4) {
+        this.selected_garage += 1
+      }else{
+        this.selected_garage = 1
+      }
+    },
+    passCreated(pass){
+      this.garages[this.selected_garage].passes.push(pass)
+    }
   },
   mounted() {
     axios.get('http://localhost:3000/parkings/' + sessionStorage.getItem('email')).then((response) => {

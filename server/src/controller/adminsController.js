@@ -21,7 +21,7 @@ exports.updatePassword = async(req, res) => {
     }
 
     try{
-        await adminsModelupdateOne(
+        await adminsModel.updateOne(
             {"email": req.params.email},
             {"password": req.body.password}
         )
