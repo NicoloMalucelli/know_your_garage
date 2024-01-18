@@ -2,16 +2,12 @@
   <Header selected_item="my_cars"></Header>
   <div class="d-flex flex-column justify-content-center align-items-center mt-5 mb-5" style="width: 100%">
     <h1>My cars</h1>
-    <div v-for="car in cars">
-      <CarCard :car="car" class="mt-5" @delete="car.visible = false" v-if="car.visible"></CarCard>
+
+    <div v-if="cars.length > 0">
+      <CarCard class="mt-5" v-for="car in cars" :initialMode="'read'" :car="car"></CarCard>
     </div>
 
-    <button @click="showForm()" class="mt-5 d-flex add-car-card justify-content-center align-items-center" v-if="!add_car_form_visible">
-      + add a new car
-    </button>
-
-    <CarCreationCard class="mt-5" v-if="add_car_form_visible" @cancel="add_car_form_visible=false" @newCarRegistered="refreshCars"></CarCreationCard>
-
+    <CarCard class="mt-5" :initialMode="'create'" @newCarRegistered="newCarRegistered"></CarCard>
   </div>
 
   <Footer></Footer>
@@ -23,13 +19,11 @@ import { defineComponent } from "vue";
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 import CarCard from "@/components/CarCard.vue";
-import CarCreationCard from "@/components/CarCreationCard.vue";
 import axios from "axios";
 
 export default defineComponent({
   name: "MyCars",
   components: {
-    CarCreationCard,
     Header,
     Footer,
     CarCard
@@ -44,9 +38,7 @@ export default defineComponent({
     showForm(){
       this.add_car_form_visible = true
     },
-    refreshCars(newCar){
-      this.add_car_form_visible = false;
-      newCar.visible= true
+    newCarRegistered(newCar){
       this.cars.push(newCar);
     }
   },
