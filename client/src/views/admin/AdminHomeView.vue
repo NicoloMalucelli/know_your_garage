@@ -5,7 +5,7 @@
   </div>
 
   <div class="row d-flex justify-content-center mb-5 mx-5 px-5">
-    <GarageCard v-for="garage in garages" :read-only="false" :initialMode="'read'" :initialGarage="garage" class="mt-5 col-12 col-xl-6 d-flex justify-content-center"></GarageCard>
+    <GarageCard v-for="garage in garages" :read-only="false" :initialMode="'read'" :garage="garage" class="mt-5 col-12 col-xl-6 d-flex justify-content-center"></GarageCard>
     <GarageCard :initialMode="'create'" class="mt-5 col-12 col-xl-6 d-flex justify-content-center align-items-center" @newGarageRegistered="newGarageRegistered"></GarageCard>
   </div>
 

@@ -1,10 +1,10 @@
 <template>
   <AdminHeader selected_item="manage_pass" ></AdminHeader>
-  <div v-if="garages.length > 0" class="d-flex flex-column justify-content-center align-items-center mt-5" style="width: 100%">
-    <div class="d-flex align-items-center">
-      <img @click="dec_index" src="../../assets/arrows/left-arrow.png" class="m-3" style="width: 20px; cursor: pointer">
-      <GarageCard id="shown_garage" :read-only="true" :garage="garages[selected_garage]" class="m-3"></GarageCard>
-      <img @click="inc_index" src="../../assets/arrows/right-arrow.png" class="m-3" style="width: 20px; cursor: pointer">
+  <div v-if="garages.length > 0" class="d-flex flex-column justify-content-center align-items-center mt-5" style="width: 100%" >
+    <div id="shownGarageContainer" class="d-flex align-items-center">
+      <img @click="dec_index" src="../../assets/arrows/left-arrow.png" style="width: 20px; cursor: pointer">
+      <GarageCard :readOnly="true" :initialMode="'read'" :garage="garages.at(selected_garage)" class="m-3 d-flex justify-content-center"></GarageCard>
+      <img @click="inc_index" src="../../assets/arrows/right-arrow.png" style="width: 20px; cursor: pointer">
     </div>
 
     <p class="mt-3" v-if="garages[selected_garage].passes.length === 0">No passes register yet for this garage</p>
@@ -68,7 +68,7 @@ export default defineComponent({
       this.garages.forEach(garage => garage.passes =[])
 
       this.garages.forEach(garage => axios.get('http://localhost:3000/passes/' + sessionStorage.getItem("email") + "/" + garage.name).then((response) => {
-        garage.passes = response.data
+        garage.passes = response.data;
       }))
     })
   }
@@ -78,9 +78,8 @@ export default defineComponent({
 
 <style>
 
-#shown_garage{
-  width: 530px;
-  padding: 20px 0px;
+.garage-card{
+  min-width: 0px !important;
 }
 
 </style>

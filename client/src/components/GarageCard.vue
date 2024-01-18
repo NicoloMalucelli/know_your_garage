@@ -8,7 +8,7 @@
         <p>position: ({{garage.latitude}}, {{garage.longitude}})</p>
       </div>
 
-      <div class="row mx-3">
+      <div class="row">
         <p class="col-4">total slots: {{garage.slots}}</p>
         <p class="col-4">slots occupied: xxx</p>
         <p class="col-4" v-if="garage.passes === undefined"></p>
@@ -71,11 +71,10 @@ import {isVisible} from "bootstrap/js/src/util";
 export default {
   name: "GarageCard",
   components: {Bin},
-  props: ['initialGarage', 'readOnly', 'initialMode'],
+  props: ['garage', 'readOnly', 'initialMode'],
   data(){
     return{
       mode: this.initialMode,
-      garage: this.initialGarage,
       garageName: "",
       latitude: "",
       longitude: "",
@@ -129,7 +128,7 @@ export default {
     resetTextBoxes(){
       this.latitude = ""; this.longitude = ""; this.slots = ""; this.garageName = "";
     }
-  }
+  },
 }
 
 </script>
