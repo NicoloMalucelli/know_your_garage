@@ -79,7 +79,9 @@ export default defineComponent({
 <style>
 
 .garage-card{
-  min-width: 0px !important;
+  min-width: 400px !important;
+  max-width: 600px !important;
+  width: 60vw !important;
 }
 
 </style>
