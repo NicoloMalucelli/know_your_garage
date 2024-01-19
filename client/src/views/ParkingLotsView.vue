@@ -39,9 +39,9 @@
 
       <MarkerCluster>
       <div v-for="(marker, index) in map_markers">
-        <CustomMarker :options="{ position: { lat: marker.latitude, lng: marker.longitude }}" @click="parking_clicked(marker)" style="cursor: pointer">
+        <CustomMarker :options="{ position: { lat: marker.latitude, lng: marker.longitude }}" @click="garage_clicked(marker)" style="cursor: pointer">
           <div class="d-flex justify-content-center flex-column align-items-center">
-            <img src="../assets/parking.png" style="height: 40px; width: 40px">
+            <img src="../assets/garage.png" style="height: 40px; width: 40px">
             <div style="background-color: #42b983; padding: 3px; font-size: 13px; border-radius: 10px">
               <strong>200/{{marker.slots}}</strong>
             </div>
@@ -60,7 +60,7 @@
     </GoogleMap>
 
     <div class="right_panel" id="list">
-      <div v-for="marker in list_markers" @click="parking_clicked(marker)" class="w-100" style="cursor: pointer; padding: 10px 0px; box-shadow: 2px 5px 10px 0px #b0b0b0; margin-bottom: 10px; border-radius: 40px; background-color: #9de3f5">
+      <div v-for="marker in list_markers" @click="garage_clicked(marker)" class="w-100" style="cursor: pointer; padding: 10px 0px; box-shadow: 2px 5px 10px 0px #b0b0b0; margin-bottom: 10px; border-radius: 40px; background-color: #9de3f5">
         <strong><p>{{marker.name}}</p></strong>
         <div class="d-flex align-items-center justify-content-center">
           <p class="d-flex" style="margin-bottom: 0; margin-right: 10%">{{getDist(lat, long, marker.latitude, marker.longitude) }} Km</p>
@@ -68,7 +68,7 @@
         </div>
       </div>
 
-      <p v-if="list_markers.length === 0" class="mt-5"><strong>No parking in this area</strong></p>
+      <p v-if="list_markers.length === 0" class="mt-5"><strong>No garage in this area</strong></p>
     </div>
 
   </div>
@@ -131,7 +131,7 @@ export default defineComponent({
         longitude_min: this.$refs.map.map.getBounds().Nh.lo,
         longitude_max:this.$refs.map.map.getBounds().Nh.hi,
       }
-      axios.get('http://localhost:3000/parkings/', {"params": params}).then((response) => {
+      axios.get('http://localhost:3000/garages/', {"params": params}).then((response) => {
         this.list_markers = response.data
         this.list_markers.sort((a, b) => this.getDist(this.lat, this.long, a.latitude, a.longitude) - this.getDist(this.lat, this.long, b.latitude, b.longitude))
 
@@ -174,7 +174,7 @@ export default defineComponent({
         this.list_markers = []
       }
     },
-    parking_clicked(marker){
+    garage_clicked(marker){
       this.map_markers.forEach(e => e.infoWindow = (e.name === marker.name) )
       this.$refs.map.map.zoom = 17
       this.$refs.map.map.setCenter({lat: marker.latitude, lng: marker.longitude})

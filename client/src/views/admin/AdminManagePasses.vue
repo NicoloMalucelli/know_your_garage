@@ -63,7 +63,7 @@ export default defineComponent({
     }
   },
   mounted() {
-    axios.get('http://localhost:3000/parkings/' + sessionStorage.getItem('email')).then((response) => {
+    axios.get('http://localhost:3000/garages/' + sessionStorage.getItem('email')).then((response) => {
       this.garages = response.data
       this.garages.forEach(garage => garage.passes =[])
 

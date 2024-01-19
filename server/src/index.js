@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 //console.log('Path of file in parent dir:', require('path').resolve(__dirname, './route/usersRoutes'));
 const usersRouter = require('./route/usersRoutes');
 const carsRouter = require('./route/carsRoutes');
-const parkingsRouter = require('./route/parkingsRoutes');
+const garagesRouter = require('./route/garagesRoutes');
 const adminsRouter = require('./route/adminsRoutes');
 const passesRouter  = require('./route/passesRoutes')
 
@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(usersRouter);
 app.use(carsRouter);
-app.use(parkingsRouter);
+app.use(garagesRouter);
 app.use(adminsRouter);
 app.use(passesRouter);
 

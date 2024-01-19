@@ -1,7 +1,7 @@
-const parkingsModel = require('../model/parkingsModel');
+const garagesModel = require('../model/garagesModel');
 
 
-exports.getParkings = async(req, res) => {
+exports.getGarages = async(req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
 
     if(req.query.latitude_min == null || req.query.latitude_max == null || req.query.longitude_min == null || req.query.longitude_max == null){
@@ -10,7 +10,7 @@ exports.getParkings = async(req, res) => {
     }
 
     try {
-        const result = await parkingsModel.find({
+        const result = await garagesModel.find({
             latitude: {$gte: req.query.latitude_min, $lte: req.query.latitude_max},
             longitude: {$gte: req.query.longitude_min, $lte: req.query.longitude_max}
         });
@@ -20,7 +20,7 @@ exports.getParkings = async(req, res) => {
     }
 }
 
-exports.getParkingsByOwner = async(req, res) => {
+exports.getGaragesByOwner = async(req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
 
     if(req.params.owner == null){
@@ -29,7 +29,7 @@ exports.getParkingsByOwner = async(req, res) => {
     }
 
     try {
-        const result = await parkingsModel.find({
+        const result = await garagesModel.find({
             owner: req.params.owner,
         });
         res.json(result)
@@ -38,7 +38,7 @@ exports.getParkingsByOwner = async(req, res) => {
     }
 }
 
-exports.createParking = async(req, res) => {
+exports.createGarage = async(req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'GET,PUT, POST,DELETE');
     res.header("Access-Control-Allow-Headers", "Content-type,Accept,X-Custom-Header");
@@ -49,7 +49,7 @@ exports.createParking = async(req, res) => {
         res.header('Access-Control-Allow-Origin', '*');
     }
 
-    const garage = new parkingsModel(req.body)
+    const garage = new garagesModel(req.body)
     try{
         res.json(await garage.save());
     }catch (e) {
@@ -57,7 +57,7 @@ exports.createParking = async(req, res) => {
     }
 }
 
-exports.deleteParking = async(req, res)  => {
+exports.deleteGarage = async(req, res)  => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'GET,PUT, POST,DELETE');
     res.header("Access-Control-Allow-Headers", "Content-type,Accept,X-Custom-Header");
@@ -68,7 +68,7 @@ exports.deleteParking = async(req, res)  => {
         res.header('Access-Control-Allow-Origin', '*');
     }
     try{
-        const out = await parkingsModel.deleteOne({name: req.params.name, owner: req.params.email})
+        const out = await garagesModel.deleteOne({name: req.params.name, owner: req.params.email})
         res.json({})
     }catch (err){
         console.log(err)
@@ -77,11 +77,11 @@ exports.deleteParking = async(req, res)  => {
 
 }
 
-exports.updateParking = async(req, res)  => {
+exports.updateGarage = async(req, res)  => {
     res.header("Access-Control-Allow-Origin", "*");
 
     try{
-        await parkingsModel.updateOne(
+        await garagesModel.updateOne(
             {"owner": req.params.email, "name": req.params.name},
             req.body
         )

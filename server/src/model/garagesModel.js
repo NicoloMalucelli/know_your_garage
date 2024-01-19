@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const parkingsSchema = new mongoose.Schema({
+const garagesSchema = new mongoose.Schema({
     owner: String,
     name: String,
     latitude: Number,
@@ -8,4 +8,4 @@ const parkingsSchema = new mongoose.Schema({
     slots: Number
 });
 
-module.exports = mongoose.model('parkings', parkingsSchema);
+module.exports = mongoose.model('garages', garagesSchema);

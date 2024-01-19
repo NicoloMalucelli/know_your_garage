@@ -86,7 +86,7 @@ export default {
     isVisible,
     askForDeletion(){
       if(window.confirm("Do you really want to remove:\n   - " + this.garage.name + "\nfrom your garages?")){
-        axios.delete('http://localhost:3000/parkings/' + sessionStorage.getItem("email") + "/" + this.garage.name).then(() => {
+        axios.delete('http://localhost:3000/garages/' + sessionStorage.getItem("email") + "/" + this.garage.name).then(() => {
           this.visible = false
         })
       }
@@ -105,7 +105,7 @@ export default {
         'longitude': this.longitude,
         'slots': this.slots
       }
-      axios.put('http://localhost:3000/parkings', body).then((response) => {
+      axios.put('http://localhost:3000/garages', body).then((response) => {
         this.mode = 'create'
         this.resetTextBoxes()
         this.$emit("newGarageRegistered", response.data)
@@ -121,7 +121,7 @@ export default {
         'slots': this.slots
       }
       axios
-          .patch('http://localhost:3000/parkings/' + sessionStorage.getItem("email") + "/" + this.garage.name, body).then((response) => {
+          .patch('http://localhost:3000/garages/' + sessionStorage.getItem("email") + "/" + this.garage.name, body).then((response) => {
         this.garage = response.data
       })
     },
