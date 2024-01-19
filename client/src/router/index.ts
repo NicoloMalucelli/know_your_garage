@@ -5,6 +5,7 @@ import MyCarsView from "@/views/MyCarsView.vue";
 import PageNotFound from "@/views/PageNotFound.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import ParkingLotsView from "@/views/ParkingLotsView.vue";
+import HistoryView from "@/views/HistoryView.vue";
 
 import AdminLoginView from "@/views/admin/AdminLoginView.vue";
 import AdminHomeView from "@/views/admin/AdminHomeView.vue";
@@ -17,6 +18,7 @@ const routes: Array<RouteRecordRaw> = [
   { path: '/register', name: 'register', component: RegisterView },
   { path: '/mycars', name: 'my_cars', component: MyCarsView },
   { path: '/profile', name: 'profile', component: ProfileView },
+  { path: '/history', name: 'history', component: HistoryView },
 
   { path: '/admin/login', name: 'admin_login', component: AdminLoginView },
   { path: '/admin/', name: 'admin_home', component: AdminHomeView },
