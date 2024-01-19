@@ -5,7 +5,8 @@ const usersRouter = require('./route/usersRoutes');
 const carsRouter = require('./route/carsRoutes');
 const garagesRouter = require('./route/garagesRoutes');
 const adminsRouter = require('./route/adminsRoutes');
-const passesRouter  = require('./route/passesRoutes')
+const passesRouter  = require('./route/passesRoutes');
+const parkingsRouter = require('./route/parkingsRoutes')
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(carsRouter);
 app.use(garagesRouter);
 app.use(adminsRouter);
 app.use(passesRouter);
+app.use(parkingsRouter);
 
 mongoose.connect('mongodb://127.0.0.1:27017/knowYourGarage').then(() => {
     console.log('Successfully connected to the database');

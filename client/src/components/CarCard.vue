@@ -12,7 +12,8 @@
       </div>
       <div class="col-4 d-flex flex-column align-items-start justify-content-center">
         <div class="d-flex flex-column align-items-center">
-          <p><strong>Status:</strong> not parked</p>
+          <p v-if="!parked"><strong>Status:<span style="color: #8c0808;"> not parked</span></strong></p>
+          <p v-if="parked"><strong>Status:<span style="color: #107a03;"> parked</span></strong></p>
           <p><strong>Active pass:</strong> none</p>
           <Bin @click="askForDeletion" style="height:35px; width: 35px;"></Bin>
         </div>
@@ -62,7 +63,8 @@ export default {
       color: "",
       year: "",
       registration_error: false,
-      visible: true
+      visible: true,
+      parked: false
     }
   },
   methods:{
@@ -118,6 +120,14 @@ export default {
         this.registration_error = false
       }, 2000)
     },
+  },
+  mounted() {
+    if(this.car === undefined || this.car == null){
+      return
+    }
+    axios.get('http://localhost:3000/parkings/' + this.car._id.toString()).then((response) => {
+      this.parked = response.data.filter(p => p.end == null).length !== 0
+    })
   }
 }
 
