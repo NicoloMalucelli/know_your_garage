@@ -1,16 +1,16 @@
 <template>
   <div v-if="visible">
-    <div v-if="mode === 'read'" class="car-card row d-flex" style="position: relative">
-      <div class="col-4 justify-content-center align-items-center d-flex">
+    <div v-if="mode === 'read'" class="car-card row d-flex justify-content-center" style="position: relative">
+      <div v-bind:class="additionalInfo ? 'col-4' : 'col-6'" class="justify-content-center align-items-center d-flex">
         <img :src="getPath()" style="width: 70%">
       </div>
-      <div class="col-4 d-flex flex-column align-items-start justify-content-center">
+      <div v-bind:class="additionalInfo ? 'col-4' : 'col-6'" class="d-flex flex-column align-items-start justify-content-center">
         <p><strong>Model:</strong> {{car.model}} </p>
         <p><strong>License plate:</strong> {{car.license_plate}} </p>
         <p><strong>Color:</strong> {{car.color}} </p>
         <p><strong>Matriculation year:</strong> {{car.matriculation_year}} </p>
       </div>
-      <div class="col-4 d-flex flex-column align-items-start justify-content-center">
+      <div v-if="additionalInfo" class="col-4 d-flex flex-column align-items-start justify-content-center">
         <div class="d-flex flex-column align-items-center">
           <p v-if="!parked"><strong>Status:<span style="color: #8c0808;"> not parked</span></strong></p>
           <p v-if="parked"><strong>Status:<span style="color: #107a03;"> parked</span></strong></p>
@@ -53,7 +53,7 @@ import axios from "axios";
 export default {
   name: "CarCard",
   components: {Bin},
-  props: ['car', 'initialMode'],
+  props: ['car', 'initialMode', 'additionalInfo'],
   data(){
     return{
       mode: this.initialMode,

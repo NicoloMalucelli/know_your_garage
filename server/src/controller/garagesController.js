@@ -38,6 +38,24 @@ exports.getGaragesByOwner = async(req, res) => {
     }
 }
 
+exports.getGarageById = async(req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    if(req.params._id == null){
+        res.status(400).json({error: 'inclomplete request'})
+        return
+    }
+
+    try {
+        const result = await garagesModel.find({
+            _id: req.params._id,
+        });
+        res.json(result)
+    }catch (error){
+        res.status(500).json("{error: Internal server error}")
+    }
+}
+
 exports.createGarage = async(req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'GET,PUT, POST,DELETE');

@@ -4,10 +4,10 @@
     <h1>My cars</h1>
 
     <div v-if="cars.length > 0">
-      <CarCard class="mt-5" v-for="car in cars" :initialMode="'read'" :car="car"></CarCard>
+      <CarCard class="mt-5" v-for="car in cars" :initialMode="'read'" :car="car" :additionalInfo="true"></CarCard>
     </div>
 
-    <CarCard class="mt-5" :initialMode="'create'" @newCarRegistered="newCarRegistered"></CarCard>
+    <CarCard class="mt-5" :initialMode="'create'" @newCarRegistered="newCarRegistered" :additionalInfo="false"></CarCard>
   </div>
 
   <Footer></Footer>

@@ -54,8 +54,8 @@
   {"car_id":  "659eb126957c388b4b327010", "garage_id":  "65aa3996163f06f8a10d3d16", "start": { "$date": "2024-01-07T03:45:57.000Z" }, "end":  { "$date": "2024-01-07T22:45:57.000Z" }},
   {"car_id":  "659eb126957c388b4b327015", "garage_id":  "65aa3996163f06f8a10d3d16", "start": { "$date": "2024-01-07T11:19:48.000Z" }, "end":  { "$date": "2024-01-07T20:19:48.000Z" }},
 
-  {"car_id":  "659eb126957c388b4b32700a", "garage_id":  "65aa3996163f06f8a10d3d13", "start": { "$date": "2024-01-19T8:19:48.000Z" }, "end":  null},
+  {"car_id":  "659eb126957c388b4b32700a", "garage_id":  "65aa3996163f06f8a10d3d13", "start": { "$date": "2024-01-19T08:19:48.000Z" }, "end":  null},
   {"car_id":  "659eb126957c388b4b32700d", "garage_id":  "65aa3996163f06f8a10d3d13", "start": { "$date": "2024-01-19T10:19:48.000Z" }, "end":  null},
   {"car_id":  "659eeaba7de6c3a4c0b5cfeb", "garage_id":  "65aa3996163f06f8a10d3d13", "start": { "$date": "2024-01-19T10:00:48.000Z" }, "end":  null},
-  {"car_id":  "659eb126957c388b4b327013", "garage_id":  "65aa3996163f06f8a10d3d13", "start": { "$date": "2024-01-19T0:19:48.000Z" }, "end":  null}
+  {"car_id":  "659eb126957c388b4b327013", "garage_id":  "65aa3996163f06f8a10d3d13", "start": { "$date": "2024-01-19T00:19:48.000Z" }, "end":  null}
 ]

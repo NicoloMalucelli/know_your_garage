@@ -1,5 +1,5 @@
 const express = require('express');
-const {getGarages, getGaragesByOwner, createGarage, deleteGarage, updateGarage} = require("../controller/garagesController");
+const {getGarages, getGaragesByOwner, getGarageById, createGarage, deleteGarage, updateGarage} = require("../controller/garagesController");
 const router = express.Router();
 
 router.route('/garages').get((req, res) => {
@@ -8,6 +8,10 @@ router.route('/garages').get((req, res) => {
 
 router.route('/garages/:owner').get((req, res) => {
     getGaragesByOwner(req, res)
+})
+
+router.route('/garages/id/:_id').get((req, res) => {
+    getGarageById(req, res)
 })
 
 router.route('/garages').put((req, res) => {
