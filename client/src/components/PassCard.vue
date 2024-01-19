@@ -1,5 +1,5 @@
 <template>
-  <div v-if="visible">
+  <div v-if="visible" class="d-inline-block">
     <div v-if="mode === 'read'" class="pass-card d-flex justify-content-center flex-column align-items-center pb-2">
       <p class="mt-4"><strong>{{pass.title}}</strong></p>
       <p style="font-size: 40px"> {{pass.duration}} giorni </p>
@@ -62,10 +62,9 @@ import axios from "axios";
 export default {
   name: "PassCard",
   components: {Bin},
-  props: ['initialpass', 'initialMode', 'editable', 'garage'],
+  props: ['pass', 'initialMode', 'editable', 'garage'],
   data(){
     return{
-      pass: this.initialpass,
       mode: this.initialMode,
       cost: "",
       days: "",

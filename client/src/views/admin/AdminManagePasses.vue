@@ -13,7 +13,7 @@
   </div>
 
   <div v-if="garages.length > 0" class="row mt-5 px-xl-5 mx-xl-5 d-flex justify-content-center">
-    <PassCard :initialMode="'read'" :editable="true" class="col-12 col-md-6 col-xl-3 mb-5 d-flex justify-content-center" v-for="pass in garages[selected_garage].passes"  :initialpass="pass"></PassCard>
+    <PassCard :initialMode="'read'" :editable="true" class="col-12 col-md-6 col-xl-3 mb-5 d-flex justify-content-center" v-for="pass in garages[selected_garage].passes"  :pass="pass"></PassCard>
     <PassCard @create="passCreated" :garage="garages[selected_garage].name" :initialMode="'create'" class="col-12 col-md-6 col-xl-3 mb-5 d-flex justify-content-center"></PassCard>
   </div>
 
@@ -48,14 +48,14 @@ export default defineComponent({
       if(this.selected_garage > 1) {
         this.selected_garage -= 1
       }else{
-        this.selected_garage = 4
+        this.selected_garage = this.garages.length-1
       }
     },
     inc_index() {
-      if(this.selected_garage < 4) {
+      if(this.selected_garage < this.garages.length-1) {
         this.selected_garage += 1
       }else{
-        this.selected_garage = 1
+        this.selected_garage = 0
       }
     },
     passCreated(pass){
