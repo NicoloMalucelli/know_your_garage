@@ -86,7 +86,7 @@ export default {
     isVisible,
     askForDeletion(){
       if(window.confirm("Do you really want to remove:\n   - " + this.garage.name + "\nfrom your garages?")){
-        axios.delete('http://localhost:3000/garages/' + sessionStorage.getItem("email") + "/" + this.garage.name).then(() => {
+        axios.patch('http://localhost:3000/garages/' + sessionStorage.getItem("email") + "/" + this.garage.name, {'visible': false}).then(() => {
           this.visible = false
         })
       }

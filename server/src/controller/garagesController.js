@@ -12,7 +12,8 @@ exports.getGarages = async(req, res) => {
     try {
         const result = await garagesModel.find({
             latitude: {$gte: req.query.latitude_min, $lte: req.query.latitude_max},
-            longitude: {$gte: req.query.longitude_min, $lte: req.query.longitude_max}
+            longitude: {$gte: req.query.longitude_min, $lte: req.query.longitude_max},
+            visible: true
         });
         res.json(result)
     }catch (error){
@@ -31,6 +32,7 @@ exports.getGaragesByOwner = async(req, res) => {
     try {
         const result = await garagesModel.find({
             owner: req.params.owner,
+            visible: true
         });
         res.json(result)
     }catch (error){
