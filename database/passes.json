@@ -1,28 +1,28 @@
 [
-  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Automatico Barriera", "duration": 1, "cost": 5, "title": "Pass giornaliero"},
-  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Automatico Barriera", "duration": 30, "cost": 50, "title": "Abbonamento mensile"},
-  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Automatico Barriera", "duration": 90, "cost": 120, "title": "Abbonamento trimestrale"},
+  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Automatico Barriera", "duration": 1, "cost": 5, "title": "Pass giornaliero", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f28481f3"}},
+  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Automatico Barriera", "duration": 30, "cost": 50, "title": "Abbonamento mensile", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f28481f4"}},
+  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Automatico Barriera", "duration": 90, "cost": 120, "title": "Abbonamento trimestrale", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f28481f5"}},
 
-  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Automatico Piazza Fabbri", "duration": 1, "cost": 6, "title": "Pass giornaliero"},
-  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Automatico Piazza Fabbri", "duration": 15, "cost": 30, "title": "Abbonamento bi-settimanale con sorveglianza 24/7"},
-  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Automatico Piazza Fabbri", "duration": 60, "cost": 80, "title": "Abbonamento bi-mensile con sorveglianza 24/7"},
+  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Automatico Piazza Fabbri", "duration": 1, "cost": 6, "title": "Pass giornaliero", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f28481f6"}},
+  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Automatico Piazza Fabbri", "duration": 15, "cost": 30, "title": "Abbonamento bi-settimanale con sorveglianza 24/7", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f28481f7"}},
+  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Automatico Piazza Fabbri", "duration": 60, "cost": 80, "title": "Abbonamento bi-mensile con sorveglianza 24/7", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f28481f8"}},
 
-  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Coperto Foro Annonario", "duration": 1, "cost": 8, "title": "Pass giornaliero"},
-  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Coperto Foro Annonario", "duration": 30, "cost": 60, "title": "Abbonamento mensile con parcheggio coperto"},
-  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Coperto Foro Annonario", "duration": 180, "cost": 300, "title": "Abbonamento semestrale con parcheggio coperto"},
+  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Coperto Foro Annonario", "duration": 1, "cost": 8, "title": "Pass giornaliero", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f28481f9"}},
+  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Coperto Foro Annonario", "duration": 30, "cost": 60, "title": "Abbonamento mensile con parcheggio coperto", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f28481fa"}},
+  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Coperto Foro Annonario", "duration": 180, "cost": 300, "title": "Abbonamento semestrale con parcheggio coperto", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f28481fb"}},
 
-  {"owner": "comune.cesena@example.com", "garage": "Parcheggio IV Novembre", "duration": 1, "cost": 7, "title": "Pass giornaliero"},
-  {"owner": "comune.cesena@example.com", "garage": "Parcheggio IV Novembre", "duration": 7, "cost": 40, "title": "Pass settimanale"},
+  {"owner": "comune.cesena@example.com", "garage": "Parcheggio IV Novembre", "duration": 1, "cost": 7, "title": "Pass giornaliero", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f28481fc"}},
+  {"owner": "comune.cesena@example.com", "garage": "Parcheggio IV Novembre", "duration": 7, "cost": 40, "title": "Pass settimanale", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f28481fd"}},
 
-  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Orogel Stadium - Dino Manuzzi", "duration": 1, "cost": 5, "title": "Pass giornaliero"},
-  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Orogel Stadium - Dino Manuzzi", "duration": 90, "cost": 120, "title": "Abbonamento trimestrale"},
-  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Orogel Stadium - Dino Manuzzi", "duration": 365, "cost": 400, "title": "Abbonamento annuale"},
+  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Orogel Stadium - Dino Manuzzi", "duration": 1, "cost": 5, "title": "Pass giornaliero", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f28481fe"}},
+  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Orogel Stadium - Dino Manuzzi", "duration": 90, "cost": 120, "title": "Abbonamento trimestrale", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f28481ff"}},
+  {"owner": "comune.cesena@example.com", "garage": "Parcheggio Orogel Stadium - Dino Manuzzi", "duration": 365, "cost": 400, "title": "Abbonamento annuale", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f2848200"}},
 
-  {"owner": "comune.forli@example.com", "garage": "Parcheggio Lungasosta Via Lombardini", "duration": 1, "cost": 7, "title": "Pass giornaliero"},
-  {"owner": "comune.forli@example.com", "garage": "Parcheggio Lungasosta Via Lombardini", "duration": 30, "cost": 50, "title": "Abbonamento mensile con posti riservati"},
-  {"owner": "comune.forli@example.com", "garage": "Parcheggio Lungasosta Via Lombardini", "duration": 180, "cost": 150, "title": "Abbonamento semestrale con posti riservati"},
+  {"owner": "comune.forli@example.com", "garage": "Parcheggio Lungasosta Via Lombardini", "duration": 1, "cost": 7, "title": "Pass giornaliero", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f2848201"}},
+  {"owner": "comune.forli@example.com", "garage": "Parcheggio Lungasosta Via Lombardini", "duration": 30, "cost": 50, "title": "Abbonamento mensile con posti riservati", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f2848202"}},
+  {"owner": "comune.forli@example.com", "garage": "Parcheggio Lungasosta Via Lombardini", "duration": 180, "cost": 150, "title": "Abbonamento semestrale con posti riservati", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f2848203"}},
 
-  {"owner": "comune.forli@example.com", "garage": "Parcheggio Via Oriani", "duration": 1, "cost": 9, "title": "Pass giornaliero"},
-  {"owner": "comune.forli@example.com", "garage": "Parcheggio Via Oriani", "duration": 30, "cost": 70, "title": "Abbonamento mensile con accesso 24 ore su 24"},
-  {"owner": "comune.forli@example.com", "garage": "Parcheggio Via Oriani", "duration": 365, "cost": 600, "title": "Abbonamento annuale con accesso 24 ore su 24"}
+  {"owner": "comune.forli@example.com", "garage": "Parcheggio Via Oriani", "duration": 1, "cost": 9, "title": "Pass giornaliero", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f2848204"}},
+  {"owner": "comune.forli@example.com", "garage": "Parcheggio Via Oriani", "duration": 30, "cost": 70, "title": "Abbonamento mensile con accesso 24 ore su 24", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f2848205"}},
+  {"owner": "comune.forli@example.com", "garage": "Parcheggio Via Oriani", "duration": 365, "cost": 600, "title": "Abbonamento annuale con accesso 24 ore su 24", "visible":  true, "_id": {"$oid": "65a7e312d4a0b816f2848206"}}
 ]

@@ -1,32 +1,31 @@
 [
-  {"owner": "mario.rossi@example.com", "model": "Fiat 500", "license_plate": "AB123CD", "color": "Blue", "matriculation_year": 2010, "pic": "car1.png"},
-  {"owner": "mario.rossi@example.com", "model": "Toyota Corolla","license_plate": "XY456ZZ", "color": "Red", "matriculation_year": 2015, "pic": "car2.png"},
-  {"owner": "mario.rossi@example.com", "model": "Honda Civic","license_plate": "OP567QR", "color": "Red", "matriculation_year": 2019, "pic": "car3.png"},
+  {"owner": "mario.rossi@example.com", "model": "Toyota Corolla","license_plate": "XY456ZZ", "color": "Red", "matriculation_year": 2015, "pic": "car2.png", "_id": {"$oid": "659eb126957c388b4b32700a"}},
+  {"owner": "mario.rossi@example.com", "model": "Honda Civic","license_plate": "OP567QR", "color": "Red", "matriculation_year": 2019, "pic": "car3.png", "_id": {"$oid": "659eb126957c388b4b32700b"}},
 
-  {"owner": "elena.bianchi@example.com", "model": "Volkswagen Golf","license_plate": "DE789FG", "color": "Green", "matriculation_year": 2012, "pic": "car1.png"},
-  {"owner": "elena.bianchi@example.com", "model": "Mercedes-Benz C-Class","license_plate": "HI012IJ", "color": "Silver", "matriculation_year": 2018, "pic": "car2.png"},
-  {"owner": "elena.bianchi@example.com", "model": "Ford Focus","license_plate": "KL345MN", "color": "Black", "matriculation_year": 2020, "pic": "car3.png"},
+  {"owner": "elena.bianchi@example.com", "model": "Volkswagen Golf","license_plate": "DE789FG", "color": "Green", "matriculation_year": 2012, "pic": "car1.png", "_id": {"$oid": "659eb126957c388b4b32700c"}},
+  {"owner": "elena.bianchi@example.com", "model": "Mercedes-Benz C-Class","license_plate": "HI012IJ", "color": "Silver", "matriculation_year": 2018, "pic": "car2.png", "_id": {"$oid": "659eb126957c388b4b32700d"}},
+  {"owner": "elena.bianchi@example.com", "model": "Ford Focus","license_plate": "KL345MN", "color": "Black", "matriculation_year": 2020, "pic": "car3.png", "_id": {"$oid": "659eb126957c388b4b32700e"}},
 
-  {"owner": "luca.ferrari@example.com", "model": "Chevrolet Malibu","license_plate": "OP678QR", "color": "White", "matriculation_year": 2014, "pic": "car1.png"},
-  {"owner": "luca.ferrari@example.com", "model": "BMW 3 Series","license_plate": "ST901UV", "color": "Yellow", "matriculation_year": 2019, "pic": "car2.png"},
+  {"owner": "luca.ferrari@example.com", "model": "Chevrolet Malibu","license_plate": "OP678QR", "color": "White", "matriculation_year": 2014, "pic": "car1.png", "_id": {"$oid": "659eb126957c388b4b32700f"}},
+  {"owner": "luca.ferrari@example.com", "model": "BMW 3 Series","license_plate": "ST901UV", "color": "Yellow", "matriculation_year": 2019, "pic": "car2.png", "_id": {"$oid": "659eb126957c388b4b327010"}},
 
-  {"owner": "giulia.russo@example.com", "model": "Audi A4","license_plate": "WX234YZ", "color": "Orange", "matriculation_year": 2017, "pic": "car1.png"},
-  {"owner": "giulia.russo@example.com", "model": "Nissan Altima","license_plate": "AB567CD", "color": "Purple", "matriculation_year": 2022, "pic": "car2.png"},
+  {"owner": "giulia.russo@example.com", "model": "Audi A4","license_plate": "WX234YZ", "color": "Orange", "matriculation_year": 2017, "pic": "car1.png", "_id": {"$oid": "659eb126957c388b4b327011"}},
+  {"owner": "giulia.russo@example.com", "model": "Nissan Altima","license_plate": "AB567CD", "color": "Purple", "matriculation_year": 2022, "pic": "car2.png", "_id": {"$oid": "659eb126957c388b4b327012"}},
 
-  {"owner": "andrea.moretti@example.com", "model": "Subaru Outback","license_plate": "EF890GH", "color": "Brown", "matriculation_year": 2016, "pic": "car1.png"},
-  {"owner": "andrea.moretti@example.com", "model": "Hyundai Sonata","license_plate": "IJ123KL", "color": "Gray", "matriculation_year": 2021, "pic": "car2.png"},
+  {"owner": "andrea.moretti@example.com", "model": "Subaru Outback","license_plate": "EF890GH", "color": "Brown", "matriculation_year": 2016, "pic": "car1.png", "_id": {"$oid": "659eb126957c388b4b327013"}},
+  {"owner": "andrea.moretti@example.com", "model": "Hyundai Sonata","license_plate": "IJ123KL", "color": "Gray", "matriculation_year": 2021, "pic": "car2.png", "_id": {"$oid": "659eb126957c388b4b327014"}},
 
-  {"owner": "francesca.galli@example.com", "model": "Kia Optima","license_plate": "MN456OP", "color": "Pink", "matriculation_year": 2013, "pic": "car1.png"},
+  {"owner": "francesca.galli@example.com", "model": "Kia Optima","license_plate": "MN456OP", "color": "Pink", "matriculation_year": 2013, "pic": "car1.png", "_id": {"$oid": "659eb126957c388b4b327015"}},
 
-  {"owner": "marco.fiori@example.com", "model": "Mazda3","license_plate": "QR789ST", "color": "Cyan", "matriculation_year": 2011, "pic": "car1.png"},
-  {"owner": "marco.fiori@example.com", "model": "Tesla Model 3","license_plate": "UV012WX", "color": "Magenta", "matriculation_year": 2019, "pic": "car2.png"},
+  {"owner": "marco.fiori@example.com", "model": "Mazda3","license_plate": "QR789ST", "color": "Cyan", "matriculation_year": 2011, "pic": "car1.png", "_id": {"$oid": "659eb126957c388b4b327016"}},
+  {"owner": "marco.fiori@example.com", "model": "Tesla Model 3","license_plate": "UV012WX", "color": "Magenta", "matriculation_year": 2019, "pic": "car2.png", "_id": {"$oid": "659eb126957c388b4b327017"}},
 
-  {"owner": "chiara.romano@example.com", "model": "Porsche 911","license_plate": "YZ345AB", "color": "Gold", "matriculation_year": 2015, "pic": "car1.png"},
-  {"owner": "chiara.romano@example.com", "model": "Jeep Wrangler","license_plate": "CD678EF", "color": "Silver", "matriculation_year": 2020, "pic": "car2.png"},
+  {"owner": "chiara.romano@example.com", "model": "Porsche 911","license_plate": "YZ345AB", "color": "Gold", "matriculation_year": 2015, "pic": "car1.png", "_id": {"$oid": "659eb126957c388b4b327018"}},
+  {"owner": "chiara.romano@example.com", "model": "Jeep Wrangler","license_plate": "CD678EF", "color": "Silver", "matriculation_year": 2020, "pic": "car2.png", "_id": {"$oid": "659eb126957c388b4b327019"}},
 
-  {"owner": "riccardo.bruno@example.com", "model": "Ford Mustang","license_plate": "GH901IJ", "color": "Green", "matriculation_year": 2018, "pic": "car1.png"},
-  {"owner": "riccardo.bruno@example.com", "model": "Honda Accord","license_plate": "KL234MN", "color": "Blue", "matriculation_year": 2023, "pic": "car2.png"},
+  {"owner": "riccardo.bruno@example.com", "model": "Ford Mustang","license_plate": "GH901IJ", "color": "Green", "matriculation_year": 2018, "pic": "car1.png", "_id": {"$oid": "659eb126957c388b4b32701a"}},
+  {"owner": "riccardo.bruno@example.com", "model": "Honda Accord","license_plate": "KL234MN", "color": "Blue", "matriculation_year": 2023, "pic": "car2.png", "_id": {"$oid": "659eb126957c388b4b32701b"}},
 
-  {"owner": "valentina.gentile@example.com", "model": "Jaguar F-PACE","license_plate": "ST890UV", "color": "Black", "matriculation_year": 2021, "pic": "car1.png"},
-  {"owner": "valentina.gentile@example.com", "model": "Dodge Charger","license_plate": "WX123YZ", "color": "White", "matriculation_year": 2024, "pic": "car2.png"}
+  {"owner": "valentina.gentile@example.com", "model": "Jaguar F-PACE","license_plate": "ST890UV", "color": "Black", "matriculation_year": 2021, "pic": "car1.png", "_id": {"$oid": "659eb126957c388b4b32701c"}},
+  {"owner": "valentina.gentile@example.com", "model": "Dodge Charger","license_plate": "WX123YZ", "color": "White", "matriculation_year": 2024, "pic": "car2.png", "_id": {"$oid": "659eb126957c388b4b32701d"}}
 ]

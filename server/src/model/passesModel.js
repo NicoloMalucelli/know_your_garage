@@ -6,6 +6,7 @@ const passesSchema = new mongoose.Schema({
     duration: Number,
     cost: Number,
     title: String,
+    visible: { "type": Boolean, "default": true }
 });
 
 module.exports = mongoose.model('passes', passesSchema);

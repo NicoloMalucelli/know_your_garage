@@ -11,7 +11,8 @@ exports.getPasses = async (req, res) => {
     try {
         const result = await passesModel.find({
             owner: req.params.owner,
-            garage: req.params.garage
+            garage: req.params.garage,
+            visible: req.query.visible
         });
         res.json(result)
     }catch (error){

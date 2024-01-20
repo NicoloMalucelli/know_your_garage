@@ -181,7 +181,7 @@ export default defineComponent({
     },
     showOverlay(marker){
       this.overlayMarker = marker
-      axios.get('http://localhost:3000/passes/' + this.overlayMarker.owner + "/" + this.overlayMarker.name).then((response) => {
+      axios.get('http://localhost:3000/passes/' + this.overlayMarker.owner + "/" + this.overlayMarker.name, {params: {"visible": true}}).then((response) => {
         this.passes = response.data
         this.selected_pass = 0
       })

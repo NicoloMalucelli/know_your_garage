@@ -67,7 +67,7 @@ export default defineComponent({
       this.garages = response.data
       this.garages.forEach(garage => garage.passes =[])
 
-      this.garages.forEach(garage => axios.get('http://localhost:3000/passes/' + sessionStorage.getItem("email") + "/" + garage.name).then((response) => {
+      this.garages.forEach(garage => axios.get('http://localhost:3000/passes/' + sessionStorage.getItem("email") + "/" + garage.name, {params: {"visible": true}}).then((response) => {
         garage.passes = response.data;
       }))
     })
