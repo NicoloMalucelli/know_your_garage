@@ -5,7 +5,8 @@ const garagesSchema = new mongoose.Schema({
     name: String,
     latitude: Number,
     longitude: Number,
-    slots: Number
+    slots: Number,
+    visible: { "type": Boolean, "default": true }
 });
 
 module.exports = mongoose.model('garages', garagesSchema);
