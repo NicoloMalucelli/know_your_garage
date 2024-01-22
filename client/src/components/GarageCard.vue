@@ -86,16 +86,13 @@ export default {
     isVisible,
     askForDeletion(){
       if(window.confirm("Do you really want to remove:\n   - " + this.garage.name + "\nfrom your garages?")){
-        axios.patch('http://localhost:3000/garages/' + sessionStorage.getItem("email") + "/" + this.garage.name, {'visible': false}).then(() => {
+        axios.patch('http://localhost:3000/garages/' + this.garage._id, {'visible': false}).then(() => {
           this.visible = false
         })
       }
     },
-    isFormSubmittable() {
-      return this.garageName.length > 0 && Math.abs(this.latitude) <= 90 && Math.abs(this.longitude) <= 180 && this.slots > 0
-    },
     registerGarage() {
-      if(!this.isFormSubmittable(this.garageName, this.latitude, this.longitude, this.slots)){
+      if(!(this.garageName.length > 0 && Math.abs(this.latitude) <= 90 && Math.abs(this.longitude) <= 180 && this.slots > 0)){
         return
       }
       const body = {
@@ -112,7 +109,7 @@ export default {
       })
     },
     updateGarage(){
-      if(!this.isFormSubmittable(this.latitude, this.longitude, this.slots)){
+      if(!(Math.abs(this.latitude) <= 90 && Math.abs(this.longitude) <= 180 && this.slots > 0)){
         return
       }
       const body = {
@@ -120,9 +117,12 @@ export default {
         'longitude': this.longitude,
         'slots': this.slots
       }
-      axios
-          .patch('http://localhost:3000/garages/' + sessionStorage.getItem("email") + "/" + this.garage.name, body).then((response) => {
-        this.garage = response.data
+      axios.patch('http://localhost:3000/garages/' + this.garage._id, body).then((response) => {
+        this.garage.latitude = this.latitude
+        this.garage.longitude = this.longitude
+        this.garage.slots = this.slots
+        this.mode = "read"
+        this.resetTextBoxes()
       })
     },
     resetTextBoxes(){

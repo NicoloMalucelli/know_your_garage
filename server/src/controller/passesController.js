@@ -14,6 +14,7 @@ exports.getPasses = async (req, res) => {
             garage: req.params.garage,
             visible: req.query.visible
         });
+
         res.json(result)
     }catch (error){
         res.status(500).json("{error: Internal server error}")
@@ -60,7 +61,6 @@ exports.createPass = async (req, res) => {
         res.header('Access-Control-Allow-Origin', '*');
     }
 
-    console.log(req.body)
     if(req.body.cost == null || req.body.duration == null || req.body.title == null || req.body.owner == null || req.body.garage == null){
         res.status(400).json({error: 'inclomplete request'})
         return

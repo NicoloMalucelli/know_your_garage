@@ -102,7 +102,7 @@ exports.updateGarage = async(req, res)  => {
 
     try{
         await garagesModel.updateOne(
-            {"owner": req.params.email, "name": req.params.name},
+            {"_id": req.params._id},
             req.body
         )
         res.status(200).json(req.body);

@@ -22,7 +22,7 @@ router.route('/garages/:email/:name').delete((req, res) => {
     deleteGarage(req, res)
 })
 
-router.route('/garages/:email/:name').patch((req, res) => {
+router.route('/garages/:_id').patch((req, res) => {
     updateGarage(req, res)
 })
 

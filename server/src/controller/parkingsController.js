@@ -9,10 +9,13 @@ exports.getParkingsByCar = async(req, res) => {
         return
     }
 
+    const page = 2
+    const numOfResults = 2
+
     try {
         const result = await parkingsModel.find({
             car_id: req.params.car_id,
-        });
+        }).sort({"start": -1}).skip(page*numOfResults).limit(numOfResults);
         res.json(result)
     }catch (error){
         res.status(500).json("{error: Internal server error}")

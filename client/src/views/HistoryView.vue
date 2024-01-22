@@ -92,7 +92,7 @@ export default defineComponent({
       this.cars = response.data
 
       this.cars.forEach(car => axios.get('http://localhost:3000/parkings/' + car._id.toString()).then((response) => {
-        car.parkings = response.data.reverse()
+        car.parkings = response.data//.reverse()
         launched += car.parkings.length
 
         car.parkings.forEach(parking => axios.get('http://localhost:3000/garages/id/' + parking.garage_id).then((res) => {
