@@ -1,21 +1,7 @@
 <template>
   <Header selected_item="home"></Header>
 
-  <div v-if="overlayMarker != null" class="overlay-container d-flex justify-content-center align-items-center" @click.self="overlayMarker = null">
-    <div class="overlay-div flex-column py-4 d-flex align-items-center" style="position: relative">
-      <img src="../assets/cancel.png" @click="overlayMarker = null" style="height: 20px; width: 20px; cursor: pointer; position: absolute; right: 10px; top: 10px">
-      <h1 style="font-size: larger">{{overlayMarker.name}}</h1>
-
-      <div class="d-flex justify-content-center align-items-center mt-4">
-        <img @click="dec_index" src="../assets/arrows/left-arrow.png" style="width: 20px; cursor: pointer">
-        <PassCard v-if="passes.length > 0" class="mx-3" :pass="passes[selected_pass]" :initial-mode="'read'" :editable="false"></PassCard>
-        <img @click="inc_index" src="../assets/arrows/right-arrow.png" style="width: 20px; cursor: pointer">
-      </div>
-
-      <button class="btn btn-primary mt-5"> Buy this pass</button>
-
-    </div>
-  </div>
+  <BuyPassForm v-if="overlayMarker != null" :garage="overlayMarker" @close="overlayMarker = null"></BuyPassForm>
 
   <GoogleAddressAutocomplete
       apiKey="AIzaSyB633unraFl_EQhKi6DAUvz-71uYQEr6VU"
@@ -52,7 +38,7 @@
           <div style="width: 200px">
             <p style="font-size: 15px; color: black"><strong>{{marker.name}}</strong></p>
             <p style="font-size: 15px; color: darkgreen"> <strong>{{marker.slots-200}} slots available</strong> </p>
-            <button class="btn btn-primary" @click="showOverlay(marker)"> buy a pass </button>
+            <button class="btn btn-primary" @click="overlayMarker = marker"> buy a pass </button>
           </div>
         </InfoWindow>
       </div>
@@ -83,11 +69,12 @@ import GoogleAddressAutocomplete from 'vue3-google-address-autocomplete'
 import axios from "axios";
 import button from "bootstrap/js/src/button";
 import PassCard from "@/components/PassCard.vue";
+import BuyPassForm from "@/components/BuyPassForm.vue";
 
 export default defineComponent({
   name: "ParkingLots",
   components: {
-    PassCard,
+    BuyPassForm,
     Header,
     GoogleMap,
     Marker,
@@ -105,8 +92,6 @@ export default defineComponent({
       lastUpdateTime: 0,
       address: "",
       overlayMarker: null,
-      passes: [],
-      selected_pass: 0,
     }
   },
   methods: {
@@ -178,28 +163,7 @@ export default defineComponent({
       this.map_markers.forEach(e => e.infoWindow = (e.name === marker.name) )
       this.$refs.map.map.zoom = 17
       this.$refs.map.map.setCenter({lat: marker.latitude, lng: marker.longitude})
-    },
-    showOverlay(marker){
-      this.overlayMarker = marker
-      axios.get('http://localhost:3000/passes/' + this.overlayMarker.owner + "/" + this.overlayMarker.name, {params: {"visible": true}}).then((response) => {
-        this.passes = response.data
-        this.selected_pass = 0
-      })
-    },
-    dec_index() {
-      if(this.selected_pass > 1) {
-        this.selected_pass -= 1
-      }else{
-        this.selected_pass = this.passes.length-1
-      }
-    },
-    inc_index() {
-      if(this.selected_pass < this.passes.length-1) {
-        this.selected_pass += 1
-      }else{
-        this.selected_pass = 0
-      }
-    },
+    }
   },
   mounted() {
     /*navigator.geolocation.getCurrentPosition((success) => {
@@ -249,22 +213,6 @@ export default defineComponent({
   margin-top: 3px;
   padding: 0px 10px;
   border-radius: 20px;
-}
-
-.overlay-container{
-  position:absolute;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-  background-color: rgb(255, 255, 255, 0.5);
-}
-
-.overlay-div{
-  height: 500px;
-  width: 400px;
-  background-color: white;
-  box-shadow: 5px 10px 20px 0px #b0b0b0;
 }
 
 </style>

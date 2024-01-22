@@ -14,7 +14,6 @@ exports.getPasses = async (req, res) => {
             garage: req.params.garage,
             visible: req.query.visible
         });
-
         res.json(result)
     }catch (error){
         res.status(500).json("{error: Internal server error}")
