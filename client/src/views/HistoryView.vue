@@ -7,7 +7,7 @@
     <img @click="inc_index" src="../assets/arrows/right-arrow.png" style="width: 20px; cursor: pointer">
   </div>
 
-  <div v-if="cars.length > 0 && loaded" class="row justify-content-center mt-5">
+  <div class="row justify-content-center mt-5 mb-2">
 
     <table class="col-8 col-xl-4">
       <thead>
@@ -20,7 +20,7 @@
         </tr>
       </thead>
       <tbody>
-       <tr v-for="parking in cars[selected_car].parkings">
+       <tr v-for="parking in parkings">
          <td><strong>{{parking.garage.name}}</strong></td>
          <td class="px-3">{{getFormattedDate(parking.start).slice(0, 10)}}</td>
          <td class="px-3">{{getFormattedDate(parking.start).slice(10)}}</td>
@@ -40,6 +40,12 @@
     </table>
   </div>
 
+  <div class="d-flex justify-content-center align-items-center mt-3">
+    <img @click="dec_page" src="../assets/arrows/left-arrow.png" style="width: 20px; cursor: pointer">
+    <p style="margin-bottom: 0">page {{page_index+1}} of {{max_page_index}}</p>
+    <img @click="inc_page" src="../assets/arrows/right-arrow.png" style="width: 20px; cursor: pointer">
+  </div>
+
 </template>
 
 <script>
@@ -56,54 +62,82 @@ export default defineComponent({
     return{
       cars: [],
       selected_car: 0,
-      loaded: false
+      loaded: false,
+      parkings: [],
+      page_index: 0,
+      max_page_index: 0,
+      skip: 5.0
     }
   },
   methods: {
+    dec_page(){
+      if(this.page_index > 0){
+        this.page_index--
+        this.updateParkings()
+      }
+    },
+    inc_page(){
+      if(this.page_index !== this.max_page_index-1){
+        this.page_index++
+        this.updateParkings()
+      }
+    },
     dec_index() {
-      this.selected_car =  this.selected_car === 0 ? this.cars.length-1 : this.selected_car-1
+      this.page_index = 0
+      this.selected_car = this.selected_car === 0 ? this.cars.length - 1 : this.selected_car - 1
+      this.updateMaxPage()
+      this.updateParkings()
     },
     inc_index() {
-      this.selected_car =  this.selected_car === this.cars.length-1 ? 0 : this.selected_car+1
+      this.page_index = 0
+      this.selected_car = this.selected_car === this.cars.length - 1 ? 0 : this.selected_car + 1
+      this.updateMaxPage()
+      this.updateParkings()
     },
     getFormattedDate(dateStr) {
       const date = new Date(new Date(dateStr).toLocaleString('en-US', {timeZone: 'Europe/London'}))
       return date.toISOString().split('T')[0] + " " + this.pad(date.getHours(), 2) + ":" + this.pad(date.getMinutes(), 2)
     },
-    getDateDiff(from, to){
+    getDateDiff(from, to) {
       const diff = new Date(to) - new Date(from)
-      const min = Math.floor((diff%3600000)/60000.0)
-      if(min === 0){
-        return Math.floor(diff/3600000) + "h"
-      }else{
-        return Math.floor(diff/3600000) + "h" + min
+      const min = Math.floor((diff % 3600000) / 60000.0)
+      if (min === 0) {
+        return Math.floor(diff / 3600000) + "h"
+      } else {
+        return Math.floor(diff / 3600000) + "h" + min
       }
     },
     pad(num, size) {
       num = num.toString();
       while (num.length < size) num = "0" + num;
       return num;
+    },
+    updateParkings() {
+      axios.get('http://localhost:3000/parkings/' + this.cars[this.selected_car]._id.toString(), {params: {skip: this.skip, page: this.page_index}}).then((response) => {
+        const launched = response.data.length
+        let terminated = 0
+
+        response.data.forEach(parking => axios.get('http://localhost:3000/garages/id/' + parking.garage_id).then((res) => {
+              parking.garage = res.data[0]
+              terminated++
+              if (terminated === launched) {
+                this.parkings = response.data
+              }
+            })
+        )
+      })
+    },
+    updateMaxPage(){
+      axios.get('http://localhost:3000/parkings/total_number/' + this.cars[this.selected_car]._id.toString()).then((response) => {
+        this.max_page_index = Math.ceil(response.data/this.skip)
+      })
     }
   },
   mounted() {
     axios.get('http://localhost:3000/cars/' + sessionStorage.getItem('email')).then((response) => {
-      let terminated = 0
-      let launched = 0
       this.cars = response.data
-
-      this.cars.forEach(car => axios.get('http://localhost:3000/parkings/' + car._id.toString()).then((response) => {
-        car.parkings = response.data//.reverse()
-        launched += car.parkings.length
-
-        car.parkings.forEach(parking => axios.get('http://localhost:3000/garages/id/' + parking.garage_id).then((res) => {
-          parking.garage = res.data[0]
-          terminated++
-          if(terminated === launched){
-            this.loaded = true
-          }
-        }))
-      }))
-
+      this.updateParkings()
+      this.updateMaxPage()
     })
   }
 })
