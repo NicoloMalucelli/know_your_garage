@@ -42,7 +42,7 @@
 
   <div class="d-flex justify-content-center align-items-center mt-3">
     <img @click="dec_page" src="../assets/arrows/left-arrow.png" style="width: 20px; cursor: pointer">
-    <p style="margin-bottom: 0">page {{page_index+1}} of {{max_page_index}}</p>
+    <p style="margin-bottom: 0" class="mx-3">page {{page_index+1}} of {{max_page_index}}</p>
     <img @click="inc_page" src="../assets/arrows/right-arrow.png" style="width: 20px; cursor: pointer">
   </div>
 
@@ -169,8 +169,13 @@ table{
 
 
 tbody tr:nth-child(odd) {
-  background-color: #4C8BF5;
-  color: #fff;
+  background-color: #bdf6f5;
+  color: #000;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f3efef;
+  color: #000;
 }
 
 </style>
