@@ -76,12 +76,13 @@ export default defineComponent({
 
 </script>
 
-<style>
+<style scoped>
 
-.garage-card{
-  min-width: 400px !important;
-  max-width: 600px !important;
-  width: 60vw !important;
+:deep(.garage-card){
+  min-width: 400px;
+  max-width: 600px;
+  width: 60vw;
+  background-color: #9ce1f4;
 }
 
 </style>

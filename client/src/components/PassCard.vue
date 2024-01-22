@@ -113,11 +113,11 @@ export default {
 <style scoped>
 
 .pass-card{
-  background-color: #b0b0b0;
+  background-color: #9ce1f4;
   width: 250px;
   height: 300px;
   border-radius: 20px;
-  box-shadow: 5px 10px 20px 0px #000000;
+  box-shadow: 5px 10px 20px 0px #b0b0b0;
 }
 
 </style>
