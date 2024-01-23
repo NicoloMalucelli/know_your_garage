@@ -14,7 +14,12 @@
         <div class="d-flex flex-column align-items-center">
           <p v-if="!parked"><strong>Status:<span style="color: #8c0808;"> not parked</span></strong></p>
           <p v-if="parked"><strong>Status:<span style="color: #107a03;"> parked</span></strong></p>
-          <p><strong>Active pass:</strong> none</p>
+          <p>
+            <strong>Active pass:
+              <span v-if="active_passes===0" style="color: #8c0808;">none</span>
+              <span v-if="active_passes!==0" style="color: #107a03;">{{active_passes}}</span>
+            </strong>
+          </p>
           <Bin @click="askForDeletion" style="height:35px; width: 35px;"></Bin>
         </div>
       </div>
@@ -49,6 +54,7 @@
 <script>
 import Bin from "@/components/Bin.vue";
 import axios from "axios";
+import io from "socket.io-client";
 
 export default {
   name: "CarCard",
@@ -64,7 +70,9 @@ export default {
       year: "",
       registration_error: false,
       visible: true,
-      parked: false
+      parked: false,
+      active_passes: 0,
+      socket: io('localhost:3000')
     }
   },
   methods:{
@@ -125,8 +133,21 @@ export default {
     if(this.car === undefined || this.car == null){
       return
     }
+    axios.get('http://localhost:3000/purchasedpasses/' + this.car._id.toString()).then((response) => {
+      this.active_passes = response.data.filter(p => new Date() >= new Date(p.start) && new Date() <= new Date(p.end)).length
+    })
     axios.get('http://localhost:3000/parkings/' + this.car._id.toString()).then((response) => {
       this.parked = response.data.filter(p => p.end == null).length !== 0
+    })
+    this.socket.on('parkings_changed', (newParking) => {
+      if(newParking.car_id === this.car._id.toString()){
+        if(newParking.end === null){
+          this.parked = true
+        }else{
+          this.parked = false
+        }
+      }
+      console.log(newParking)
     })
   }
 }

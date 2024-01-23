@@ -41,7 +41,6 @@ exports.getPurchasedPasses = async (req, res) => {
 
 exports.getSoldPasses = async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
-    console.log("req")
 
     if(req.params.pass_id == null){
         res.status(400).json({error: 'inclomplete request'})
@@ -59,7 +58,6 @@ exports.getSoldPasses = async (req, res) => {
 
 exports.getNumOfPassesByCar = async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
-
 
     if(req.params.car_id == null){
         res.status(400).json({error: 'inclomplete request'})

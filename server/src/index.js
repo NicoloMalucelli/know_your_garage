@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const socket = require('socket.io')
 //console.log('Path of file in parent dir:', require('path').resolve(__dirname, './route/usersRoutes'));
 const usersRouter = require('./route/usersRoutes');
 const carsRouter = require('./route/carsRoutes');
@@ -8,6 +9,7 @@ const adminsRouter = require('./route/adminsRoutes');
 const passesRouter  = require('./route/passesRoutes');
 const parkingsRouter = require('./route/parkingsRoutes');
 const purchasedPassesRouter = require('./route/purchasedPassesRoutes');
+
 
 const app = express();
 
@@ -30,6 +32,20 @@ mongoose.connect('mongodb://127.0.0.1:27017/knowYourGarage').then(() => {
     console.log(err);
 });
 
-app.listen(3000, () => {
+server = app.listen(3000, () => {
     console.log(`Server listening on port ${3000}`);
 });
+
+const io = socket(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"],
+        allowedHeaders: ["Content-type,Accept,X-Custom-Header"],
+        credentials: true
+    }
+});
+
+
+exports.parkingChanged = (newParking) =>{
+    io.emit('parkings_changed', newParking)
+}

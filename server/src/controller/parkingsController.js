@@ -1,4 +1,5 @@
 const parkingsModel = require('../model/parkingsModel');
+const index = require('../../src/index');
 
 exports.getNumOfParkingsByCar = async(req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -44,5 +45,27 @@ exports.getParkingsByQueryParams = async(req, res) => {
         res.json(result)
     }catch (error){
         res.status(500).json("{error: Internal server error}")
+    }
+}
+
+exports.addParking = async(req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT, POST,DELETE');
+    res.header("Access-Control-Allow-Headers", "Content-type,Accept,X-Custom-Header");
+
+    if (req.method === "OPTIONS") {
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+    } else {
+        res.header('Access-Control-Allow-Origin', '*');
+    }
+
+    const parking = new parkingsModel(req.body);
+    try{
+        const result = await parking.save()
+        res.json(result);
+        index.parkingChanged(result)
+    }catch (e) {
+        console.log(e)
+        res.status(500).json({ error: 'Internal Server Error occurred'})
     }
 }
