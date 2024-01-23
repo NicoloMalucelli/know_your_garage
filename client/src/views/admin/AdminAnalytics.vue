@@ -10,21 +10,21 @@
   </div>
 
   <div class="row d-flex justify-content-center align-items-center mt-4">
-    <div class="col-10 col-md-8 col-lg-6 col-xxl-4 d-flex align-items-center justify-content-center flex-column">
+    <div class="px-lg-4 col-10 col-md-8 col-lg-6 col-xxl-4 d-flex align-items-center justify-content-center flex-column">
       <BarChart v-if="garages.length > 0" :garage="garages[selected_garage]"></BarChart>
     </div>
 
 
     <div class="mt-5 mt-lg-0 col-10 col-md-8 col-lg-6 col-xxl-4 d-flex align-items-center justify-content-center flex-column">
-      <div class="w-100">
       <PieChart v-if="garages.length > 0" :garage="garages[selected_garage]"></PieChart>
-      </div>
-      <p class="mb-0 mt-3" style="font-size: 14px"><em>sold passes</em></p>
     </div>
 
 
-    <div class="mt-5 mt-xxl-0  col-10 col-md-8 col-lg-6 col-xxl-4 d-flex align-items-center justify-content-center">
+    <div class="mt-5 mt-xxl-0  col-10 col-md-8 col-lg-6 col-xxl-4 d-flex flex-column align-items-center justify-content-center">
       <NewCarsAnalytic v-if="garages.length > 0" :garage="garages[selected_garage]"></NewCarsAnalytic>
+      <div class="mt-3 d-flex flex-column justify-content-center align-items-start">
+        <p class="mb-0 mx-5"><em>(+) positive and (-) negative trend compared to the immediately larger range</em></p>
+      </div>
     </div>
   </div>
 

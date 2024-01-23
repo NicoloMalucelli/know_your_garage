@@ -1,6 +1,7 @@
 <template>
+  <div class="w-100">
     <Pie
-        v-if="passes.length > 0"
+        v-if="passes.length > 0 && passes.map(p => p.count).reduce((s,a) => s+a, 0) > 0"
       :options="pieChartOptions"
       :data="{
             labels: passes.map(pass => pass.title),
@@ -11,6 +12,12 @@
             }],
           }">
     </Pie>
+  </div>
+
+  <p v-if="passes.length > 0 && passes.map(p => p.count).reduce((s,a) => s+a, 0) > 0" class="mb-0 mt-3" style="font-size: 14px"><em>sold passes</em></p>
+
+  <p v-if="passes.length > 0 && passes.map(p => p.count).reduce((s,a) => s+a, 0) <= 0"><em>no pass has been sold yet</em></p>
+
 </template>
 
 <script>
