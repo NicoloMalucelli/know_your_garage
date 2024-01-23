@@ -13,6 +13,7 @@ import AdminHomeView from "@/views/admin/AdminHomeView.vue";
 import AdminProfileView from "@/views/admin/AdminProfileView.vue";
 import AdminManagePasses from "@/views/admin/AdminManagePasses.vue";
 import AdminAnalytics from "@/views/admin/AdminAnalytics.vue";
+import AdminRealTime from "@/views/admin/AdminRealTime.vue";
 
 const routes: Array<RouteRecordRaw> = [
   { path: '/', name: 'home', component: ParkingLotsView },
@@ -28,6 +29,7 @@ const routes: Array<RouteRecordRaw> = [
   { path: '/admin/profile', name: 'admin_profile', component: AdminProfileView },
   { path: '/admin/passes', name: 'admin_passes', component: AdminManagePasses },
   {path: '/admin/analytics', name: 'admin_analytics', component: AdminAnalytics},
+  {path: '/admin/realtime', name: 'admin_real_time', component: AdminRealTime},
 
   { path: '/:catchAll(.*)', name:'404', component: PageNotFound}
 ]

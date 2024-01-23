@@ -10,15 +10,8 @@
         <img src="../assets/home_black.png" v-if="selected_item !== 'home'" style="height: 35%">
         <img src="../assets/home_white.png" v-if="selected_item === 'home'" style="height: 35%">
       </div>
-      <div :style="{color: updateColor('watch_real_time')}" class="d-flex align-items-center justify-content-center" style="width: 21%"> Real-time  </div>
+      <div :style="{color: updateColor('real_time')}" class="d-flex align-items-center justify-content-center" style="width: 21%" @click="$router.push({name: 'admin_real_time'})"> Real-time  </div>
       <div @click="$router.push({name: 'admin_profile'})" :style="{color: updateColor('my_profile')}" class="d-flex align-items-center justify-content-center" style="width: 21%; border-radius: 0px max(4vh, 40px) max(4vh, 40px) 0px"> My profile </div>
-      <!--
-      <div class="col-2 d-flex align-items-center justify-content-center" style="border-radius: max(4vh, 27px) 0px 0px max(4vh, 27px)"> My profile</div>
-      <div class="col-3 d-flex align-items-center justify-content-center" style=""> My cars </div>
-      <div class="col-2 d-flex align-items-center justify-content-center" style=""> Home </div>
-      <div class="col-3 d-flex align-items-center justify-content-center" style=""> find a parking lot </div>
-      <div class="col-2 d-flex align-items-center justify-content-center" style="border-radius: 0px max(4vh, 27px) max(4vh, 27px) 0px"> history </div>
-      -->
     </div>
   </div>
 </template>
