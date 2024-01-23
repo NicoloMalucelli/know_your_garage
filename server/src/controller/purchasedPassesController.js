@@ -22,7 +22,6 @@ exports.buy = async(req, res) => {
 exports.getPurchasedPasses = async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
 
-
     if(req.params.car_id == null){
         res.status(400).json({error: 'inclomplete request'})
         return
@@ -34,6 +33,24 @@ exports.getPurchasedPasses = async (req, res) => {
             .sort({"end": -1, "_id": -1})
             .skip(req.query.skip * req.query.page)
             .limit(req.query.skip);
+        res.json(result)
+    }catch (error){
+        res.status(500).json("{error: Internal server error}")
+    }
+}
+
+exports.getSoldPasses = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    console.log("req")
+
+    if(req.params.pass_id == null){
+        res.status(400).json({error: 'inclomplete request'})
+        return
+    }
+
+    try {
+        const result = await purchasedPassesModel
+            .find({pass_id: req.params.pass_id})
         res.json(result)
     }catch (error){
         res.status(500).json("{error: Internal server error}")

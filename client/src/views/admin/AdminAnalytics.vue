@@ -9,14 +9,21 @@
     </div>
   </div>
 
-  <div class="row d-flex justify-content-center">
+  <div class="row d-flex justify-content-center align-items-center">
     <div class="col-10 col-md-8 col-lg-6 col-xxl-4 d-flex align-items-center justify-content-center flex-column">
-
       <BarChart v-if="garages.length > 0" :garage="garages[selected_garage]"></BarChart>
-
     </div>
-    <div class="col-10 col-md-8 col-lg-6 col-xxl-4 d-flex align-items-center justify-content-center" style="background-color: white; height: 100px">ciao</div>
-    <div class="col-10 col-md-8 col-lg-6 col-xxl-4 d-flex align-items-center justify-content-center" style="background-color: red; height: 100px">ciao</div>
+
+
+    <div class="col-10 col-md-8 col-lg-6 col-xxl-4 d-flex align-items-center justify-content-center flex-column">
+      <div class="w-100">
+      <PieChart v-if="garages.length > 0" :garage="garages[selected_garage]"></PieChart>
+      </div>
+      <p class="mb-0 mt-3" style="font-size: 14px"><em>sold passes</em></p>
+    </div>
+
+
+    <div class="col-10 col-md-8 col-lg-6 col-xxl-4 d-flex align-items-center justify-content-center" style="background-color: red">ciao</div>
   </div>
 
   <Footer></Footer>
@@ -29,13 +36,14 @@ import Footer from "@/components/Footer.vue";
 import AdminHeader from "@/components/AdminHeader.vue";
 import axios from "axios";
 import GarageCard from "@/components/GarageCard.vue";
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 import BarChart from "@/components/BarChart.vue";
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+import PieChart from "@/components/PieChart.vue";
+
 
 export default defineComponent({
   name: "AdminAnalytics",
   components: {
+    PieChart,
     BarChart,
     GarageCard,
     AdminHeader,

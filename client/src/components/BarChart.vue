@@ -1,6 +1,5 @@
 <template>
   <Bar
-      id="my-chart-id"
       :options="barChartOptions"
       :data="{
             labels: getWeek(week).map(day => day.toString().slice(0, 15)),
@@ -23,6 +22,8 @@
 <script>
 import axios from "axios";
 import {Bar} from "vue-chartjs";
+import {BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip} from "chart.js";
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
   name: "BarChart",
