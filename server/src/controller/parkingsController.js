@@ -35,3 +35,14 @@ exports.getParkingsByCar = async(req, res) => {
         res.status(500).json("{error: Internal server error}")
     }
 }
+
+exports.getParkingsByQueryParams = async(req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    try {
+        const result = await parkingsModel.find(req.query);
+        res.json(result)
+    }catch (error){
+        res.status(500).json("{error: Internal server error}")
+    }
+}

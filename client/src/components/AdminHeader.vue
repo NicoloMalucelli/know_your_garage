@@ -4,7 +4,7 @@
   </div>
   <div class="d-flex justify-content-center align-items-center my-navbar-container" style="width: 100%">
     <div class="my-navbar row" style="">
-      <div :style="{color: updateColor('analytics')}" class="d-flex align-items-center justify-content-center" style="width: 21%; border-radius: max(4vh, 40px) 0px 0px max(4vh, 40px)"> Analytics </div>
+      <div :style="{color: updateColor('analytics')}" class="d-flex align-items-center justify-content-center" style="width: 21%; border-radius: max(4vh, 40px) 0px 0px max(4vh, 40px)" @click="$router.push({name: 'admin_analytics'})"> Analytics </div>
       <div :style="{color: updateColor('manage_pass')}" class="d-flex align-items-center justify-content-center" @click="$router.push({name: 'admin_passes'})" style="width: 21%"> Manage passes </div>
       <div :style="{color: updateColor('home')}" class="d-flex align-items-center justify-content-center" style="height: 100%; width: 16%" @click="$router.push({name: 'admin_home'})">
         <img src="../assets/home_black.png" v-if="selected_item !== 'home'" style="height: 35%">

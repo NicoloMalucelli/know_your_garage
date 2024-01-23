@@ -1,5 +1,5 @@
 <template>
-  <AdminHeader selected_item="manage_pass" ></AdminHeader>
+  <AdminHeader selected_item="analytics" ></AdminHeader>
   <div v-if="garages.length > 0" class="d-flex flex-column justify-content-center align-items-center mt-5" style="width: 100%" >
     <div id="shownGarageContainer" class="d-flex align-items-center">
       <img @click="dec_index" src="../../assets/arrows/left-arrow.png" style="width: 20px; cursor: pointer">
@@ -45,18 +45,10 @@ export default defineComponent({
   },
   methods: {
     dec_index() {
-      if(this.selected_garage > 1) {
-        this.selected_garage -= 1
-      }else{
-        this.selected_garage = this.garages.length-1
-      }
+      this.selected_garage = this.selected_garage === 0 ? this.garages.length - 1 : this.selected_garage - 1
     },
     inc_index() {
-      if(this.selected_garage < this.garages.length-1) {
-        this.selected_garage += 1
-      }else{
-        this.selected_garage = 0
-      }
+      this.selected_garage = this.selected_garage === this.garages.length - 1 ? 0 : this.selected_garage + 1
     },
     passCreated(pass){
       this.garages[this.selected_garage].passes.push(pass)
