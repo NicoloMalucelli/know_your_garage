@@ -22,7 +22,7 @@
       <tbody>
        <tr v-for="parking in parkings">
          <td><strong>{{parking.garage.name}}</strong></td>
-         <td class="px-3">{{getFormattedDate(parking.start).slice(0, 10)}}</td>
+         <td class="px-3">{{getDateDDMMYYYY(parking.start)}}</td>
          <td class="px-3">{{getFormattedDate(parking.start).slice(10)}}</td>
 
          <td class="px-3">
@@ -96,6 +96,10 @@ export default defineComponent({
     getFormattedDate(dateStr) {
       const date = new Date(new Date(dateStr).toLocaleString('en-US', {timeZone: 'Europe/London'}))
       return date.toISOString().split('T')[0] + " " + this.pad(date.getHours(), 2) + ":" + this.pad(date.getMinutes(), 2)
+    },
+    getDateDDMMYYYY(dateStr) {
+      let date = new Date(new Date(dateStr).toLocaleString('en-US', {timeZone: 'Europe/London'}))
+      return date.toISOString().split('T')[0].split('-').reverse().join("-")
     },
     getDateDiff(from, to) {
       const diff = new Date(to) - new Date(from)
