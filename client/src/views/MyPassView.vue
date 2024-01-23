@@ -1,20 +1,20 @@
 <template>
   <Header :selected_item="'my_pass'"></Header>
 
-  <div v-if="cars.length > 0" class="d-flex align-items-center justify-content-center mt-5">
+  <div v-if="cars.length > 0" class="d-flex align-items-center justify-content-center mt-3 mt-xl-5">
     <img @click="dec_index" src="../assets/arrows/left-arrow.png" style="width: 20px; cursor: pointer">
     <CarCard class="mx-3" :initial-mode="'read'" :car="cars[selected_car]" :additionalInfo="false"></CarCard>
     <img @click="inc_index" src="../assets/arrows/right-arrow.png" style="width: 20px; cursor: pointer">
   </div>
 
-  <div v-if="passes.length === 0" class="row justify-content-center mt-5 mb-2">
+  <div v-if="passes.length === 0" class="row justify-content-center mt-xl-5 mt-3 mb-2">
     <p>this car never had an associated pass</p>
   </div>
 
   <div v-if="passes.length > 0">
     <div class="row justify-content-center mt-5 mb-2">
 
-      <table class="col-10 col-xl-5">
+      <table class="col-10 col-xl-6">
         <thead>
         <tr>
           <th scope="col"> pass </th>
@@ -31,8 +31,9 @@
           <td class="px-3">{{getFormattedDate(pass.start)}}</td>
           <td class="px-3">{{getFormattedDate(pass.end)}}</td>
 
-          <td class="px-3" style="color: darkgreen" v-if="new Date() <= new Date(pass.end)"> <strong>active</strong></td>
-          <td class="px-3" style="color: darkred" v-if="new Date() > new Date(pass.end)"> <strong>expired</strong></td>
+          <td class="px-3" style="color: darkgoldenrod" v-if="new Date() < new Date(pass.start)"> <strong>not active yet</strong></td>
+          <td class="px-3" style="color: darkgreen" v-if="new Date() >= new Date(pass.start) && new Date() <= new Date(pass.end)"> <strong>active</strong></td>
+          <td class="px-3" style="color: darkred" v-if="new Date() >= new Date(pass.start) && new Date() > new Date(pass.end)"> <strong>expired</strong></td>
         </tr>
         </tbody>
       </table>
@@ -91,8 +92,8 @@ export default defineComponent({
       }
     },
     getFormattedDate(dateStr) {
-      const date = new Date(new Date(dateStr).toLocaleString('en-US', {timeZone: 'Europe/London'}))
-      return date.toISOString().split('T')[0]
+      let date = new Date(new Date(dateStr).toLocaleString('en-US', {timeZone: 'Europe/London'}))
+      return date.toISOString().split('T')[0].split('-').reverse().join("-")
     },
     updatePasses(){
       console.log(this.page_index)
