@@ -23,7 +23,9 @@
     </div>
 
 
-    <div class="col-10 col-md-8 col-lg-6 col-xxl-4 d-flex align-items-center justify-content-center" style="background-color: red">ciao</div>
+    <div class="col-10 col-md-8 col-lg-6 col-xxl-4 d-flex align-items-center justify-content-center">
+      <NewCarsAnalytic v-if="garages.length > 0" :garage="garages[selected_garage]"></NewCarsAnalytic>
+    </div>
   </div>
 
   <Footer></Footer>
@@ -38,11 +40,13 @@ import axios from "axios";
 import GarageCard from "@/components/GarageCard.vue";
 import BarChart from "@/components/BarChart.vue";
 import PieChart from "@/components/PieChart.vue";
+import NewCarsAnalytic from "@/components/NewCarsAnalytic.vue";
 
 
 export default defineComponent({
   name: "AdminAnalytics",
   components: {
+    NewCarsAnalytic,
     PieChart,
     BarChart,
     GarageCard,
