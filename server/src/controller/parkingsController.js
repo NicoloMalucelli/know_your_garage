@@ -59,6 +59,7 @@ exports.addParking = async(req, res) => {
         res.header('Access-Control-Allow-Origin', '*');
     }
 
+    req.body.start = new Date(new Date().toLocaleString('en-US', {timeZone: 'Europe/Helsinki'}))
     const parking = new parkingsModel(req.body);
     try{
         const result = await parking.save()
@@ -67,5 +68,24 @@ exports.addParking = async(req, res) => {
     }catch (e) {
         console.log(e)
         res.status(500).json({ error: 'Internal Server Error occurred'})
+    }
+}
+
+exports.endParking = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    try {
+        const end = new Date(new Date().toLocaleString('en-US', {timeZone: 'Europe/Helsinki'}))
+        await parkingsModel.updateOne(
+            {"car_id": req.params.car_id, "end": null},
+            {"end": end}
+        )
+        const result = {
+            'car_id': req.params.car_id,
+            'end': end
+        }
+        res.status(200).json(result);
+        index.parkingChanged(result)
+    } catch (e) {
+        res.json(e);
     }
 }
