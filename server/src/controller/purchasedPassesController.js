@@ -17,5 +17,42 @@ exports.buy = async(req, res) => {
     }catch (e) {
         res.status(500).json({ error: 'Internal Server Error occurred'})
     }
+}
 
+exports.getPurchasedPasses = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+
+
+    if(req.params.car_id == null){
+        res.status(400).json({error: 'inclomplete request'})
+        return
+    }
+
+    try {
+        const result = await purchasedPassesModel
+            .find({car_id: req.params.car_id})
+            .sort({"end": -1, "_id": -1})
+            .skip(req.query.skip * req.query.page)
+            .limit(req.query.skip);
+        res.json(result)
+    }catch (error){
+        res.status(500).json("{error: Internal server error}")
+    }
+}
+
+exports.getNumOfPassesByCar = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+
+
+    if(req.params.car_id == null){
+        res.status(400).json({error: 'inclomplete request'})
+        return
+    }
+
+    try {
+        const result = await purchasedPassesModel.find({car_id: req.params.car_id}).count();
+        res.json(result)
+    }catch (error){
+        res.status(500).json("{error: Internal server error}")
+    }
 }

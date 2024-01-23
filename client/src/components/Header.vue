@@ -5,7 +5,7 @@
   <div class="d-flex justify-content-center align-items-center my-navbar-container" style="width: 100%">
     <div class="my-navbar row" style="">
       <div :style="{color: updateColor('history')}" class="d-flex align-items-center justify-content-center" style="width: 21%; border-radius: max(4vh, 40px) 0px 0px max(4vh, 40px)" @click="$router.push({name: 'history'})"> History </div>
-      <div :style="{color: updateColor('my_pass')}" class="d-flex align-items-center justify-content-center" style="width: 21%"> My pass </div>
+      <div :style="{color: updateColor('my_pass')}" class="d-flex align-items-center justify-content-center" style="width: 21%" @click="$router.push({name: 'my_pass'})"> My pass </div>
       <div :style="{color: updateColor('home')}" class="d-flex align-items-center justify-content-center" style="height: 100%; width: 16%" @click="$router.push({name: 'home'})">
         <img src="../assets/home_black.png" v-if="selected_item !== 'home'" style="height: 35%">
         <img src="../assets/home_white.png" v-if="selected_item === 'home'" style="height: 35%">

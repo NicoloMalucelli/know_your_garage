@@ -1,4 +1,5 @@
 const passesModel = require('../model/passesModel');
+const ObjectId = require('mongodb').ObjectId;
 
 exports.getPasses = async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -16,6 +17,23 @@ exports.getPasses = async (req, res) => {
         });
         res.json(result)
     }catch (error){
+        res.status(500).json("{error: Internal server error}")
+    }
+}
+
+exports.getPass = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    if(req.params.id == null){
+        res.status(400).json({error: 'inclomplete request'})
+        return
+    }
+
+    try {
+        const result = await passesModel.find({_id: req.params.id})
+        res.json(result)
+    }catch (error){
+        console.log(error)
         res.status(500).json("{error: Internal server error}")
     }
 }

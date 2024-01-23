@@ -62,7 +62,6 @@ export default defineComponent({
     return{
       cars: [],
       selected_car: 0,
-      loaded: false,
       parkings: [],
       page_index: 0,
       max_page_index: 0,
@@ -116,6 +115,9 @@ export default defineComponent({
       axios.get('http://localhost:3000/parkings/' + this.cars[this.selected_car]._id.toString(), {params: {skip: this.skip, page: this.page_index}}).then((response) => {
         const launched = response.data.length
         let terminated = 0
+        if (response.data.length === 0) {
+          this.parkings = response.data
+        }
 
         response.data.forEach(parking => axios.get('http://localhost:3000/garages/id/' + parking.garage_id).then((res) => {
               parking.garage = res.data[0]

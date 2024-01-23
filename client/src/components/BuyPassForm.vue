@@ -161,6 +161,7 @@ export default {
         'end': new Date(Date.parse(end.toLocaleString('en-US', {timeZone: 'Europe/Helsinki'}))),
       })
           .then(() => {
+            this.mode = "bought"
           }).catch(error => {
         if(error.response){
           console.log(error)
