@@ -9,13 +9,13 @@
     </div>
   </div>
 
-  <div class="row d-flex justify-content-center align-items-center">
+  <div class="row d-flex justify-content-center align-items-center mt-4">
     <div class="col-10 col-md-8 col-lg-6 col-xxl-4 d-flex align-items-center justify-content-center flex-column">
       <BarChart v-if="garages.length > 0" :garage="garages[selected_garage]"></BarChart>
     </div>
 
 
-    <div class="col-10 col-md-8 col-lg-6 col-xxl-4 d-flex align-items-center justify-content-center flex-column">
+    <div class="mt-5 mt-lg-0 col-10 col-md-8 col-lg-6 col-xxl-4 d-flex align-items-center justify-content-center flex-column">
       <div class="w-100">
       <PieChart v-if="garages.length > 0" :garage="garages[selected_garage]"></PieChart>
       </div>
@@ -23,7 +23,7 @@
     </div>
 
 
-    <div class="col-10 col-md-8 col-lg-6 col-xxl-4 d-flex align-items-center justify-content-center">
+    <div class="mt-5 mt-xxl-0  col-10 col-md-8 col-lg-6 col-xxl-4 d-flex align-items-center justify-content-center">
       <NewCarsAnalytic v-if="garages.length > 0" :garage="garages[selected_garage]"></NewCarsAnalytic>
     </div>
   </div>
