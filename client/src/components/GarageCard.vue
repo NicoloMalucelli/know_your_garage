@@ -138,7 +138,6 @@ export default {
     },
     updateFreePlaces(){
       axios.get('http://localhost:3000/garages/realtime/' + this.garage._id).then((newCount) => {
-        console.log(newCount.data)
         this.freePlaces = this.garage.slots - newCount.data
       })
     }
