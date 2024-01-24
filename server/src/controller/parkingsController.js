@@ -65,6 +65,7 @@ exports.addParking = async(req, res) => {
         const result = await parking.save()
         res.json(result);
         index.parkingChanged(result)
+        index.freeSlotsChanged({id: result.garage_id})
     }catch (e) {
         console.log(e)
         res.status(500).json({ error: 'Internal Server Error occurred'})
@@ -74,6 +75,13 @@ exports.addParking = async(req, res) => {
 exports.endParking = async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     try {
+        let toModify = await parkingsModel.find(
+            {"car_id": req.params.car_id, "end": null}
+        )
+        if(toModify.length == 0){
+            return
+        }
+
         const end = new Date(new Date().toLocaleString('en-US', {timeZone: 'Europe/Helsinki'}))
         await parkingsModel.updateOne(
             {"car_id": req.params.car_id, "end": null},
@@ -85,6 +93,7 @@ exports.endParking = async (req, res) => {
         }
         res.status(200).json(result);
         index.parkingChanged(result)
+        index.freeSlotsChanged({id: toModify[0].garage_id})
     } catch (e) {
         res.json(e);
     }
@@ -96,6 +105,7 @@ exports.getRealTimeParkings = async (garage_id) => {
             garage_id: garage_id,
             end: null
         });
+        console.log(result.length)
         return result
     }catch (error){
         return {}

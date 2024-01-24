@@ -49,3 +49,7 @@ const io = socket(server, {
 exports.parkingChanged = (newParking) =>{
     io.emit('parkings_changed', newParking)
 }
+
+exports.freeSlotsChanged = (garage) =>{
+    io.emit('free-slots-update', garage)
+}

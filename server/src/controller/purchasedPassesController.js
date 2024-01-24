@@ -1,4 +1,5 @@
 const purchasedPassesModel = require('../model/purchasedPassesModel');
+const index = require('../../src/index');
 
 exports.buy = async(req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -13,7 +14,9 @@ exports.buy = async(req, res) => {
 
     const purchasedPasses = new purchasedPassesModel(req.body)
     try{
-        res.json(await purchasedPasses.save());
+        const result = await purchasedPasses.save()
+        res.json(result);
+        index.freeSlotsChanged({id: result._id})
     }catch (e) {
         res.status(500).json({ error: 'Internal Server Error occurred'})
     }

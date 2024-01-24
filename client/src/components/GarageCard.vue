@@ -10,7 +10,7 @@
 
       <div class="row">
         <p class="col-4">total slots: {{garage.slots}}</p>
-        <p class="col-4">slots occupied: xxx</p>
+        <p class="col-4">slots occupied: {{freePlaces}}</p>
         <p class="col-4" v-if="garage.passes === undefined"></p>
         <p class="col-4" v-if="garage.passes !== undefined">active passes: {{garage.passes.length}}</p>
       </div>
@@ -67,11 +67,17 @@
 import Bin from "@/components/Bin.vue";
 import axios from "axios";
 import {isVisible} from "bootstrap/js/src/util";
+import io from "socket.io-client";
 
 export default {
   name: "GarageCard",
   components: {Bin},
   props: ['garage', 'readOnly', 'initialMode'],
+  watch: {
+    garage: function (newVal, oldVal){
+      this.updateFreePlaces()
+    }
+  },
   data(){
     return{
       mode: this.initialMode,
@@ -79,7 +85,9 @@ export default {
       latitude: "",
       longitude: "",
       slots: "",
-      visible: true
+      visible: true,
+      socket: io('localhost:3000'),
+      freePlaces: ""
     }
   },
   methods:{
@@ -100,7 +108,7 @@ export default {
         'name': this.garageName,
         'latitude': this.latitude,
         'longitude': this.longitude,
-        'slots': this.slots
+        'slots': this.slots,
       }
       axios.put('http://localhost:3000/garages', body).then((response) => {
         this.mode = 'create'
@@ -127,8 +135,24 @@ export default {
     },
     resetTextBoxes(){
       this.latitude = ""; this.longitude = ""; this.slots = ""; this.garageName = "";
+    },
+    updateFreePlaces(){
+      console.log('http://localhost:3000/garages/realtime/' + this.garage._id)
+      axios.get('http://localhost:3000/garages/realtime/' + this.garage._id).then((newCount) => {
+        console.log(newCount.data)
+        this.freePlaces = this.garage.slots - newCount.data
+      })
     }
   },
+  mounted() {
+    this.updateFreePlaces()
+    this.socket.on('free-slots-update', (garage) => {
+      if(garage.id !== this.garage._id){
+        return
+      }
+      this.updateFreePlaces()
+    })
+  }
 }
 
 </script>
