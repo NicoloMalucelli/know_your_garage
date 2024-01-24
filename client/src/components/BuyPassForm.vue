@@ -8,7 +8,10 @@
 
       <div style="height: 80%">
 
-        <div v-if="mode === 'navigate_pass'">
+        <div v-if="mode === 'navigate_pass' && passes.length === 0">
+          <p><em>no pass available for this garage</em></p>
+        </div>
+        <div v-if="mode === 'navigate_pass' && passes.length > 0">
           <h2 style="font-size: large">Step 1: select a pass</h2>
           <div class="d-flex justify-content-center align-items-center mt-4">
             <img @click="dec_index" src="../assets/arrows/left-arrow.png" style="width: 20px; cursor: pointer">
@@ -74,9 +77,9 @@
 
       </div>
 
-      <div v-if="mode === 'navigate_pass' || mode === 'navigate_car'" style="height: 10%; width: 100%" class="d-flex justify-content-center align-items-center mt-4">
+      <div v-if="passes.length > 0 &&(mode === 'navigate_pass' || mode === 'navigate_car')" style="height: 10%; width: 100%" class="d-flex justify-content-center align-items-center mt-4">
           <button v-if="mode !== 'navigate_pass'" @click="previous" class="btn btn-danger mx-3"> previous </button>
-          <button v-if="mode !== 'buy'" @click="next" class="btn btn-primary mx-3"> next </button>
+          <button :disabled="isPassPurchasable(garage.occupiedPlaces)" v-if="mode !== 'buy'" @click="next" class="btn btn-primary mx-3"> next </button>
       </div>
 
     </div>
@@ -167,6 +170,9 @@ export default {
           console.log(error)
         }
       })
+    },
+    isPassPurchasable(occupiedPlaces){
+      return occupiedPlaces >= this.garage.slots
     }
   },
   mounted() {

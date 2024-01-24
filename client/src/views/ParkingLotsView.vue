@@ -29,7 +29,7 @@
           <div class="d-flex justify-content-center flex-column align-items-center">
             <img src="../assets/garage.png" style="height: 40px; width: 40px">
             <div style="background-color: #42b983; padding: 3px; font-size: 13px; border-radius: 10px">
-              <strong>200/{{marker.slots}}</strong>
+              <strong>{{marker.occupiedPlaces}}/{{marker.slots}}</strong>
             </div>
           </div>
         </CustomMarker>
@@ -37,7 +37,7 @@
         <InfoWindow class="mb-1" v-if="marker.infoWindow" :options="{ position: { lat: marker.latitude, lng: marker.longitude }, pixelOffset: {width: 0, height: -25}}">
           <div style="width: 200px">
             <p style="font-size: 15px; color: black"><strong>{{marker.name}}</strong></p>
-            <p style="font-size: 15px; color: darkgreen"> <strong>{{marker.slots-200}} slots available</strong> </p>
+            <p style="font-size: 15px; color: darkgreen"> <strong>{{marker.slots-marker.occupiedPlaces}} slots available</strong> </p>
             <button class="btn btn-primary" @click="overlayMarker = marker"> buy a pass </button>
           </div>
         </InfoWindow>
@@ -50,7 +50,7 @@
         <strong><p>{{marker.name}}</p></strong>
         <div class="d-flex align-items-center justify-content-center">
           <p class="d-flex" style="margin-bottom: 0; margin-right: 10%">{{getDist(lat, long, marker.latitude, marker.longitude) }} Km</p>
-          <p class="d-flex" style="margin-bottom: 0">{{marker.slots - 200}} free slots</p>
+          <p class="d-flex" style="margin-bottom: 0">{{marker.slots - marker.occupiedPlaces}} free slots</p>
         </div>
       </div>
 
@@ -70,6 +70,7 @@ import axios from "axios";
 import button from "bootstrap/js/src/button";
 import PassCard from "@/components/PassCard.vue";
 import BuyPassForm from "@/components/BuyPassForm.vue";
+import io from "socket.io-client";
 
 export default defineComponent({
   name: "ParkingLots",
@@ -92,6 +93,7 @@ export default defineComponent({
       lastUpdateTime: 0,
       address: "",
       overlayMarker: null,
+      socket: io('localhost:3000'),
     }
   },
   methods: {
@@ -119,6 +121,7 @@ export default defineComponent({
       axios.get('http://localhost:3000/garages/', {"params": params}).then((response) => {
         this.list_markers = response.data
         this.list_markers.sort((a, b) => this.getDist(this.lat, this.long, a.latitude, a.longitude) - this.getDist(this.lat, this.long, b.latitude, b.longitude))
+        this.list_markers.forEach(m => this.updateListMarkersSlots(m._id))
 
         if(this.map_markers.length === response.data.length && this.getNewMarkers(this.map_markers, response.data).length === 0){
           return
@@ -126,6 +129,7 @@ export default defineComponent({
 
         const openInfoWindow = this.map_markers.find(e => e.infoWindow === true)
         this.map_markers = response.data
+        this.map_markers.forEach(m => this.updateMapMarkersSlots(m._id))
         this.map_markers.forEach(e => e.infoWindow = !(openInfoWindow === undefined || e.name !== openInfoWindow.name))
       })
     },
@@ -163,9 +167,31 @@ export default defineComponent({
       this.map_markers.forEach(e => e.infoWindow = (e.name === marker.name) )
       this.$refs.map.map.zoom = 17
       this.$refs.map.map.setCenter({lat: marker.latitude, lng: marker.longitude})
-    }
+    },
+    updateMapMarkersSlots(id){
+      this.map_markers
+        .filter(m => m._id.toString() === id)
+        .forEach(m => {
+          axios.get('http://localhost:3000/garages/realtime/' + id).then((newCount) => {
+            m.occupiedPlaces = m.slots - newCount.data
+          })
+        })
+    },
+    updateListMarkersSlots(id){
+      this.list_markers
+          .filter(m => m._id.toString() === id)
+          .forEach(m => {
+            axios.get('http://localhost:3000/garages/realtime/' + id).then((newCount) => {
+              m.occupiedPlaces = m.slots - newCount.data
+            })
+          })
+    },
   },
   mounted() {
+    this.socket.on('free-slots-update', (garage) => {
+      this.updateMapMarkersSlots(garage.id)
+      this.updateListMarkersSlots(garage.id)
+    })
     /*navigator.geolocation.getCurrentPosition((success) => {
       this.longitude = success.coords.longitude
       this.latitude = success.coords.latitude

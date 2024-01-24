@@ -137,7 +137,6 @@ export default {
       this.latitude = ""; this.longitude = ""; this.slots = ""; this.garageName = "";
     },
     updateFreePlaces(){
-      console.log('http://localhost:3000/garages/realtime/' + this.garage._id)
       axios.get('http://localhost:3000/garages/realtime/' + this.garage._id).then((newCount) => {
         console.log(newCount.data)
         this.freePlaces = this.garage.slots - newCount.data
