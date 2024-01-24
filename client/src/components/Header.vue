@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-center align-items-center" style="height: 20vh; background-color: #9de3f5; min-height: 100px">
     <img src="../assets/logo.png" style="height: 70%">
   </div>
-  <div class="d-flex justify-content-center align-items-center my-navbar-container" style="width: 100%">
+  <div class="d-flex justify-content-center align-items-center my-navbar-container" style="width: 100%; cursor: pointer">
     <div class="my-navbar row" style="">
       <div :style="{color: updateColor('history')}" class="d-flex align-items-center justify-content-center" style="width: 21%; border-radius: max(4vh, 40px) 0px 0px max(4vh, 40px)" @click="$router.push({name: 'history'})"> History </div>
       <div :style="{color: updateColor('my_pass')}" class="d-flex align-items-center justify-content-center" style="width: 21%" @click="$router.push({name: 'my_pass'})"> My pass </div>

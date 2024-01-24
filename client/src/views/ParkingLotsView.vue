@@ -7,7 +7,7 @@
       apiKey="AIzaSyB633unraFl_EQhKi6DAUvz-71uYQEr6VU"
       v-model="address"
       @callback="updatePlace"
-      class="mb-3 mt-3 searchBar"
+      class="mb-3 mt-4 searchBar"
       placeholder="Seach a place"
   />
 
@@ -46,7 +46,7 @@
     </GoogleMap>
 
     <div class="right_panel" id="list">
-      <div v-for="marker in list_markers" @click="garage_clicked(marker)" class="w-100" style="cursor: pointer; padding: 10px 0px; box-shadow: 2px 5px 10px 0px #b0b0b0; margin-bottom: 10px; border-radius: 40px; background-color: #9de3f5">
+      <div v-for="marker in list_markers" @click="garage_clicked(marker)" class="w-100 list-div">
         <strong><p>{{marker.name}}</p></strong>
         <div class="d-flex align-items-center justify-content-center">
           <p class="d-flex" style="margin-bottom: 0; margin-right: 10%">{{getDist(lat, long, marker.latitude, marker.longitude) }} Km</p>
@@ -223,6 +223,15 @@ export default defineComponent({
 
 .searchBar{
   height: 40px; border-radius: 20px; padding: 10px; text-align: center
+}
+
+.list-div{
+  cursor: pointer;
+  padding: 10px 0px;
+  box-shadow: 2px 5px 10px 0px #b0b0b0;
+  margin-bottom: 10px;
+  border-radius: 40px;
+  background: linear-gradient(207deg, rgba(157,227,245,1) 68%, rgba(224,240,245,1) 100%);
 }
 
 .pac-item-query{

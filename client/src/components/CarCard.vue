@@ -158,7 +158,7 @@ export default {
 
 .car-card{
   display: block;
-  background-color: #9de3f5;
+  background: linear-gradient(207deg, rgba(157,227,245,1) 68%, rgba(224,240,245,1) 100%);
   height: 30vh;
   min-height: 200px;
   min-width: 650px;
