@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex justify-content-center align-items-center mt-5 w-100">
-    <div class="my-card d-flex justify-content-center align-items-center flex-column" style="background-color: #9de3f5">
+    <div class="my-card d-flex justify-content-center align-items-center flex-column">
       <img v-if="admin()" style="height: 100px" src="../assets/admin.png">
       <img v-if="!admin()" style="height: 100px" src="../assets/user.png">
       <h1>{{user.name}} {{user.surname}}</h1>
@@ -128,7 +128,8 @@ export default defineComponent({
   min-height: 500px;
   border-radius: 50px;
   padding: 30px 30px;
-  background-color: #f0f0f0;
+  background: rgb(157,227,245);
+  background: linear-gradient(207deg, rgba(157,227,245,1) 68%, rgba(224,240,245,1) 100%);
   box-shadow: 5px 10px 20px 0px #b0b0b0;
 }
 

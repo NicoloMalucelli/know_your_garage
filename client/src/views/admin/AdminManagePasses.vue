@@ -13,7 +13,7 @@
   </div>
 
   <div v-if="garages.length > 0" class="row mt-5 px-xl-5 mx-xl-5 d-flex justify-content-center">
-    <PassCard :initialMode="'read'" :editable="true" class="col-12 col-md-6 col-xl-3 mb-5 d-flex justify-content-center" v-for="pass in garages[selected_garage].passes"  :pass="pass"></PassCard>
+    <PassCard @deleted="deletePass" :initialMode="'read'" :editable="true" class="col-12 col-md-6 col-xl-3 mb-5 d-flex justify-content-center" v-for="pass in garages[selected_garage].passes"  :pass="pass"></PassCard>
     <PassCard @create="passCreated" :garage="garages[selected_garage].name" :initialMode="'create'" class="col-12 col-md-6 col-xl-3 mb-5 d-flex justify-content-center"></PassCard>
   </div>
 
@@ -52,6 +52,9 @@ export default defineComponent({
     },
     passCreated(pass){
       this.garages[this.selected_garage].passes.push(pass)
+    },
+    deletePass(pass){
+      this.garages[this.selected_garage].passes = this.garages[this.selected_garage].passes.filter(p => pass._id !== p._id)
     }
   },
   mounted() {

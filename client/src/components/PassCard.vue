@@ -77,6 +77,7 @@ export default {
       if(window.confirm("Do you really want to remove:\n   - " + this.pass.title + "\nfrom this garage?")){
         axios.patch('http://localhost:3000/passes/' + this.pass._id, {"visible": false}).then(() => {
           this.visible = false
+          this.$emit('deleted', this.pass)
         })
       }
     },
