@@ -90,3 +90,12 @@ exports.createPass = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error occurred'})
     }
 }
+
+exports.getPurchasablePasses = async (garageName) => {
+    try {
+        const result = await passesModel.find({garage: garageName, visible: true})
+        return result
+    }catch (error){
+        return {}
+    }
+}

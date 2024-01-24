@@ -71,3 +71,17 @@ exports.getNumOfPassesByCar = async (req, res) => {
         res.status(500).json("{error: Internal server error}")
     }
 }
+
+exports.getActivePasses = async (pass_id) => {
+    try {
+        const result = await purchasedPassesModel.find({
+            pass_id: pass_id,
+            start: {$lte: new Date()},
+            end: {$gte: new Date()}
+        });
+        return result
+    }catch (error){
+        console.log(error)
+        return {}
+    }
+}

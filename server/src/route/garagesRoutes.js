@@ -1,5 +1,5 @@
 const express = require('express');
-const {getGarages, getGaragesByOwner, getGarageById, createGarage, deleteGarage, updateGarage} = require("../controller/garagesController");
+const {getGarages, getGaragesByOwner, getGarageById, createGarage, deleteGarage, updateGarage, getNumOfParkingRealTime} = require("../controller/garagesController");
 const router = express.Router();
 
 router.route('/garages').get((req, res) => {
@@ -24,6 +24,11 @@ router.route('/garages/:email/:name').delete((req, res) => {
 
 router.route('/garages/:_id').patch((req, res) => {
     updateGarage(req, res)
+})
+
+
+router.route('/garages/realtime/:_id').get((req, res) => {
+    getNumOfParkingRealTime(req, res)
 })
 
 

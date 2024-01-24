@@ -89,3 +89,15 @@ exports.endParking = async (req, res) => {
         res.json(e);
     }
 }
+
+exports.getRealTimeParkings = async (garage_id) => {
+    try {
+        const result = await parkingsModel.find({
+            garage_id: garage_id,
+            end: null
+        });
+        return result
+    }catch (error){
+        return {}
+    }
+}

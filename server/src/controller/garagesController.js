@@ -1,4 +1,7 @@
 const garagesModel = require('../model/garagesModel');
+const {getRealTimeParkings} = require("../controller/parkingsController");
+const {getActivePasses} = require("../controller/purchasedPassesController");
+const {getPurchasablePasses} = require("../controller/passesController");
 
 
 exports.getGarages = async(req, res) => {
@@ -110,4 +113,35 @@ exports.updateGarage = async(req, res)  => {
         res.json(e);
     }
 
+}
+
+exports.getNumOfParkingRealTime = async(req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    if(req.params._id == null){
+        res.status(400).json({error: 'inclomplete request'})
+        return
+    }
+
+    try {
+        const result = await garagesModel.find({_id: req.params._id});
+        if(result.length == 0){
+            res.status(400).json({error: 'no garage with the given id'})
+        }
+        let parkings = await getRealTimeParkings(req.params._id.toString())
+        const passes = await getPurchasablePasses(result[0].name)
+
+        let activePasses = []
+        for(let i=0; i<passes.length; i++){
+            const tmpResult = await getActivePasses(passes[i]._id)
+            activePasses = activePasses.concat(tmpResult)
+        }
+        activePasses = activePasses.map(p => p.car_id)
+        parkings = parkings.map(p => p.car_id)
+
+        res.status(200).json(result[0].slots - parkings.filter(p => !activePasses.includes(p)).concat(activePasses).length)
+    }catch (error){
+        console.log(error)
+        res.status(500).json("{error: Internal server error}")
+    }
 }
