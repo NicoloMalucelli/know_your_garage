@@ -2,7 +2,7 @@
   <div v-if="visible" class="d-inline-block">
     <div v-if="mode === 'read'" class="pass-card d-flex justify-content-center flex-column align-items-center pb-2">
       <p class="mt-4"><strong>{{pass.title}}</strong></p>
-      <p style="font-size: 40px"> {{pass.duration}} giorni </p>
+      <p style="font-size: 40px"> {{pass.duration}} {{pass.duration === 1 ? 'day' : 'days'}} </p>
       <p style="font-size: 40px"> {{pass.cost}} €</p>
       <div v-if="editable">
         <Bin class="mx-3" @click="askForDeletion" style="height: 40px; width: 40px"></Bin>
@@ -12,7 +12,7 @@
 
     <form v-if="mode === 'edit'" class="pass-card d-flex justify-content-center flex-column align-items-center pb-2" @submit.prevent="submitForm">
       <p class="mt-4"><strong>{{pass.title}}</strong></p>
-      <p style="font-size: 40px"> {{pass.duration}} giorni </p>
+      <p style="font-size: 40px"> {{pass.duration}} days </p>
 
       <div class="d-flex justify-content-center align-items-center mb-3">
         <input type="number" v-model="cost" min="0" style="font-size: 30px; width: 50%; text-align: center">
@@ -34,13 +34,13 @@
         <input type="text" v-model="passName" placeholder="Pass title" style="text-align: center"/>
 
         <div class="row mt-3 mb-3 d-flex justify-content-center align-items-center mx-4">
-          <input class="col-6 d-flex justify-content-center" v-model="cost" type="number" min="0" style="font-size: 30px; width: 50%; text-align: center">
-          <p class="col-6 d-flex justify-content-center" style="font-size: 30px; margin-bottom: 0;"> €</p>
-        </div>
-
-        <div class="row mb-4 d-flex justify-content-center align-items-center mx-4">
           <input class="col-6 d-flex justify-content-center" v-model="days" type="number" min="1" style="font-size: 30px; width: 50%; text-align: center">
           <p class="col-6 d-flex justify-content-center" style="font-size: 30px; margin-bottom: 0;"> days</p>
+        </div>
+
+        <div class="row mb-4  d-flex justify-content-center align-items-center mx-4">
+          <input class="col-6 d-flex justify-content-center" v-model="cost" type="number" min="0" style="font-size: 30px; width: 50%; text-align: center">
+          <p class="col-6 d-flex justify-content-center" style="font-size: 30px; margin-bottom: 0;"> €</p>
         </div>
 
         <div class="mt-5">
@@ -114,7 +114,7 @@ export default {
 <style scoped>
 
 .pass-card{
-  background-color: #9ce1f4;
+  background: linear-gradient(207deg, rgba(157,227,245,1) 68%, rgba(224,240,245,1) 100%);
   width: 250px;
   height: 300px;
   border-radius: 20px;

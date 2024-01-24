@@ -1,6 +1,6 @@
 <template>
-  <AdminHeader selected_item="analytics" ></AdminHeader>
-  <div v-if="garages.length > 0" class="d-flex flex-column justify-content-center align-items-center mt-5" style="width: 100%" >
+  <AdminHeader selected_item="manage_pass" ></AdminHeader>
+  <div v-if="garages.length > 0" class="d-flex flex-column justify-content-center align-items-center mt-3" style="width: 100%" >
     <div id="shownGarageContainer" class="d-flex align-items-center">
       <img @click="dec_index" src="../../assets/arrows/left-arrow.png" style="width: 20px; cursor: pointer">
       <GarageCard :readOnly="true" :initialMode="'read'" :garage="garages.at(selected_garage)" class="m-3 d-flex justify-content-center"></GarageCard>
@@ -74,10 +74,11 @@ export default defineComponent({
 <style scoped>
 
 :deep(.garage-card){
+
   min-width: 400px;
   max-width: 600px;
   width: 60vw;
-  background-color: #9ce1f4;
+  background: linear-gradient(207deg, rgba(157,227,245,0.6) 68%, rgba(224,240,245,0.4) 100%);
 }
 
 </style>

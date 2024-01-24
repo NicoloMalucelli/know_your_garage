@@ -1,5 +1,5 @@
 <template>
-  <AdminHeader selected_item="home" ></AdminHeader>
+  <AdminHeader :selected_item="'analytics'" ></AdminHeader>
 
   <div v-if="garages.length > 0" class="d-flex flex-column justify-content-center align-items-center mt-3" style="width: 100%" >
     <div id="shownGarageContainer" class="d-flex align-items-center">
@@ -92,7 +92,7 @@ export default defineComponent({
   min-width: 400px;
   max-width: 600px;
   width: 60vw;
-  background-color: #9ce1f4;
+  background: linear-gradient(207deg, rgba(157,227,245,0.6) 68%, rgba(224,240,245,0.4) 100%);
 }
 
 </style>
