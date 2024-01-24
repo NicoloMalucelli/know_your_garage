@@ -145,13 +145,15 @@ export default {
     }
   },
   mounted() {
-    this.updateFreePlaces()
-    this.socket.on('free-slots-update', (garage) => {
-      if(garage.id !== this.garage._id){
-        return
-      }
+    if(this.garage !== undefined){
       this.updateFreePlaces()
-    })
+      this.socket.on('free-slots-update', (garage) => {
+        if(garage.id !== this.garage._id){
+          return
+        }
+        this.updateFreePlaces()
+      })
+    }
   }
 }
 
