@@ -161,7 +161,8 @@ export default {
 
 .garage-card{
   display: block;
-  background-color: #9de3f5;
+  background: rgb(157,227,245);
+  background: linear-gradient(207deg, rgba(157,227,245,1) 68%, rgba(224,240,245,1) 100%);
   min-width: 450px;
   max-width: 650px;
   width: 80%;
