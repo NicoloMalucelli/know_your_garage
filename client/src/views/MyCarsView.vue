@@ -1,6 +1,6 @@
 <template>
   <Header selected_item="my_cars"></Header>
-  <div class="d-flex flex-column justify-content-center align-items-center mt-5 mb-5" style="width: 100%">
+  <div class="d-flex flex-column justify-content-center align-items-center mt-5" style="width: 100%">
     <h1>My cars</h1>
 
     <div v-if="cars.length > 0">
@@ -10,14 +10,12 @@
     <CarCard class="mt-5" :initialMode="'create'" @newCarRegistered="newCarRegistered" :additionalInfo="false"></CarCard>
   </div>
 
-  <Footer></Footer>
 </template>
 
 <script>
 
 import { defineComponent } from "vue";
 import Header from "@/components/Header.vue";
-import Footer from "@/components/Footer.vue";
 import CarCard from "@/components/CarCard.vue";
 import axios from "axios";
 
@@ -25,7 +23,6 @@ export default defineComponent({
   name: "MyCars",
   components: {
     Header,
-    Footer,
     CarCard
   },
   data(){

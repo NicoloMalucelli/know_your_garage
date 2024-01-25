@@ -67,8 +67,6 @@ import Header from "@/components/Header.vue";
 import { GoogleMap, Marker, InfoWindow, CustomMarker, MarkerCluster } from "vue3-google-map";
 import GoogleAddressAutocomplete from 'vue3-google-address-autocomplete'
 import axios from "axios";
-import button from "bootstrap/js/src/button";
-import PassCard from "@/components/PassCard.vue";
 import BuyPassForm from "@/components/BuyPassForm.vue";
 import io from "socket.io-client";
 

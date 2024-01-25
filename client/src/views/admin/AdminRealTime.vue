@@ -37,16 +37,12 @@
       />
     </div>
   </div>
-
-
-  <Footer></Footer>
 </template>
 
 <script>
 import AdminHeader from "@/components/AdminHeader.vue";
 import io from 'socket.io-client';
 import axios from "axios";
-import Footer from "@/components/Footer.vue";
 import {Bar} from "vue-chartjs";
 import {BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip} from "chart.js";
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
@@ -58,7 +54,6 @@ export default defineComponent({
   components: {
     AdminHeader,
     Bar,
-    Footer,
   },
   data(){
     return{

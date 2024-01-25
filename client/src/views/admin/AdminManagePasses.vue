@@ -17,7 +17,6 @@
     <PassCard @create="passCreated" :garage="garages[selected_garage].name" :initialMode="'create'" class="col-12 col-md-6 col-xl-3 mb-5 d-flex justify-content-center"></PassCard>
   </div>
 
-  <Footer></Footer>
 </template>
 
 <script>
@@ -25,7 +24,6 @@
 import { defineComponent } from "vue";
 import AdminHeader from "@/components/AdminHeader.vue";
 import GarageCard from "@/components/GarageCard.vue";
-import Footer from "@/components/Footer.vue";
 import axios from "axios";
 import PassCard from "@/components/PassCard.vue";
 
@@ -35,7 +33,6 @@ export default defineComponent({
     PassCard,
     GarageCard,
     AdminHeader,
-    Footer
   },
   data(){
     return{

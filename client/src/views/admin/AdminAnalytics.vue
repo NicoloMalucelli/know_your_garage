@@ -28,13 +28,11 @@
     </div>
   </div>
 
-  <Footer></Footer>
 </template>
 
 <script>
 
 import { defineComponent } from "vue";
-import Footer from "@/components/Footer.vue";
 import AdminHeader from "@/components/AdminHeader.vue";
 import axios from "axios";
 import GarageCard from "@/components/GarageCard.vue";
@@ -51,7 +49,6 @@ export default defineComponent({
     BarChart,
     GarageCard,
     AdminHeader,
-    Footer,
   },
   data(){
     return{

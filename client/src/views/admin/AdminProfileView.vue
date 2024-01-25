@@ -6,7 +6,6 @@
 <script>
 import { defineComponent } from "vue";
 import ProfileCard from "@/components/ProfileCard.vue";
-import Header from "@/components/Header.vue";
 import AdminHeader from "@/components/AdminHeader.vue";
 export default defineComponent({
   name: "Profile",

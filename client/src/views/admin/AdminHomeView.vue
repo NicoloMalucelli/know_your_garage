@@ -4,18 +4,16 @@
     <h1>My garages</h1>
   </div>
 
-  <div class="row d-flex justify-content-center mb-5 mx-5 px-5 mt-4">
+  <div class="row d-flex justify-content-center mb-0 mx-5 px-5 mt-4">
     <VerticalGarageCard v-for="garage in garages" :read-only="false" :initialMode="'read'" :garage="garage" class="mb-5 col-12 col-lg-4 col-xl-3 d-flex justify-content-center"></VerticalGarageCard>
     <VerticalGarageCard :initialMode="'create'" class="mb-5 col-12 col-xl-3 d-flex justify-content-center align-items-center" @newGarageRegistered="newGarageRegistered"></VerticalGarageCard>
   </div>
 
-  <Footer></Footer>
 </template>
 
 <script>
 
 import { defineComponent } from "vue";
-import Footer from "@/components/Footer.vue";
 import AdminHeader from "@/components/AdminHeader.vue";
 import axios from "axios";
 import GarageCard from "@/components/GarageCard.vue";
@@ -27,7 +25,6 @@ export default defineComponent({
     VerticalGarageCard,
     GarageCard,
     AdminHeader,
-    Footer,
   },
   data(){
     return{

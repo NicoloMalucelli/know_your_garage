@@ -46,18 +46,16 @@
     </div>
   </div>
 
-  <Footer></Footer>
 </template>
 
 <script>
 import {defineComponent} from "vue";
 import Header from "@/components/Header.vue";
-import Footer from "@/components/Footer.vue";
 import CarCard from "@/components/CarCard.vue";
 import axios from "axios";
 export default defineComponent({
   name: "MyPass",
-  components: {Header, Footer, CarCard},
+  components: {Header, CarCard},
   data(){
     return{
       cars: [],
