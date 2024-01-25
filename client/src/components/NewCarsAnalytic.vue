@@ -70,6 +70,10 @@ export default {
         const total = response.data.length
         let done = 0
 
+        if(total === 0){
+          this.passes = response.data
+        }
+
         response.data.forEach(pass => {
           axios.get('http://localhost:3000/soldpasses/' + pass._id.toString(), {}).then((res) => {
             allSoldPasses = allSoldPasses.concat(res.data)

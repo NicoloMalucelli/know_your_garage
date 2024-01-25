@@ -1,13 +1,21 @@
 <template>
   <Header :selected_item="'history'"></Header>
 
+  <div v-if="cars.length === 0" class="row justify-content-center mt-xl-5 mt-3 mb-2">
+    <p><em>no car has been registered yet</em></p>
+  </div>
+
   <div v-if="cars.length > 0" class="d-flex align-items-center justify-content-center mt-5">
     <img @click="dec_index" src="../assets/arrows/left-arrow.png" style="width: 20px; cursor: pointer">
     <CarCard class="mx-3" :initial-mode="'read'" :car="cars[selected_car]" :additionalInfo="false"></CarCard>
     <img @click="inc_index" src="../assets/arrows/right-arrow.png" style="width: 20px; cursor: pointer">
   </div>
 
-  <div class="row justify-content-center mt-5 mb-2">
+  <div v-if="cars.length > 0 && parkings.length === 0" class="row justify-content-center mt-xl-5 mt-3 mb-2">
+    <p><em>no parking found</em></p>
+  </div>
+
+  <div v-if="parkings.length > 0" class="row justify-content-center mt-5 mb-2">
 
     <table class="col-8 col-xl-4">
       <thead>
@@ -40,7 +48,7 @@
     </table>
   </div>
 
-  <div class="d-flex justify-content-center align-items-center mt-3">
+  <div v-if="parkings.length > 0" class="d-flex justify-content-center align-items-center mt-3">
     <img @click="dec_page" src="../assets/arrows/left-arrow.png" style="width: 20px; cursor: pointer">
     <p style="margin-bottom: 0" class="mx-3">page {{page_index+1}} of {{max_page_index}}</p>
     <img @click="inc_page" src="../assets/arrows/right-arrow.png" style="width: 20px; cursor: pointer">

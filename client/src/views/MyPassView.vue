@@ -7,8 +7,12 @@
     <img @click="inc_index" src="../assets/arrows/right-arrow.png" style="width: 20px; cursor: pointer">
   </div>
 
-  <div v-if="passes.length === 0" class="row justify-content-center mt-xl-5 mt-3 mb-2">
-    <p>this car never had an associated pass</p>
+  <div v-if="cars.length === 0" class="row justify-content-center mt-xl-5 mt-3 mb-2">
+    <p><em>no car has been registered yet</em></p>
+  </div>
+
+  <div v-if="cars.length > 0 && passes.length === 0" class="row justify-content-center mt-xl-5 mt-3 mb-2">
+    <p><em>this car never had an associated pass</em></p>
   </div>
 
   <div v-if="passes.length > 0">

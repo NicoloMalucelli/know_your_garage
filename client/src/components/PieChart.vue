@@ -1,5 +1,10 @@
 <template>
-  <div class="w-100">
+
+  <div v-if="passes.length === 0" class="row justify-content-center mt-xl-5 mt-3 mb-2">
+    <p><em>no pass has been sold yet</em></p>
+  </div>
+
+  <div v-if="passes.length > 0" class="w-100">
     <Pie
         v-if="passes.length > 0 && passes.map(p => p.count).reduce((s,a) => s+a, 0) > 0"
       :options="pieChartOptions"
@@ -50,6 +55,10 @@ export default {
       axios.get('http://localhost:3000/passes/' + sessionStorage.getItem("email") + "/" + this.garage.name, {params: {"visible": true}}).then((response) => {
         const total = response.data.length
         let done = 0
+
+        if(total === 0){
+          this.passes = response.data
+        }
 
         response.data.forEach(pass => {
           axios.get('http://localhost:3000/soldpasses/' + pass._id.toString(), {}).then((res) => {

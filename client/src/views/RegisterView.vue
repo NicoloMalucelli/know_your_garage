@@ -1,12 +1,12 @@
 <template>
   <div class="d-flex justify-content-center align-items-center vh-100" style="background-color: #9de3f5">
-    <div class="my-card" style="">
+    <div class="my-card">
       <form @submit.prevent="submitForm">
         <img class="w-100 mb-5 d-flex flex-column" src="../assets/logo.png">
         <input type="email" class="form-control mb-3 mt-3 my-input" v-model="email" placeholder="name@example.com">
         <div class="d-flex mb-3 mt-3">
           <input type="text" class="form-control my-input" style="width: 48%; margin-right: 4%" v-model="u_name" placeholder="name">
-          <input type="text" class="form-control my-input" style="width: 48%" v-model="u_surname" placeholder="surname">
+          <input type="text" class="form-control my-input" style="width: 48%" v-model="username" placeholder="surname">
         </div>
         <input type="password" class="form-control mb-3 my-input" autocomplete="on" v-model="password" placeholder="password">
         <input type="password" class="form-control mb-3 my-input" autocomplete="on" v-model="password_confirm" placeholder="password">
@@ -34,7 +34,7 @@ export default defineComponent({
       email: "",
       password: "",
       u_name: "",
-      u_surname: "",
+      username: "",
       password_confirm: "",
       registration_error: false,
       error_text: ""
@@ -46,7 +46,7 @@ export default defineComponent({
         this.displayError("The given passwords are different")
         return
       }
-      const body = {'email': this.email, 'name': this.u_name, 'surname': this.u_surname, 'password': sha256(this.password).toString()}
+      const body = {'email': this.email, 'name': this.u_name, 'surname': this.username, 'password': sha256(this.password).toString()}
       axios.put('http://localhost:3000/users', body)
         .then(() => {
           sessionStorage.setItem('email', this.email)
@@ -65,7 +65,7 @@ export default defineComponent({
       }, 2000)
     },
     isDisable(){
-      return this.email.length <= 0 || this.password.length <= 0 || this.u_name.length <= 0 || this.u_surname.length <= 0 || this.password_confirm.length <= 0
+      return this.email.length <= 0 || this.password.length <= 0 || this.u_name.length <= 0 || this.username.length <= 0 || this.password_confirm.length <= 0
     }
   }
 })
