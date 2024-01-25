@@ -93,18 +93,20 @@ export default defineComponent({
     },
     getFormattedDate(dateStr) {
       let date = new Date(new Date(dateStr).toLocaleString('en-US', {timeZone: 'Europe/London'}))
-      return date.toISOString().split('T')[0].split('-').reverse().join("-")
+      return this.pad(date.getDate(), 2) + "-" + this.pad(date.getMonth()+1, 2) + "-" + date.getFullYear()
+    },
+    pad(num, size) {
+      num = num.toString();
+      while (num.length < size) num = "0" + num;
+      return num;
     },
     updatePasses(){
-      console.log(this.page_index)
       axios.get('http://localhost:3000/purchasedpasses/' + this.cars[this.selected_car]._id.toString(), {params: {skip: this.skip, page: this.page_index}}).then((response) => {
         const launched = response.data.length
         let terminated = 0
         if (response.data.length === 0) {
           this.passes = response.data
         }
-
-        console.log(response.data.map(p => p.pass_id))
 
         response.data.forEach(pass => axios.get('http://localhost:3000/passes/' + pass.pass_id.toString()).then((res) => {
           pass.raw_pass = res.data[0]
@@ -119,7 +121,6 @@ export default defineComponent({
     updateMaxPage(){
       axios.get('http://localhost:3000/purchasedpasses/total_number/' + this.cars[this.selected_car]._id.toString()).then((response) => {
         this.max_page_index = Math.ceil(response.data/this.skip)
-        console.log(this.max_page_index)
       })
     }
   },

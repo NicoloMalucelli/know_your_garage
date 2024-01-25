@@ -79,6 +79,7 @@ exports.endParking = async (req, res) => {
             {"car_id": req.params.car_id, "end": null}
         )
         if(toModify.length == 0){
+            res.status(404).json({error: "no active parking"});
             return
         }
 
@@ -105,7 +106,6 @@ exports.getRealTimeParkings = async (garage_id) => {
             garage_id: garage_id,
             end: null
         });
-        console.log(result.length)
         return result
     }catch (error){
         return {}

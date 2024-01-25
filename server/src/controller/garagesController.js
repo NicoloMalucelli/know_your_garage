@@ -126,7 +126,8 @@ exports.getNumOfParkingRealTime = async(req, res) => {
     try {
         const result = await garagesModel.find({_id: req.params._id});
         if(result.length == 0){
-            res.status(400).json({error: 'no garage with the given id'})
+            res.status(404).json({error: 'no garage with the given id'})
+            return
         }
         let parkings = await getRealTimeParkings(req.params._id.toString())
         const passes = await getPurchasablePasses(result[0].name)

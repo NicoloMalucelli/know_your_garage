@@ -147,7 +147,6 @@ export default {
           this.parked = false
         }
       }
-      console.log(newParking)
     })
   }
 }
