@@ -102,6 +102,7 @@ export default defineComponent({
       this.updateMarkers()
     },
     updateMarkers(){
+      console.log(this.$refs.map.map.getBounds())
       if(this.$refs.map.map.zoom < 12){
         return;
       }
@@ -111,8 +112,8 @@ export default defineComponent({
       this.long = this.$refs.map.map.center.lng()
 
       const params = {
-        latitude_min: this.$refs.map.map.getBounds().ci.lo,
-        latitude_max: this.$refs.map.map.getBounds().ci.hi,
+        latitude_min: this.$refs.map.map.getBounds().di.lo,
+        latitude_max: this.$refs.map.map.getBounds().di.hi,
         longitude_min: this.$refs.map.map.getBounds().Nh.lo,
         longitude_max:this.$refs.map.map.getBounds().Nh.hi,
       }
