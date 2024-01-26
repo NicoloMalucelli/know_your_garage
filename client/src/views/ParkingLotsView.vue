@@ -102,7 +102,6 @@ export default defineComponent({
       this.updateMarkers()
     },
     updateMarkers(){
-      console.log(this.$refs.map.map.getBounds())
       if(this.$refs.map.map.zoom < 12){
         return;
       }
