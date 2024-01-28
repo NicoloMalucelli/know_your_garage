@@ -17,7 +17,7 @@
 
   <div v-if="parkings.length > 0" class="row justify-content-center mt-5 mb-2">
 
-    <table class="col-8 col-xl-4">
+    <table class="col-8 col-xl-5">
       <thead>
         <tr>
           <th scope="col"> garage </th>
