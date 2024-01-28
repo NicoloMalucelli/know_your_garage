@@ -1,6 +1,6 @@
 <template>
   <Header selected_item="my_profile"></Header>
-  <ProfileCard></ProfileCard>
+  <ProfileCard class="mb-5"></ProfileCard>
 </template>
 
 <script>

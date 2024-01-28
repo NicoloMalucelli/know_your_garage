@@ -43,7 +43,7 @@
       </table>
     </div>
 
-    <div class="d-flex justify-content-center align-items-center mt-3">
+    <div class="d-flex justify-content-center align-items-center mt-3 mb-5">
       <img @click="dec_page" src="../assets/arrows/left-arrow.png" style="width: 20px; cursor: pointer">
       <p style="margin-bottom: 0" class="mx-3">page {{page_index+1}} of {{max_page_index}}</p>
       <img @click="inc_page" src="../assets/arrows/right-arrow.png" style="width: 20px; cursor: pointer">

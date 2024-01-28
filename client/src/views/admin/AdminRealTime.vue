@@ -1,8 +1,8 @@
 <template>
   <AdminHeader :selected_item="'real_time'"></AdminHeader>
 
-  <div class="row d-flex justify-content-center mt-5">
-    <div class="col-5">
+  <div class="row d-flex justify-content-center ">
+    <div class="col-12 col-md-8 col-xl-5 mt-5">
       <Bar
           :options="{responsive: true}"
           :data="{
@@ -16,7 +16,7 @@
       />
     </div>
 
-    <div class="col-5">
+    <div class="col-12 col-md-8 col-xl-5 mt-5">
       <Bar
           :options="{
             responsive: true,

@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div class="row d-flex justify-content-center align-items-center mt-4">
+  <div class="row d-flex justify-content-center align-items-center mt-4 mb-5">
     <div class="px-lg-4 col-10 col-md-8 col-lg-6 col-xxl-4 d-flex align-items-center justify-content-center flex-column">
       <BarChart v-if="garages.length > 0" :garage="garages[selected_garage]"></BarChart>
     </div>
