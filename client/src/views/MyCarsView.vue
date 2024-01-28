@@ -55,8 +55,6 @@ export default defineComponent({
     display: block;
     background-color: #9de3f5;
     height: 10vh;
-    #min-height: 200px;
-    #min-width: 650px;
     width: 30vw;
     border-radius: 30vh;
     box-shadow: 5px 10px 20px 0px #b0b0b0;

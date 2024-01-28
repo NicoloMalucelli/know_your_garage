@@ -122,8 +122,6 @@ export default defineComponent({
 <style scoped>
 
 .my-card{
-  #height: 550px;
-  #aspect-ratio: 4/5;
   width: 400px;
   min-height: 500px;
   border-radius: 50px;

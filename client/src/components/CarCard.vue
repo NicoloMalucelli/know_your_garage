@@ -55,6 +55,10 @@
 import Bin from "@/components/Bin.vue";
 import axios from "axios";
 import io from "socket.io-client";
+import car1 from "../assets/cars/car1.png"
+import car2 from "../assets/cars/car2.png"
+import car3 from "../assets/cars/car3.png"
+import car4 from "../assets/cars/car4.png"
 
 export default {
   name: "CarCard",
@@ -72,12 +76,14 @@ export default {
       visible: true,
       parked: false,
       active_passes: 0,
-      socket: io('localhost:3000')
+      socket: io('localhost:3000'),
+      cars: [car1, car2, car3, car4]
     }
   },
   methods:{
     getPath(){
-      return new URL('../assets/cars/' + this.car.pic, import.meta.url).href//require("@/assets/cars/" + this.car.pic)
+      return this.cars[this.car.pic.at(-5)-1]
+      //return new URL('../assets/cars/' + this.car.pic, import.meta.url).href//require("@/assets/cars/" + this.car.pic)
     },
     askForDeletion(){
       if(window.confirm("Do you really want to remove:\n   - " + this.car.model + ", license plate " + this.car.license_plate + "\nfrom your cars?")){
@@ -87,7 +93,9 @@ export default {
       }
     },
     getPathCreation() {
-      return new URL('../assets/cars/car' + this.shown_image + ".png", import.meta.url).href//require("@/assets/cars/car" + this.shown_image + ".png")
+      return this.cars[this.shown_image-1]
+      //return new URL('@/assets/cars/car' + this.shown_image + ".png", import.meta.url).href
+      //return new URL('../assets/cars/car' + this.shown_image + ".png", import.meta.url).href//require("@/assets/cars/car" + this.shown_image + ".png")
     },
     dec_index() {
       if(this.shown_image > 1) {
